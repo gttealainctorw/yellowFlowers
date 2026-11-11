@@ -1,0 +1,315 @@
+\section{Variables conjuntas continuas (la densidad)}
+
+Ahora $\fxy(x,y)$ es una superficie y la probabilidad es el \textbf{volumen} bajo ella sobre una regi\'on.
+Todo el trabajo est\'a en una sola habilidad: \textbf{poner bien los l\'imites de la integral doble}.
+
+\subsection{La habilidad clave: l\'imites de integraci\'on}
+
+\begin{receta}{poner l\'imites (m\'etodo de la flecha)}
+\begin{enumerate}
+\item \textbf{Dibuja la regi\'on} donde la densidad no es cero (el \guillemotleft soporte\guillemotright).
+Encima, sombrea la parte que pide el evento.
+\item Elige la variable de \textbf{afuera}. Sus l\'imites son \textbf{n\'umeros}: el valor m\'inimo y m\'aximo que toma en la zona sombreada.
+\item Para la variable de \textbf{adentro}, traza una flecha que cruce la zona en su direcci\'on
+(vertical si adentro es $y$, horizontal si adentro es $x$). Donde la flecha \textbf{entra} es el l\'imite inferior;
+donde \textbf{sale}, el superior. Pueden depender de la variable de afuera.
+\item Si la flecha entra o sale por curvas distintas seg\'un d\'onde la pongas, parte la integral en dos.
+\item Integra primero adentro (la otra variable es constante) y luego afuera.
+\end{enumerate}
+\end{receta}
+
+\begin{center}
+\begin{tikzpicture}[scale=2.35]
+% rectangulo
+\begin{scope}
+\draw[->] (-0.1,0)--(1.25,0) node[right]{$x$}; \draw[->] (0,-0.1)--(0,1.25) node[above]{$y$};
+\fill[azul!18] (0,0) rectangle (1,1); \draw (0,0) rectangle (1,1);
+\draw[->,rojo,thick] (0.55,-0.05)--(0.55,1.08);
+\node[below] at (1,0){\small 1}; \node[left] at (0,1){\small 1};
+\node[align=center] at (0.5,-0.5){\small Rect\'angulo\\[3pt]\small $\displaystyle\int_0^1\!\!\int_0^1$};
+\end{scope}
+% triangulo x+y<=1
+\begin{scope}[xshift=1.85cm]
+\draw[->] (-0.1,0)--(1.25,0) node[right]{$x$}; \draw[->] (0,-0.1)--(0,1.25) node[above]{$y$};
+\fill[azul!18] (0,0)--(1,0)--(0,1)--cycle; \draw (0,0)--(1,0)--(0,1)--cycle;
+\draw[->,rojo,thick] (0.35,-0.05)--(0.35,0.73);
+\node[right] at (0.5,0.55){\small $y=1-x$};
+\node[align=center] at (0.5,-0.5){\small $x+y\le1$\\[3pt]\small $\displaystyle\int_0^1\!\!\int_0^{1-x}dy\,dx$};
+\end{scope}
+% triangulo y<=x
+\begin{scope}[xshift=3.7cm]
+\draw[->] (-0.1,0)--(1.25,0) node[right]{$x$}; \draw[->] (0,-0.1)--(0,1.25) node[above]{$y$};
+\fill[azul!18] (0,0)--(1,0)--(1,1)--cycle; \draw (0,0)--(1,0)--(1,1)--cycle;
+\draw[->,rojo,thick] (0.65,-0.05)--(0.65,0.73);
+\node[left] at (0.5,0.6){\small $y=x$};
+\node[align=center] at (0.5,-0.5){\small $0\le y\le x\le1$\\[3pt]\small $\displaystyle\int_0^1\!\!\int_0^{x}dy\,dx$};
+\end{scope}
+% triangulo x<=y
+\begin{scope}[xshift=5.55cm]
+\draw[->] (-0.1,0)--(1.25,0) node[right]{$x$}; \draw[->] (0,-0.1)--(0,1.25) node[above]{$y$};
+\fill[azul!18] (0,0)--(0,1)--(1,1)--cycle; \draw (0,0)--(0,1)--(1,1)--cycle;
+\draw[->,rojo,thick] (0.35,0.3)--(0.35,1.08);
+\node[right] at (0.55,0.5){\small $y=x$};
+\node[align=center] at (0.5,-0.5){\small $0\le x\le y\le1$\\[3pt]\small $\displaystyle\int_0^1\!\!\int_x^{1}dy\,dx$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+Estas cuatro regiones cubren pr\'acticamente todos los problemas de tus apuntes y de la serie. Apr\'endetelas de vista.
+
+\subsection{Hallar la constante y calcular probabilidades}
+
+\begin{receta}{hallar $k$}
+Plantea $\displaystyle\iint_{\text{soporte}} \fxy\,dx\,dy=1$, integra y despeja $k$. Despu\'es \textbf{reescribe} la densidad ya con el valor de $k$.
+\end{receta}
+
+\begin{ejemplo}{Ejemplo resuelto 6 \origen{Apuntes, Ej.~3.4}}
+$\fxy(x,y)=k(x+y)$ para $0\le x\le1$, $0\le y\le1$.
+
+\textbf{a) $k$.}
+\[
+1=k\int_0^1\!\!\int_0^1 (x+y)\,dx\,dy=k\int_0^1\Big(\tfrac12+y\Big)dy=k\Big(\tfrac12+\tfrac12\Big)\;\Rightarrow\;\resp{k=1}
+\]
+\textbf{b) $P(0.5\le X\le1,\;0.5\le Y\le1)$.} Regi\'on rectangular, l\'imites num\'ericos:
+\[
+\int_{0.5}^1\!\!\int_{0.5}^1 (x+y)\,dx\,dy=\int_{0.5}^1\Big(\tfrac{y}{2}+\tfrac38\Big)dy=\Big[\tfrac{y^2}{4}+\tfrac38y\Big]_{0.5}^{1}=\resp{0.375}
+\]
+\textbf{c) $P(X+Y\le1)$.} Es el tri\'angulo bajo la recta $y=1-x$ (segunda figura de arriba):
+\[
+\int_0^1\!\!\int_0^{1-x}(x+y)\,dy\,dx=\int_0^1\Big[x(1-x)+\tfrac{(1-x)^2}{2}\Big]dx=\int_0^1\frac{1-x^2}{2}\,dx=\tfrac12-\tfrac16=\resp{\tfrac13}
+\]
+\end{ejemplo}
+
+\begin{ejemplo}{Ejemplo resuelto 7 --- Tabacalera \origen{Serie 3, problema 3a}}
+$\fxy(x,y)=24xy$ para $0\le x\le1$, $0\le y\le1$, $x+y\le1$. Calcular $P(X>\tfrac12)$.
+
+\begin{minipage}{0.29\textwidth}
+\begin{tikzpicture}[scale=2.4]
+\draw[->] (-0.1,0)--(1.25,0) node[right]{$x$}; \draw[->] (0,-0.1)--(0,1.25) node[above]{$y$};
+\draw (0,0)--(1,0)--(0,1)--cycle;
+\fill[azul!25] (0.5,0)--(1,0)--(0.5,0.5)--cycle;
+\draw[dashed] (0.5,0)--(0.5,0.5);
+\draw[->,rojo,thick] (0.7,-0.05)--(0.7,0.38);
+\node[below] at (0.5,0){\small $\tfrac12$}; \node[below] at (1,0){\small 1};
+\node[right] at (0.45,0.65){\small $y=1-x$};
+\end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.69\textwidth}\small
+Afuera $x$: de $\tfrac12$ a $1$. La flecha vertical entra en $y=0$ y sale en $y=1-x$.
+\begin{align*}
+P\big(X>\tfrac12\big)&=\int_{1/2}^{1}\!\int_0^{1-x}24xy\,dy\,dx=\int_{1/2}^{1}12x(1-x)^2dx\\
+&=12\Big[\tfrac{x^2}{2}-\tfrac{2x^3}{3}+\tfrac{x^4}{4}\Big]_{1/2}^{1}
+=12\Big(\tfrac{16}{192}-\tfrac{11}{192}\Big)=\resp{\tfrac{5}{16}=0.3125}
+\end{align*}
+\end{minipage}
+\end{ejemplo}
+
+\begin{ejemplo}{Ejemplo resuelto 8 --- Regi\'on en banda, integral partida \origen{Serie 3, problema 2}}
+$\fxy(x,y)=kx$ para $0\le x\le4$, $y\ge0$, $-x+2\le y\le -x+4$.
+
+\begin{minipage}{0.36\textwidth}
+\begin{tikzpicture}[scale=0.82]
+\draw[->] (-0.2,0)--(4.7,0) node[right]{$x$}; \draw[->] (0,-0.2)--(0,4.6) node[above]{$y$};
+\fill[azul!18] (0,2)--(0,4)--(4,0)--(2,0)--cycle;
+\draw (0,2)--(0,4)--(4,0)--(2,0)--cycle;
+\draw[dashed] (2,0)--(2,2);
+\draw[->,rojo,thick] (1,0.85)--(1,3.2);
+\draw[->,rojo,thick] (3,-0.15)--(3,1.2);
+\node[below] at (2,0){\small 2}; \node[below] at (4,0){\small 4};
+\node[left] at (0,2){\small 2}; \node[left] at (0,4){\small 4};
+\node[right] at (2.1,2.3){\small $y=4-x$};
+\node[left] at (1.25,0.45){\small $y=2-x$};
+\end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.62\textwidth}
+La flecha vertical entra por curvas distintas:
+\begin{itemize}
+\item si $0\le x\le2$: entra en $y=2-x$, sale en $y=4-x$;
+\item si $2\le x\le4$: entra en $y=0$, sale en $y=4-x$.
+\end{itemize}
+Por eso la integral se parte en $x=2$.
+\end{minipage}
+
+\textbf{a) $k$.}
+\[
+1=k\Big[\int_0^2\!\!\int_{2-x}^{4-x}x\,dy\,dx+\int_2^4\!\!\int_0^{4-x}x\,dy\,dx\Big]
+=k\Big[\int_0^2 2x\,dx+\int_2^4(4x-x^2)dx\Big]=k\Big[4+\tfrac{16}{3}\Big]
+\]
+$\Rightarrow\ \resp{k=\tfrac{3}{28}}$.
+
+\textbf{b) $P(1\le X\le3)$.} Mismas dos piezas, ahora con $x$ de 1 a 2 y de 2 a 3:
+\[
+\tfrac{3}{28}\Big[\int_1^2 2x\,dx+\int_2^3(4x-x^2)dx\Big]=\tfrac{3}{28}\Big[3+\tfrac{11}{3}\Big]=\tfrac{3}{28}\cdot\tfrac{20}{3}=\resp{\tfrac57\approx0.714}
+\]
+\end{ejemplo}
+
+\begin{ejemplo}{Ejemplo resuelto 9 --- Densidad constante: usa \'areas \origen{Apuntes, Ej.~5.5}}
+$f(x_1,x_2)=2$ en el tri\'angulo $x_1\ge0$, $x_2\ge0$, $x_1+x_2\le1$.
+Si la densidad es constante, \textbf{probabilidad $=$ constante $\times$ \'area}; no hace falta integrar.
+
+\textbf{a)} $P(X_1\le\tfrac34,X_2\le\tfrac34)$: cuadrado de lado $\tfrac34$ menos la esquina que queda arriba de la recta
+(tri\'angulo de catetos $\tfrac12$): \'area $=\tfrac{9}{16}-\tfrac18=\tfrac{7}{16}$. Probabilidad $=2\cdot\tfrac{7}{16}=\resp{\tfrac78}$.
+
+\textbf{b)} $P(X_1\le\tfrac12,X_2\le\tfrac12)$: cuadrado de lado $\tfrac12$ completo dentro del tri\'angulo: $2\cdot\tfrac14=\resp{\tfrac12}$.
+
+\textbf{c)} $P(X_1\le\tfrac12\mid X_2\le\tfrac12)=\dfrac{P(X_1\le\frac12,\,X_2\le\frac12)}{P(X_2\le\frac12)}$.
+El denominador es $\int_0^{1/2}\!\int_0^{1-x_2}2\,dx_1dx_2=\tfrac34$. Resultado: $\dfrac{1/2}{3/4}=\resp{\tfrac23}$.
+
+\textbf{Ojo:} aqu\'i se condiciona a un \emph{evento} ($X_2\le\frac12$), as\'i que se usa $P(A\cap B)/P(B)$,
+no la densidad condicional.
+\end{ejemplo}
+
+\begin{ejemplo}{Ejemplo resuelto 10 --- Neum\'aticos \origen{Serie 3, problema 7}}
+$\fxy(x,y)=K(x^2+y^2)$ para $20\le x\le30$, $20\le y\le30$.
+
+\textbf{a)} Por simetr\'ia $\iint(x^2+y^2)=2\cdot10\int_{20}^{30}x^2dx=20\cdot\tfrac{19000}{3}=\tfrac{380000}{3}$, as\'i que
+$\resp{K=\tfrac{3}{380000}}$.
+
+\textbf{b)} Ambos menores que 26:
+\[
+K\int_{20}^{26}\!\!\int_{20}^{26}(x^2+y^2)\,dx\,dy=K\cdot2\cdot6\cdot\frac{26^3-20^3}{3}=\frac{3}{380000}(38304)=\resp{0.3024}
+\]
+\textbf{c)} $P(|X-Y|\le2)$. Es la banda alrededor de la diagonal. Conviene el complemento: las dos esquinas son
+iguales por simetr\'ia.
+
+\begin{minipage}{0.3\textwidth}
+\begin{tikzpicture}[scale=0.36]
+\draw[->] (19,20)--(31.5,20) node[right]{\small $x$}; \draw[->] (20,19)--(20,31.5) node[above]{\small $y$};
+\draw (20,20) rectangle (30,30);
+\fill[azul!22] (20,20)--(22,20)--(30,28)--(30,30)--(28,30)--(20,22)--cycle;
+\fill[rojo!20] (20,22)--(28,30)--(20,30)--cycle;
+\fill[rojo!20] (22,20)--(30,28)--(30,20)--cycle;
+\node at (27.2,22.4){\small $y<x-2$};
+\node at (22.8,27.6){\small $y>x+2$};
+\node[below] at (20,20){\small 20}; \node[below] at (30,20){\small 30};
+\end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.68\textwidth}
+\[
+P(|X-Y|\le2)=1-2K\int_{20}^{28}\!\!\int_{x+2}^{30}(x^2+y^2)\,dy\,dx=\resp{0.3593}
+\]
+(En el examen el planteamiento con la figura vale casi todos los puntos.)
+\end{minipage}
+
+\textbf{d)} Marginal del neum\'atico derecho:
+\[
+f_X(x)=K\int_{20}^{30}(x^2+y^2)\,dy=K\Big(10x^2+\tfrac{19000}{3}\Big)=\resp{\frac{3x^2}{38000}+\frac1{20}},\quad 20\le x\le30
+\]
+\textbf{e)} $f_X(x)f_Y(y)$ tiene un t\'ermino $x^2y^2$ que la conjunta no tiene: $\fxy\neq f_Xf_Y$. \resp{\text{No son independientes}}.
+\end{ejemplo}
+
+\begin{mecaniza}
+\textbf{1.} (Autoexamen 1) $\fxy=c$ en $0\le x\le0.25$, $0\le y\le2000$. Halla $c$.
+\quad\textbf{R:} $c\cdot0.25\cdot2000=1\Rightarrow c=\tfrac1{500}$ (inciso B).
+
+\textbf{2.} (Autoexamen 2) $\fxy=6x^2y$ en el cuadrado unitario. $P(X\le0.5,Y\le0.5)$.
+\quad\textbf{R:} $6\cdot\tfrac{(0.5)^3}{3}\cdot\tfrac{(0.5)^2}{2}=\tfrac1{32}=0.03125$ (inciso A).
+
+\textbf{3.} Con $\fxy=24xy$ del tri\'angulo, calcula $P(X\le\tfrac12)$.\quad\textbf{R:} $1-\tfrac{5}{16}=\tfrac{11}{16}$.
+\end{mecaniza}
+
+\subsection{Marginales y condicionales continuas}
+
+\begin{receta}{marginal y condicional de una densidad}
+\begin{enumerate}
+\item $f_X(x)=\int \fxy\,dy$: integra en $y$ con los l\'imites que da la flecha vertical. \textbf{Escribe el intervalo de $x$} donde vale.
+\item $f_Y(y)=\int \fxy\,dx$: flecha horizontal. Escribe el intervalo de $y$.
+\item Condicional: $f_{X\mid y_0}(x\mid y_0)=\dfrac{\fxy(x,y_0)}{f_Y(y_0)}$, con el intervalo de $x$ que queda \textbf{cuando $y=y_0$}.
+\item Probabilidad condicional con valor exacto ($P(X<a\mid Y=y_0)$): sustituye $y_0$ en la condicional e integra en $x$.
+\end{enumerate}
+\end{receta}
+
+\begin{ejemplo}{Ejemplo resuelto 11 \origen{Apuntes, Ej.~3.6 (en blanco) y Ej.~3.10}}
+$\fxy(x,y)=x^3+\dfrac{xy^2}{a}$ para $0\le x\le1$, $0\le y\le2$.
+
+\textbf{a) Valor de $a$.}
+\[
+1=\int_0^2\!\!\int_0^1\Big(x^3+\frac{xy^2}{a}\Big)dx\,dy=\int_0^2\Big(\frac14+\frac{y^2}{2a}\Big)dy=\frac12+\frac{4}{3a}
+\;\Rightarrow\;\resp{a=\tfrac83}
+\]
+es decir $\fxy=x^3+\tfrac38xy^2$ (la misma del Ej.~3.10).
+
+\textbf{b) $P(X\le Y)$.} Flecha vertical: entra en $y=x$, sale en $y=2$; $x$ de 0 a 1.
+\[
+\int_0^1\!\!\int_x^2\Big(x^3+\tfrac38xy^2\Big)dy\,dx=\int_0^1\Big(x+2x^3-\tfrac98x^4\Big)dx=\tfrac12+\tfrac12-\tfrac{9}{40}=\resp{\tfrac{31}{40}=0.775}
+\]
+\textbf{c) Marginales.}
+\begin{align*}
+f_X(x)&=\int_0^2\Big(x^3+\tfrac38xy^2\Big)dy=\resp{2x^3+x},\quad 0\le x\le1\\
+f_Y(y)&=\int_0^1\Big(x^3+\tfrac38xy^2\Big)dx=\resp{\tfrac14+\tfrac{3}{16}y^2},\quad 0\le y\le2
+\end{align*}
+\textbf{d) Condicionales.}
+\begin{align*}
+f_{X\mid y_0}(x\mid y_0)&=\frac{x^3+\frac38xy_0^2}{\frac14+\frac{3}{16}y_0^2}=\resp{\frac{2x(8x^2+3y_0^2)}{4+3y_0^2}},\quad 0\le x\le1\\[3pt]
+f_{Y\mid x_0}(y\mid x_0)&=\frac{x_0^3+\frac38x_0y^2}{2x_0^3+x_0}=\resp{\frac{8x_0^2+3y^2}{8(2x_0^2+1)}},\quad 0\le y\le2
+\end{align*}
+(coinciden con las que da el Ej.~3.10 de tus apuntes).
+\end{ejemplo}
+
+\begin{ejemplo}{Ejemplo resuelto 12 --- Tabacalera, incisos b y c \origen{Serie 3, problema 3}}
+$\fxy=24xy$ en el tri\'angulo $x+y\le1$.
+
+\textbf{b) Marginal de $Y$.} Flecha horizontal: entra en $x=0$, sale en $x=1-y$.
+\[
+f_Y(y)=\int_0^{1-y}24xy\,dx=\resp{12y(1-y)^2},\quad0\le y\le1
+\]
+\textbf{c) $P(X<\tfrac18\mid Y=\tfrac34)$.} Condicional con $y_0=\tfrac34$; ah\'i $x$ s\'olo puede ir de 0 a $1-\tfrac34=\tfrac14$:
+\[
+f_{X\mid 3/4}(x)=\frac{24x\cdot\frac34}{12\cdot\frac34\cdot\big(\frac14\big)^2}=32x,\quad0\le x\le\tfrac14
+\qquad\Rightarrow\qquad
+P=\int_0^{1/8}32x\,dx=16\cdot\tfrac{1}{64}=\resp{0.25}
+\]
+\end{ejemplo}
+
+\begin{trampa}
+\begin{itemize}
+\item En regiones triangulares los l\'imites de la marginal \textbf{no son} $0$ y $1$: son los de la flecha ($0$ a $1-y$, $y$ a $1$, etc.).
+\item La marginal de $X$ no puede contener $y$. Si te queda una $y$, los l\'imites est\'an mal.
+\item Al condicionar en un tri\'angulo, el intervalo de la variable libre cambia con el valor dado (arriba: $0\le x\le\frac14$, no $0\le x\le1$).
+\item Comprueba: toda marginal y toda condicional debe integrar 1.
+\end{itemize}
+\end{trampa}
+
+\begin{mecaniza}
+\textbf{1.} (Autoexamen 3) $\fxy=\dfrac{3x-y}{18}$, $1<x<4$, $1<y<2$. Marginal de $X$.
+\quad\textbf{R:} $\int_1^2\frac{3x-y}{18}dy=\frac{x}{6}-\frac{1}{12}$ (inciso B).
+
+\textbf{2.} (Autoexamen 4) $\fxy=8xy$, $0<x<y<1$. Condicional de $X$ dado $y$.
+\quad\textbf{R:} $f_Y(y)=\int_0^y8xy\,dx=4y^3$; $f_{X\mid y}=\dfrac{8xy}{4y^3}=\dfrac{2x}{y^2}$, $0<x<y$ (inciso B).
+
+\textbf{3.} (Serie 6) $\fxy=\tfrac1{240}$ en $8.5\le x\le10.5$, $120\le y\le240$. Obt\'en $f_{X\mid y}$ y $f_{Y\mid x}$.
+\quad\textbf{R:} $f_X=\tfrac12$, $f_Y=\tfrac1{120}$; $f_{X\mid y}=\tfrac{1/240}{1/120}=\tfrac12=f_X$ y
+$f_{Y\mid x}=\tfrac1{120}=f_Y$. Son iguales a las marginales porque hay independencia: saber el colesterol no dice nada del calcio.
+\end{mecaniza}
+
+\subsection{Independencia en el caso continuo}
+
+\begin{receta}{decidir independencia r\'apido}
+\begin{enumerate}
+\item \textbf{Mira el soporte.} Si no es un rect\'angulo (los l\'imites de una variable dependen de la otra:
+tri\'angulos, $y\le x$, $x+y\le1$), son \textbf{dependientes}. Justificaci\'on: hay puntos donde $\fxy=0$ pero $f_Xf_Y>0$.
+\item Si el soporte es rect\'angulo, calcula $f_X$ y $f_Y$ y compara $f_Xf_Y$ con $\fxy$.
+Atajo: si $\fxy$ se puede escribir como (algo s\'olo de $x$)$\times$(algo s\'olo de $y$), son independientes; si es una suma como $x+y$ o $x^2+y^2$, no.
+\item En el examen \textbf{escribe la comparaci\'on}: calcula las marginales y muestra el producto.
+\end{enumerate}
+\end{receta}
+
+\begin{ejemplo}{Ejemplo resuelto 13 \origen{Apuntes, Ej.~3.8 (en blanco)}}
+$\fxy=\tfrac83x(x+y)$ para $0\le x\le1$, $0\le y\le x$.
+\begin{align*}
+f_X(x)&=\int_0^x\tfrac83(x^2+xy)\,dy=\tfrac83\Big(x^3+\tfrac{x^3}{2}\Big)=4x^3,\quad0\le x\le1\\
+f_Y(y)&=\int_y^1\tfrac83(x^2+xy)\,dx=\tfrac89(1-y^3)+\tfrac43y(1-y^2)=\tfrac89+\tfrac43y-\tfrac{20}{9}y^3,\quad0\le y\le1
+\end{align*}
+$f_X(x)f_Y(y)=4x^3\big(\tfrac89+\tfrac43y-\tfrac{20}{9}y^3\big)\neq\tfrac83x(x+y)$. \resp{\text{No son independientes}}
+(adem\'as el soporte es triangular).
+\end{ejemplo}
+
+\begin{ejemplo}{Ejemplo resuelto 14 \origen{Apuntes, Ej.~3.12 (en blanco), incisos a y b}}
+$\fxy=4xye^{-(x^2+y^2)}$ para $x\ge0$, $y\ge0$.
+
+Con $u=y^2$: $\int_0^\infty 2ye^{-y^2}dy=1$. Entonces
+\[
+f_X(x)=2xe^{-x^2}\int_0^\infty2ye^{-y^2}dy=\resp{2xe^{-x^2}},\ x\ge0\qquad f_Y(y)=\resp{2ye^{-y^2}},\ y\ge0
+\]
+$f_Xf_Y=4xye^{-(x^2+y^2)}=\fxy$: \resp{\text{independientes}}. Por lo tanto las condicionales son las marginales:
+$f_{X\mid y}=2xe^{-x^2}$ y $f_{Y\mid x}=2ye^{-y^2}$. (Los incisos c y d se terminan en la secci\'on~\ref{sec:cov}.)
+\end{ejemplo}

@@ -1,0 +1,116 @@
+\section{Radiograf\'ia del examen: qu\'e va a venir}
+
+\subsection{Qu\'e nos dice tu examen del Tema 2}
+
+Tu segundo parcial tuvo \textbf{5 problemas}, cada uno de un subtema distinto, todos de procedimiento
+(nada de demostraciones) y con el mismo molde que la serie y los ejemplos de los apuntes:
+
+\begin{center}\small
+\begin{tabular}{clp{7.2cm}}
+\toprule
+\# & Qu\'e pidi\'o & De d\'onde sale el molde\\
+\midrule
+1 & Dada $F_X$: media, variancia, probabilidad & Serie 2, problema 9 (misma idea, otra funci\'on)\\
+2 & Dada $F$ discreta: funci\'on de masa y $P(4<X\le 7)$ & Serie 2, problema 7, \textbf{casi id\'entico}\\
+3 & Densidad: media, mediana, moda, sesgo & Serie 2, problemas 13 y 15\\
+4 & Hallar $c$, obtener $F_Y$, graficar, usar $F_Y$ & Serie 2, problemas 8 y 13\\
+5 & Valor esperado de un costo $120X+10$ & Serie 2, problema 14 / propiedades de $\E$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Conclusi\'on:} la profesora toma un problema de la serie casi tal cual y arma los dem\'as con el
+mismo molde de la serie y de los ejemplos de clase, cambiando la funci\'on o los n\'umeros. Recorre el temario
+en orden y pide incisos cortos y encadenados. Si dominas los moldes de la Serie 3 y de los ejemplos 3.3 a 3.13,
+no hay sorpresa posible.
+
+\subsection{Pron\'ostico para el examen del Tema 3}
+
+Las probabilidades son \emph{mi estimaci\'on}, hecha con el patr\'on anterior, el peso de cada subtema en tus
+apuntes y cu\'antas veces aparece en la serie. No son un dato oficial.
+
+\begin{center}\small
+\begin{tabular}{p{6.6cm}cp{5.6cm}}
+\toprule
+Tipo de ejercicio & Prob. & Molde para practicar\\
+\midrule
+Tabla conjunta discreta: probabilidades de eventos, marginales, condicional & 95\,\% & Ej.~3.3, Serie 1 y 8\\
+Densidad conjunta: hallar $k$ y una probabilidad (regi\'on rectangular o triangular) & 95\,\% & Ej.~3.4, Serie 2, 3 y 7\\
+Marginales y condicionales continuas (y probabilidad condicional) & 85\,\% & Ej.~3.6, Serie 3 y 6\\
+Covariancia y coeficiente de correlaci\'on & 85\,\% & Serie 9 y 10, Autoexamen 7 y 10\\
+?`Son independientes? (como inciso) & 75\,\% & Ej.~3.8, Serie 7e y 8c\\
+$\E$ y $\Var$ de una combinaci\'on lineal & 70\,\% & Serie 11, Ej.~3.13, Autoexamen 8 y 9\\
+Valor esperado de $g(X,Y)$ con contexto (costo, sobrante) & 65\,\% & Ej.~3.9, Serie 5 y 8d--e\\
+Curva de regresi\'on $\E[Y\mid x]$ & 45\,\% & Ej.~3.10, Serie 6c\\
+Construir la tabla conjunta desde un experimento & 30\,\% & Ej.~3.1, Serie 10a\\
+Funci\'on de distribuci\'on conjunta (tabla acumulada) & 25\,\% & Ej.~3.7\\
+Generadora de momentos de una suma & 10\,\% & Ej.~3.11\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Examen m\'as probable (5 problemas):} (1) una tabla discreta con marginales, condicional e independencia;
+(2) una densidad con $k$ y una probabilidad sobre un tri\'angulo; (3) marginal y condicional de una densidad;
+(4) covariancia y correlaci\'on; (5) combinaci\'on lineal o valor esperado con contexto.
+
+\subsection{C\'omo usar esta gu\'ia}
+
+\begin{enumerate}
+\item Lee la secci\'on~\ref{sec:ideas} una vez: son las \'unicas tres ideas del tema.
+\item En cada secci\'on, lee la \textbf{receta} (verde), sigue el \textbf{ejemplo resuelto} (gris) con l\'apiz en mano
+y despu\'es resuelve el cuadro \textbf{Mecaniza} (naranja) tapando la respuesta.
+\item Los cuadros rojos son los errores que m\'as puntos quitan.
+\item Al final hay un simulacro de 5 problemas con soluci\'on completa. Hazlo con reloj: 90 minutos.
+\end{enumerate}
+Todos los resultados de la gu\'ia est\'an verificados y coinciden con las respuestas que trae tu serie.
+
+\section{Las tres ideas del tema (desde cero)}\label{sec:ideas}
+
+En el Tema 2 ten\'ias \emph{una} variable y su funci\'on $f_X(x)$. Ahora el mismo experimento contesta
+\emph{dos} preguntas a la vez: $X$ y $Y$. La funci\'on conjunta $\fxy(x,y)$ dice qu\'e tan probable es cada
+\emph{pareja} $(x,y)$.
+
+\begin{teoria}{Diccionario discreto $\leftrightarrow$ continuo}
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+ & Discreto (tabla) & Continuo (f\'ormula)\\
+\midrule
+$\fxy(x,y)$ es & $P(X=x,\,Y=y)$ & altura de una superficie\\
+Todo suma & $\sum\sum \fxy = 1$ & $\iint \fxy\,dx\,dy = 1$\\
+Probabilidad de un evento & sumar las celdas del evento & integrar sobre la regi\'on\\
+\bottomrule
+\end{tabular}
+\end{center}
+Todo lo que se hace con sumas en una tabla se hace con integrales en una densidad. Es la misma receta.
+\end{teoria}
+
+\begin{teoria}{Idea 1 --- Marginal: \guillemotleft olvidar\guillemotright{} una variable}
+Si s\'olo me interesa $X$, junto todo lo que pasa con $Y$:
+\[
+f_X(x)=\sum_{y}\fxy(x,y)\qquad\text{o}\qquad f_X(x)=\int_{-\infty}^{\infty}\fxy(x,y)\,dy .
+\]
+Se suma o se integra \textbf{sobre la variable que quiero desaparecer}. El resultado s\'olo depende de $x$.
+En una tabla son los totales de rengl\'on y de columna (por eso se llaman \emph{marginales}: van al margen).
+\end{teoria}
+
+\begin{teoria}{Idea 2 --- Condicional: \guillemotleft ya s\'e cu\'anto vali\'o la otra\guillemotright}
+\[
+f_{X\mid y_0}(x\mid Y=y_0)=\frac{\fxy(x,y_0)}{f_Y(y_0)}
+\qquad\qquad
+f_{Y\mid x_0}(y\mid X=x_0)=\frac{\fxy(x_0,y)}{f_X(x_0)}
+\]
+\textbf{Conjunta entre la marginal de lo que ya conozco.} En una tabla: tomo el rengl\'on (o columna) del valor
+conocido y lo divido entre su total, para que vuelva a sumar 1.
+\end{teoria}
+
+\begin{teoria}{Idea 3 --- Independencia: una variable no informa sobre la otra}
+\[
+X,\,Y \text{ independientes} \iff \fxy(x,y)=f_X(x)\,f_Y(y)\quad\text{para \textbf{todo} } x,\,y .
+\]
+Si falla en una sola pareja, son dependientes. Si son independientes entonces
+$\E(XY)=\E(X)\E(Y)$, $\Cov(X,Y)=0$ y $\rho=0$.
+\end{teoria}
+
+Con estas tres ideas m\'as el valor esperado
+$\E[g(X,Y)]=\sum\sum g\,\fxy$ (o $\iint g\,\fxy$) se resuelve todo el examen.
