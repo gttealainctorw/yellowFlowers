@@ -1,0 +1,26 @@
+\begin{afondo}{De dónde sale la fórmula de la variancia}
+No hay que memorizarla a ciegas: sale de la definición en tres pasos. Para $W=aX+bY+c$:
+
+\begin{pasos}
+\paso{La media de $W$ \textnormal{(promedio de una suma = suma de promedios)}}
+\[\mu_W=a\mu_X+b\mu_Y+c\]
+\paso{La desviación de $W$: la constante se cancela}
+\[W-\mu_W=(aX+bY+c)-(a\mu_X+b\mu_Y+c)=a(X-\mu_X)+b(Y-\mu_Y)\]
+\enpalabras{la $c$ mueve a $W$ y a su media lo mismo, así que no cambia qué tan lejos está $W$ de su media. Por eso
+no aparece en la variancia.}
+\paso{Elevo al cuadrado: es un binomio}
+\[(W-\mu_W)^2=a^2(X-\mu_X)^2+b^2(Y-\mu_Y)^2+2ab\,(X-\mu_X)(Y-\mu_Y)\]
+\paso{Promedio cada término y reconozco cada pieza}
+\[\Var(W)=a^2\underbrace{\E\big[(X-\mu_X)^2\big]}_{\Var(X)}+b^2\underbrace{\E\big[(Y-\mu_Y)^2\big]}_{\Var(Y)}
++2ab\underbrace{\E\big[(X-\mu_X)(Y-\mu_Y)\big]}_{\Cov(X,Y)}\]
+\end{pasos}
+
+\pregunta{Por qué los coeficientes van al cuadrado}
+La variancia está en unidades al cuadrado. Si duplicas una variable, sus desviaciones se duplican y sus cuadrados se
+multiplican por 4. Por eso $\Var(2X)=4\Var(X)$, y por eso un signo menos desaparece: $(-3)^2=9$.
+
+\pregunta{Comprobación con números: los transistores}
+Para $W=X+Y$ ($a=b=1$) la fórmula da $\Var(W)=0.45+0.45+2(1)(1)(-0.15)=0.60$.
+Directo desde la tabla: $X+Y$ vale 2 con prob.~0.3, vale 3 con $0.2+0.2=0.4$ y vale 4 con $0.1+0.1+0.1=0.3$; entonces
+$\E(W)=3$, $\E(W^2)=4(0.3)+9(0.4)+16(0.3)=9.6$ y $\Var(W)=9.6-9=0.60$. Coinciden.
+\end{afondo}

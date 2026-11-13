@@ -1,0 +1,146 @@
+\subsection{Por qué ahora hay densidad y no tabla}
+
+\begin{afondo}{La probabilidad de un punto exacto es cero}
+Piensa en la proporción de tabaco turco de una mezcla. ¿Cuál es la probabilidad de que sea \textbf{exactamente}
+$0.3000000\ldots$, con infinitos ceros? Entre 0 y 1 hay infinitos valores posibles; si cada uno tuviera una probabilidad
+positiva, la suma pasaría de 1. Por eso, en variables continuas:
+\[P(X=0.3,\ Y=0.5)=0\qquad\text{y sólo las \textbf{regiones} tienen probabilidad.}\]
+Ya no se puede hacer una tabla con una probabilidad por pareja. En su lugar se usa una \textbf{densidad}.
+
+\pregunta{Qué es una densidad: probabilidad por unidad de área}
+Imagina una lámina de metal muy delgada cuyo grosor cambia de punto a punto. La \emph{densidad} en un punto dice cuántos
+gramos hay por cada cm² alrededor de ese punto. Para saber la masa de un pedazo se multiplica densidad por área y se suma
+sobre todo el pedazo. La densidad conjunta es lo mismo con probabilidad:
+\begin{center}
+\begin{tabular}{|p{5.2cm}|p{8.6cm}|}\hline
+\hd{Lámina de metal} & \hd{Densidad conjunta}\\\hline
+Densidad (g/cm²) en cada punto & $\fxy(x,y)$ en cada punto\\\hline
+Masa de un pedazo & Probabilidad de una región\\\hline
+Masa total de la lámina: 1 kg & Probabilidad total: 1\\\hline
+\end{tabular}
+\end{center}
+Por eso $\fxy$ \textbf{puede valer más de 1} en algunos puntos (por ejemplo $24xy$ vale 6 en $(0.5,\,0.5)$): no es una
+probabilidad, es probabilidad \emph{por unidad de área}. Lo que nunca pasa de 1 es el volumen.
+
+\pregunta{De la tabla a la integral: los cuadritos}
+Si partes la región en cuadritos de lado $\Delta x$ por $\Delta y$, la probabilidad de cada cuadrito es casi
+$\fxy(\text{centro})\cdot\Delta x\,\Delta y$. Eso es una \textbf{tabla} con una celda por cuadrito, y la probabilidad de la región es
+la suma de sus celdas. Cuando los cuadritos se hacen infinitamente pequeños, esa suma se convierte en la integral doble.
+\textbf{La integral doble es la versión continua de «marcar celdas y sumar».}
+
+\begin{center}
+\begin{tikzpicture}[scale=3.2]
+\foreach \i in {0,...,9}{\foreach \j in {0,...,9}{
+  \pgfmathsetmacro\cx{(\i+0.5)/10}\pgfmathsetmacro\cy{(\j+0.5)/10}
+  \pgfmathparse{(\cx+\cy<=1)?1:0}\ifnum\pgfmathresult=1
+    \pgfmathtruncatemacro\p{100*24*\cx*\cy/5}
+    \fill[colY!\p!white,draw=white,line width=0.3pt] (\i/10,\j/10) rectangle ++(0.1,0.1);
+  \fi}}
+\draw[tinta,line width=0.8pt] (0,0)--(1,0)--(0,1)--cycle;
+\draw[-{Stealth[length=4pt]},tinta] (-0.05,0)--(1.2,0) node[right,font=\footnotesize]{$x$};
+\draw[-{Stealth[length=4pt]},tinta] (0,-0.05)--(0,1.2) node[above,font=\footnotesize]{$y$};
+\node[anchor=west,font=\small,text width=6.6cm,align=left] at (1.35,0.55)
+  {Triángulo $x+y\le1$ con $\fxy=24xy$ partido en cuadritos.\\[3pt]
+   Más oscuro = densidad más alta = más probabilidad por cuadrito.\\[3pt]
+   Sumar (densidad)$\times$(área) de todos los cuadritos da casi 1; con cuadritos infinitamente chicos da exactamente
+   $\displaystyle\int_0^1\!\!\int_0^{1-x}24xy\,dy\,dx=1$.};
+\end{tikzpicture}
+\end{center}
+\end{afondo}
+
+\subsection{Cómo dibujar la región a partir de las desigualdades}
+
+El enunciado da la región como una lista de desigualdades. Dibujarla bien es la mitad del problema, así que conviene tener
+un método fijo.
+
+\begin{receta}{dibujar una región}
+\begin{pasosreceta}
+\item \textbf{Cada desigualdad es una recta.} Cambia el $\le$ o $\ge$ por $=$ y dibuja esa recta. Para trazarla basta con dos
+puntos: dónde corta al eje $y$ (pon $x=0$) y dónde corta al eje $x$ (pon $y=0$).
+\item \textbf{Escoge el lado.} Prueba un punto fácil que no esté sobre la recta, casi siempre $(0,0)$. Si cumple la desigualdad,
+la región está del lado de ese punto; si no la cumple, está del otro lado.
+\item \textbf{Junta todas.} La región es donde se cumplen todas a la vez. Sombrea sólo esa zona.
+\item \textbf{Marca los vértices.} Son los cruces de las rectas que forman el borde. Te dan los números de los límites.
+\end{pasosreceta}
+\end{receta}
+
+\begin{resuelto}{Dibujar el soporte de la Serie 3, problema 2}{Método}
+\begin{enunciado}
+Soporte: \ $0\le x\le4,\quad 0\le y,\quad -x+2\le y\le -x+4$.
+\end{enunciado}
+\begin{center}
+\begin{tikzpicture}[scale=0.5]
+\tikzset{ax/.style={-{Stealth[length=3pt]},tinta},lb/.style={font=\scriptsize,text=tinta}}
+\foreach \k/\tit in {0/{\circnum{1} Rectas verticales y eje},1/{\circnum{2} Las dos rectas inclinadas},2/{\circnum{3} Escojo el lado},3/{\circnum{4} Región y vértices}}{
+\begin{scope}[xshift=\k*8.4cm]
+  \draw[ax] (-0.4,0)--(5.2,0) node[right,lb]{$x$}; \draw[ax] (0,-0.4)--(0,5.2) node[above,lb]{$y$};
+  \node[font=\footnotesize\sffamily\bfseries,text=tinta] at (2.4,-1.2) {\tit};
+  \foreach \t in {1,2,3,4}{\draw[tinta!30] (\t,-0.08)--(\t,0.08); \draw[tinta!30] (-0.08,\t)--(0.08,\t);}
+\end{scope}}
+% panel 1
+\begin{scope}[xshift=0cm]
+  \fill[tinta!8] (0,0) rectangle (4,4.9);
+  \draw[colX,line width=1pt] (0,0)--(0,4.9) (4,0)--(4,4.9);
+  \draw[colX,line width=1pt] (0,0)--(4,0);
+  \node[lb,anchor=west] at (4.05,4.5){$x=4$}; \node[lb,anchor=south west] at (0.05,0.05){$y=0$};
+\end{scope}
+% panel 2
+\begin{scope}[xshift=8.4cm]
+  \draw[colY,line width=1pt] (-0.3,2.3)--(2.3,-0.3); \draw[colY,line width=1pt] (-0.3,4.3)--(4.3,-0.3);
+  \fill[colY] (0,2) circle (2.5pt) (2,0) circle (2.5pt) (0,4) circle (2.5pt) (4,0) circle (2.5pt);
+  \node[lb,anchor=west] at (0.1,2.15){$(0,2)$}; \node[lb,anchor=north] at (2,-0.1){$(2,0)$};
+  \node[lb,anchor=west] at (0.1,4.15){$(0,4)$}; \node[lb,anchor=north] at (4,-0.1){$(4,0)$};
+  \node[lb,anchor=west] at (2.4,2.1){$y=4-x$}; \node[lb,anchor=west] at (1.2,1.0){$y=2-x$};
+\end{scope}
+% panel 3
+\begin{scope}[xshift=16.8cm]
+  \draw[colY,line width=1pt] (-0.3,2.3)--(2.3,-0.3); \draw[colY,line width=1pt] (-0.3,4.3)--(4.3,-0.3);
+  \fill[rojo] (0,0) circle (3pt);
+  \node[font=\tiny,anchor=north west,text width=1.9cm,align=left] at (2.3,5.3){Pruebo $(0,0)$:\\
+    ¿$0\ge 2-0$? \no\\ $\Rightarrow$ arriba de $y=2-x$\\[2pt]
+    ¿$0\le 4-0$? \si\\ $\Rightarrow$ abajo de $y=4-x$};
+\end{scope}
+% panel 4
+\begin{scope}[xshift=25.2cm]
+  \fill[marca] (0,2)--(0,4)--(4,0)--(2,0)--cycle;
+  \draw[tinta,line width=1pt] (0,2)--(0,4)--(4,0)--(2,0)--cycle;
+  \foreach \p/\a/\l in {{(0,2)}/west/{(0,2)},{(0,4)}/south west/{(0,4)},{(4,0)}/north/{(4,0)},{(2,0)}/north/{(2,0)}}
+    {\fill[tinta] \p circle (2.5pt); \node[lb,anchor=\a] at \p {$\l$};}
+\end{scope}
+\end{tikzpicture}
+\end{center}
+\enpalabras{la región es una banda inclinada entre las dos rectas, cortada por el eje $x$. Con este dibujo ya se ve que la flecha
+vertical entra por $y=2-x$ cuando $x<2$ y por $y=0$ cuando $x>2$: por eso la integral se parte en $x=2$.}
+\end{resuelto}
+
+\begin{afondo}{¿Qué orden de integración conviene: $dy\,dx$ o $dx\,dy$?}
+Los dos órdenes dan \textbf{el mismo resultado}, porque calculan el mismo volumen; sólo cambia el camino. Escoge el orden en el
+que la flecha \textbf{no cambie de curva}, porque así no hay que partir la integral.
+
+\begin{center}
+\begin{tikzpicture}[scale=2.4]
+\begin{scope}
+\draw[-{Stealth[length=4pt]},tinta] (-0.08,0)--(1.25,0) node[right,font=\footnotesize]{$x$};
+\draw[-{Stealth[length=4pt]},tinta] (0,-0.08)--(0,1.15) node[above,font=\footnotesize]{$y$};
+\fill[marca] (0,0)--(1,0)--(0.5,0.5)--cycle; \draw[tinta] (0,0)--(1,0)--(0.5,0.5)--cycle;
+\draw[dashed,tinta] (0.5,0)--(0.5,0.5);
+\draw[-{Stealth[length=4pt]},colY,line width=1.2pt] (0.28,-0.05)--(0.28,0.36);
+\draw[-{Stealth[length=4pt]},colY,line width=1.2pt] (0.75,-0.05)--(0.75,0.33);
+\node[font=\footnotesize,text=colY,anchor=east] at (0.24,0.42){sale en $y=x$};
+\node[font=\footnotesize,text=colY,anchor=west] at (0.8,0.36){sale en $y=1-x$};
+\node[font=\small,align=center] at (0.5,-0.3){Flecha vertical: \textbf{dos piezas}\\ (cambia de curva en $x=\tfrac12$)};
+\end{scope}
+\begin{scope}[xshift=2.7cm]
+\draw[-{Stealth[length=4pt]},tinta] (-0.08,0)--(1.25,0) node[right,font=\footnotesize]{$x$};
+\draw[-{Stealth[length=4pt]},tinta] (0,-0.08)--(0,1.15) node[above,font=\footnotesize]{$y$};
+\fill[marca] (0,0)--(1,0)--(0.5,0.5)--cycle; \draw[tinta] (0,0)--(1,0)--(0.5,0.5)--cycle;
+\draw[-{Stealth[length=4pt]},colX,line width=1.2pt] (0.08,0.15)--(0.95,0.15);
+\draw[-{Stealth[length=4pt]},colX,line width=1.2pt] (0.25,0.35)--(0.75,0.35);
+\node[font=\footnotesize,text=colX,anchor=west] at (0.62,0.62){entra en $x=y$, sale en $x=1-y$};
+\node[font=\small,align=center] at (0.5,-0.3){Flecha horizontal: \textbf{una pieza}};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+Es la región del problema 3 del simulacro. Con flecha vertical hay que hacer dos integrales; con flecha horizontal, una sola.
+\textbf{Regla práctica:} prueba primero la flecha vertical; si cambia de curva, prueba la horizontal antes de partir.
+\end{afondo}

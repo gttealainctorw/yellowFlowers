@@ -1,0 +1,45 @@
+% ---------------------------------------------------------------- A: marginal
+\begin{afondo}{La marginal junta todo lo que hay sobre cada línea vertical}
+En la tabla, $f_X(1)$ era el total de la columna $x=1$. En una densidad, la «columna» de un valor $x$ es la
+\textbf{línea vertical} que pasa por ese $x$, y su «total» es la integral de $\fxy$ a lo largo de esa línea.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{scope}[scale=3]
+\draw[-{Stealth[length=4pt]},tinta] (-0.05,0)--(1.2,0) node[right,font=\footnotesize]{$x$};
+\draw[-{Stealth[length=4pt]},tinta] (0,-0.05)--(0,1.15) node[above,font=\footnotesize]{$y$};
+\fill[tinta!9] (0,0)--(1,0)--(0,1)--cycle; \draw[tinta] (0,0)--(1,0)--(0,1)--cycle;
+\fill[colX!40] (0.23,0)--(0.27,0)--(0.27,0.73)--(0.23,0.77)--cycle;
+\fill[colX!40] (0.73,0)--(0.77,0)--(0.77,0.23)--(0.73,0.27)--cycle;
+\node[below,font=\footnotesize] at (0.25,0){$0.25$}; \node[below,font=\footnotesize] at (0.75,0){$0.75$};
+\node[font=\footnotesize,text=colX,anchor=west] at (0.29,0.62){franja larga};
+\node[font=\footnotesize,text=colX,anchor=west] at (0.79,0.2){franja corta};
+\node[font=\small] at (0.5,-0.3){Soporte $x+y\le1$, \ $\fxy=24xy$};
+\end{scope}
+\begin{scope}[xshift=5.6cm,xscale=4,yscale=1.3]
+\draw[-{Stealth[length=4pt]},tinta] (-0.03,0)--(1.12,0) node[right,font=\footnotesize]{$x$};
+\draw[-{Stealth[length=4pt]},tinta] (0,-0.05)--(0,2.35) node[above,font=\footnotesize]{$f_X(x)$};
+\draw[colX,line width=1.2pt,domain=0:1,samples=60] plot (\x,{12*\x*(1-\x)^2});
+\fill[colX] (0.25,1.6875) circle (0.9pt) (0.75,0.5625) circle (0.9pt);
+\draw[dashed,tinta!50] (0.25,0)--(0.25,1.6875) (0.75,0)--(0.75,0.5625);
+\node[font=\footnotesize,anchor=south west] at (0.26,1.69){$f_X(0.25)=1.69$};
+\node[font=\footnotesize,anchor=south west] at (0.76,0.57){$f_X(0.75)=0.56$};
+\node[below,font=\footnotesize] at (0.25,0){$0.25$}; \node[below,font=\footnotesize] at (0.75,0){$0.75$};
+\node[font=\small] at (0.5,-0.55){$f_X(x)=12x(1-x)^2$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\pregunta{Por qué los límites son donde la flecha entra y sale}
+Fuera del soporte la densidad vale 0 y no aporta nada a la suma. Sólo cuenta el tramo de la línea vertical que queda dentro
+del soporte, y ese tramo empieza donde la flecha entra y termina donde sale.
+
+\pregunta{Por qué en un triángulo la marginal tiene forma rara}
+Cada franja tiene \textbf{distinto largo}: en $x=0.25$ va de $y=0$ a $y=0.75$; en $x=0.75$ sólo de $y=0$ a $y=0.25$. Por eso el
+límite superior es $1-x$, y por eso $f_X$ depende de $x$ por dos lados: por la fórmula y por el largo de la franja.
+Cuenta hecha: $f_X(x)=\int_0^{1-x}24xy\,dy=12x(1-x)^2$.
+
+\pregunta{Por qué el resultado ya no tiene $y$}
+Al integrar a lo largo de toda la franja se «junta» todo lo que pasa con $Y$. Lo que queda depende sólo de dónde está la
+franja, es decir, de $x$. Es exactamente lo que en la tabla era sumar la columna sin importar el renglón.
+\end{afondo}

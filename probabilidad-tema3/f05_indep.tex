@@ -1,0 +1,41 @@
+\begin{afondo}{Independencia: todas las rebanadas tienen la misma forma}
+Si saber $Y$ no cambia nada de $X$, entonces la condicional $f_{X\mid y}$ debe ser \textbf{la misma} para cualquier valor de
+$y$, e igual a la marginal $f_X$. En dibujo: todas las rebanadas, ya reescaladas, quedan encimadas.
+
+\begin{center}
+\begin{tikzpicture}[xscale=3.3,yscale=1.25]
+\begin{scope}
+\draw[-{Stealth[length=4pt]},tinta] (-0.03,0)--(1.15,0) node[right,font=\footnotesize]{$x$};
+\draw[-{Stealth[length=4pt]},tinta] (0,-0.05)--(0,2.2);
+\draw[colX,line width=2.6pt,opacity=0.45] (0,0)--(1,2);
+\draw[colY,line width=1.1pt,dashed] (0,0)--(1,2);
+\node[font=\footnotesize,anchor=west] at (1,2){$2x$};
+\node[below,font=\footnotesize] at (1,0){1};
+\node[font=\small,align=center,anchor=north] at (0.5,-0.25){$\fxy=4xy$: rebanadas en $y=0.25$ y $y=0.75$\\ reescaladas: \textbf{son la misma}};
+\end{scope}
+\begin{scope}[xshift=1.9cm]
+\draw[-{Stealth[length=4pt]},tinta] (-0.03,0)--(1.15,0) node[right,font=\footnotesize]{$x$};
+\draw[-{Stealth[length=4pt]},tinta] (0,-0.05)--(0,2.2);
+\draw[colX,line width=1.3pt] (0,0.1667)--(1,1.8333);
+\draw[colY,line width=1.3pt] (0,0.6429)--(1,1.3571);
+\node[font=\footnotesize,text=colX,anchor=west] at (1,1.83){$y=0.1$};
+\node[font=\footnotesize,text=colY,anchor=west] at (1,1.36){$y=0.9$};
+\node[below,font=\footnotesize] at (1,0){1};
+\node[font=\small,align=center,anchor=north] at (0.5,-0.25){$\fxy=x+y$: rebanadas reescaladas\\ \textbf{con forma distinta}};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\pregunta{Lectura de la figura}
+Con $\fxy=4xy$, sea cual sea $y$, la rebanada es $4x\cdot y$: siempre una recta que sale del origen; al reescalarla queda
+$2x$ en todos los casos. Saber $y$ no cambia la forma: \textbf{independientes}.
+
+Con $\fxy=x+y$, si $y=0.1$ la rebanada $x+0.1$ es casi proporcional a $x$ (valores grandes de $x$ mucho más probables);
+si $y=0.9$, la rebanada $x+0.9$ es casi plana (todos los $x$ parecidos). Saber $y$ sí cambia cómo se reparte $X$:
+\textbf{dependientes}.
+
+\pregunta{Por qué un soporte triangular siempre da dependencia}
+En el triángulo $x+y\le1$, si te dicen que $Y=\tfrac34$, entonces $X$ sólo puede estar entre 0 y $\tfrac14$. Sin ese dato,
+$X$ podía llegar hasta 1. El dato de $Y$ \textbf{cambió los valores posibles} de $X$, así que no pueden ser independientes.
+En un rectángulo, en cambio, los valores posibles de $X$ son los mismos para cualquier $y$; ahí hay que revisar la fórmula.
+\end{afondo}

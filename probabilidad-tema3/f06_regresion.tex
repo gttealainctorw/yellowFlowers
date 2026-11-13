@@ -1,0 +1,33 @@
+\begin{afondo}{La curva de regresión une los centros de las rebanadas}
+Fija un valor de $x$. La rebanada vertical en ese $x$ dice cómo se reparte $Y$ cuando ya conoces $X$. Su punto de equilibrio
+(su valor esperado) es el mejor pronóstico de $Y$ para ese $x$. Si haces lo mismo con todos los $x$ y unes los puntos,
+obtienes la curva de regresión.
+
+\begin{center}
+\begin{tikzpicture}[scale=3.4]
+\draw[-{Stealth[length=4pt]},tinta] (-0.05,0)--(1.2,0) node[right,font=\footnotesize]{$x$};
+\draw[-{Stealth[length=4pt]},tinta] (0,-0.05)--(0,1.12) node[above,font=\footnotesize]{$y$};
+\fill[tinta!9] (0,0)--(1,0)--(1,1)--cycle; \draw[tinta] (0,0)--(1,0)--(1,1)--cycle;
+\foreach \a in {0.3,0.6,0.9}{
+  \draw[colY!60,line width=3pt] (\a,0)--(\a,\a);
+  \pgfmathsetmacro\c{5/9*\a}
+  \fill[colY] (\a,\c) circle (0.75pt);
+  \draw[tinta!40,dashed] (\a,\a/2)--(\a+0.06,\a/2);}
+\draw[verde,line width=1.3pt] (0,0)--(1,0.5556) node[right,font=\footnotesize]{$\hat y=\tfrac59x$};
+\node[left,font=\footnotesize] at (0.62,0.75){$y=x$};
+\node[anchor=west,font=\small,text width=6.4cm,align=left] at (1.35,0.5)
+  {$\fxy=\tfrac83x(x+y)$ en $0\le y\le x\le1$.\\[3pt]
+   Cada barra naranja es una rebanada; el punto es su centro, $\E[Y\mid x]=\tfrac59x$.\\[3pt]
+   La raya punteada marca la mitad de la barra ($\tfrac x2$). El centro queda un poco arriba porque la densidad crece con $y$
+   (el término $x+y$): los valores altos de $Y$ pesan más.};
+\end{tikzpicture}
+\end{center}
+
+\pregunta{Qué significa en palabras}
+$\E[Y\mid x]=\tfrac59x$ dice: «si $X$ resultó valer $x$, en promedio $Y$ vale $\tfrac59$ de eso». Si $X=0.9$, el pronóstico es
+$Y=0.5$. Es el pronóstico que, en promedio, se equivoca menos.
+
+\pregunta{Por qué si son independientes la curva es una recta horizontal}
+Si son independientes, todas las rebanadas tienen la misma forma (la de $f_Y$), así que todas tienen el mismo centro: $\E(Y)$.
+Conocer $x$ no mueve el pronóstico. En el calcio y colesterol de la Serie~3 por eso $\hat y=180$ para cualquier $x$.
+\end{afondo}

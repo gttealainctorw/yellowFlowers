@@ -1,0 +1,59 @@
+\subsection{Entiéndelo contando días}
+
+Antes de las fórmulas, una forma de pensar que hace que todo el capítulo tenga sentido. Las probabilidades de la tabla
+de la fábrica pueden venir de \textbf{contar}: se anotó durante 100 días cuántos artículos produjo cada línea.
+
+\begin{center}\small
+\newcolumntype{Q}{>{\centering\arraybackslash}p{0.95cm}}
+\begin{tabular}{|Q|Q|Q|Q|}\hline
+\hd{días} & \hx{$x=0$} & \hx{$x=1$} & \hx{$x=2$}\\\hline
+\hy{$y=0$} & 10 & 20 & 20\\\hline
+\hy{$y=1$} & 4 & 8 & 8\\\hline
+\hy{$y=2$} & 6 & 12 & 12\\\hline
+\end{tabular}
+\quad\raisebox{-0.2cm}{$\xrightarrow{\ \div\,100\ }$}\quad
+\begin{tabular}{|Q|Q|Q|Q|}\hline
+\hd{$\fxy$} & \hx{$x=0$} & \hx{$x=1$} & \hx{$x=2$}\\\hline
+\hy{$y=0$} & 0.10 & 0.20 & 0.20\\\hline
+\hy{$y=1$} & 0.04 & 0.08 & 0.08\\\hline
+\hy{$y=2$} & 0.06 & 0.12 & 0.12\\\hline
+\end{tabular}
+\end{center}
+
+\enpalabras{una probabilidad conjunta es la \textbf{fracción de días} en que pasaron las dos cosas al mismo tiempo.
+$\fxy(1,0)=0.20$ porque en 20 de los 100 días la línea uno hizo 1 artículo \textbf{y} la línea dos hizo 0.}
+
+Con esta imagen, cada concepto del capítulo es una pregunta de conteo:
+
+\begin{afondo}{Las tres ideas del capítulo, contando días}
+\pregunta{Marginal: «¿en cuántos días la línea uno hizo 1 artículo, sin importar la otra?»}
+Hay que contar \textbf{todos} los días con $x=1$, sea cual sea $y$: es la columna completa,
+$20+8+12=40$ días de 100. Por eso $f_X(1)=0.40$ y por eso la marginal \textbf{suma la columna}: ignorar a $Y$ es juntar todos
+sus casos.
+
+\pregunta{Condicional: «de los días en que la línea dos hizo 1, ¿en qué fracción la línea uno hizo 0?»}
+Ya no miro los 100 días: me quedo \textbf{sólo} con los días en que $y=1$. Son $4+8+8=20$ días. De esos 20, en 4 la línea uno
+hizo 0, así que la respuesta es $\tfrac{4}{20}=0.2$.
+
+Con probabilidades es la misma cuenta: $\tfrac{0.04}{0.20}=0.2$. \textbf{Dividir entre la marginal $f_Y(1)=0.20$ es dividir entre el
+tamaño del grupo al que me restringí.} Por eso la condicional siempre es «conjunta entre marginal de lo conocido».
+
+\pregunta{Independencia: «¿saber cuánto hizo la línea dos cambia lo que espero de la línea uno?»}
+En los 100 días, la línea uno hizo 0 en el 20\,\% de ellos ($f_X(0)=0.20$). Entre los 20 días con $y=1$, también lo hizo
+en el 20\,\% ($4$ de $20$). Lo mismo pasa con cualquier valor: \textbf{la proporción no cambia} al restringir el grupo. Saber $Y$
+no aporta información sobre $X$: son \textbf{independientes}.
+
+\pregunta{¿Y de dónde sale la regla del producto?}
+Si son independientes, «la fracción de días con $x=1$ \emph{y} $y=0$» se puede calcular en dos pasos:
+el 40\,\% de los días tienen $x=1$, y \emph{de esos}, el 50\,\% tienen $y=0$ (porque saber $X$ no cambia la proporción de $Y$).
+Entonces la fracción es $0.40\times0.50=0.20$, que es justo la celda. Por eso, cuando hay independencia,
+\[\fxy(x,y)=f_X(x)\cdot f_Y(y)\]
+y cuando alguna celda no cumple el producto es porque saber una variable sí cambió las proporciones de la otra.
+\end{afondo}
+
+\begin{afondo}{Un ejemplo donde sí hay dependencia: el restaurante}
+En la tabla del restaurante (Serie~3, problema~8), el 30\,\% de los hombres pide la comida de \$10: $f_X(10)=0.30$.
+Pero entre las parejas donde la mujer pidió la de \$7, \textbf{ningún} hombre pidió la de \$10: $\fxy(10,7)=0$.
+Saber que ella pidió la de \$7 cambió la proporción de 30\,\% a 0\,\%: la información de $Y$ sí dice algo sobre $X$.
+Son \textbf{dependientes}, y la regla del producto falla en esa celda: $0.30\times0.10=0.03\ne0$.
+\end{afondo}

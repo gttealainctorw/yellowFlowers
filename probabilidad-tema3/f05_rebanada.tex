@@ -1,0 +1,45 @@
+\begin{afondo}{La condicional es una rebanada que se reescala para que su área valga 1}
+Toma $\fxy=x+y$ en el cuadrado unitario y supón que ya sabes que $Y=0.2$. Lo único que sigue siendo posible son los puntos
+de la línea horizontal $y=0.2$. Sobre esa línea la densidad vale $\fxy(x,\,0.2)=x+0.2$: es la \textbf{rebanada}.
+
+\begin{center}
+\begin{tikzpicture}[xscale=3.4,yscale=1.5]
+\begin{scope}
+\fill[colY!25] (0,0)--(0,0.2)--(1,1.2)--(1,0)--cycle;
+\draw[colY,line width=1.3pt] (0,0.2)--(1,1.2);
+\draw[-{Stealth[length=4pt]},tinta] (-0.03,0)--(1.15,0) node[right,font=\footnotesize]{$x$};
+\draw[-{Stealth[length=4pt]},tinta] (0,-0.05)--(0,1.95);
+\node[font=\footnotesize,anchor=east] at (0,0.2){0.2}; \node[font=\footnotesize,anchor=west] at (1,1.2){1.2};
+\node[below,font=\footnotesize] at (1,0){1};
+\node[font=\small] at (0.55,0.38){área $=0.7$};
+\node[font=\small,align=center] at (0.5,-0.45){Rebanada: $\fxy(x,0.2)=x+0.2$};
+\end{scope}
+\draw[-{Stealth[length=6pt]},tinta,line width=1pt] (1.3,0.8)--(1.65,0.8) node[midway,above,font=\footnotesize]{$\div\,0.7$};
+\begin{scope}[xshift=1.85cm]
+\fill[verde!20] (0,0)--(0,0.286)--(1,1.714)--(1,0)--cycle;
+\draw[verde,line width=1.3pt] (0,0.286)--(1,1.714);
+\draw[-{Stealth[length=4pt]},tinta] (-0.03,0)--(1.15,0) node[right,font=\footnotesize]{$x$};
+\draw[-{Stealth[length=4pt]},tinta] (0,-0.05)--(0,1.95);
+\node[font=\footnotesize,anchor=east] at (0,0.286){0.29}; \node[font=\footnotesize,anchor=west] at (1,1.714){1.71};
+\node[below,font=\footnotesize] at (1,0){1};
+\node[font=\small] at (0.55,0.45){área $=1$};
+\node[font=\small,align=center] at (0.5,-0.45){Condicional: $\dfrac{x+0.2}{0.7}$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\pregunta{Por qué se divide justo entre $f_Y(y_0)$}
+El área bajo la rebanada es $\int_0^1(x+0.2)\,dx=0.5+0.2=0.7$, y eso es exactamente la marginal $f_Y(0.2)=0.2+\tfrac12$.
+No es casualidad: la marginal $f_Y(y_0)$ \textbf{es} el total de la rebanada en $y_0$ (es lo que hace la marginal: juntar todo lo
+que hay sobre esa línea). Para que la rebanada sea una densidad de verdad tiene que tener área 1, y se logra dividiendo entre
+su área. Es el mismo «dividir entre el tamaño del grupo» de la tabla.
+
+\pregunta{Qué se conserva y qué cambia}
+La \textbf{forma} se conserva (la línea sigue subiendo igual: valores grandes de $x$ son más probables). Sólo cambia la escala.
+Por eso la condicional dice «cómo se reparte $X$ cuando ya sé que $Y=0.2$».
+
+\pregunta{Por qué no se puede usar $P(A\cap B)/P(B)$ con un valor exacto}
+Con $B=\{Y=0.2\}$, el denominador $P(Y=0.2)$ vale 0 (un punto exacto no tiene probabilidad), y no se puede dividir entre 0.
+La densidad condicional resuelve el problema dividiendo entre la \emph{densidad} $f_Y(0.2)$, que sí es positiva.
+Cuando lo que se conoce es un intervalo, como $Y\le0.5$, sí tiene probabilidad positiva y se usa $P(A\cap B)/P(B)$.
+\end{afondo}

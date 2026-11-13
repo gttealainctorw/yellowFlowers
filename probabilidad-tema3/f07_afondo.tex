@@ -1,0 +1,65 @@
+\begin{afondo}{De dónde sale la covariancia}
+La definición formal es el promedio del producto de las desviaciones de cada variable respecto a su media:
+\[\Cov(X,Y)=\E\big[(X-\mu_X)(Y-\mu_Y)\big]\]
+
+\pregunta{Qué mide ese producto: los cuatro cuadrantes}
+Dibuja una cruz en el punto de las medias $(\mu_X,\mu_Y)$. Cada resultado cae en uno de cuatro cuadrantes, y el signo del
+producto $(x-\mu_X)(y-\mu_Y)$ depende del cuadrante:
+
+\begin{center}
+\begin{tikzpicture}[scale=1.15]
+\fill[verde!12] (0,0) rectangle (2.4,1.8); \fill[verde!12] (0,0) rectangle (-2.4,-1.8);
+\fill[rojo!10] (0,0) rectangle (-2.4,1.8); \fill[rojo!10] (0,0) rectangle (2.4,-1.8);
+\draw[-{Stealth[length=4pt]},tinta,line width=0.9pt] (-2.4,0)--(2.6,0) node[right,font=\footnotesize]{$x$ arriba de $\mu_X$};
+\draw[-{Stealth[length=4pt]},tinta,line width=0.9pt] (0,-1.8)--(0,2.0) node[above,font=\footnotesize]{$y$ arriba de $\mu_Y$};
+\node[font=\small,align=center] at (1.2,0.95){$(+)(+)$\\ \textbf{positivo}};
+\node[font=\small,align=center] at (-1.2,-0.95){$(-)(-)$\\ \textbf{positivo}};
+\node[font=\small,align=center] at (-1.2,0.95){$(-)(+)$\\ \textbf{negativo}};
+\node[font=\small,align=center] at (1.2,-0.95){$(+)(-)$\\ \textbf{negativo}};
+\fill[tinta] (0,0) circle (1.8pt); \node[font=\scriptsize,fill=white,inner sep=1pt,anchor=north west] at (0.06,-0.06){$(\mu_X,\mu_Y)$};
+\end{tikzpicture}
+\end{center}
+Si la mayor parte de la probabilidad está en los cuadrantes verdes (las dos arriba de su media o las dos abajo), el promedio
+del producto es positivo: \textbf{se mueven juntas}. Si está en los rojos, es negativo: \textbf{cuando una sube, la otra baja}.
+Si se reparte parejo, se compensa y da casi cero.
+
+\pregunta{De dónde sale la fórmula corta $\E(XY)-\E(X)\E(Y)$}
+\begin{pasos}
+\paso{Desarrollo el producto como un binomio}
+\[(X-\mu_X)(Y-\mu_Y)=XY-\mu_Y X-\mu_X Y+\mu_X\mu_Y\]
+\paso{Saco el promedio de cada término \textnormal{(las medias son números fijos y salen)}}
+\[\E(XY)-\mu_Y\,\E(X)-\mu_X\,\E(Y)+\mu_X\mu_Y\]
+\paso{Sustituyo $\E(X)=\mu_X$ y $\E(Y)=\mu_Y$}
+\[\E(XY)-\mu_X\mu_Y-\mu_X\mu_Y+\mu_X\mu_Y=\E(XY)-\mu_X\mu_Y\]
+\end{pasos}
+Las dos fórmulas dan lo mismo; la corta se usa porque $\E(XY)$ es una sola suma o integral.
+
+\pregunta{Por qué se necesita la correlación: las unidades}
+Si $X$ está en centímetros y $Y$ en kilogramos, la covariancia está en cm·kg. Si cambias a metros, la covariancia se divide
+entre 100, aunque la relación entre las variables sea la misma. Por eso su tamaño no dice si la relación es fuerte o débil.
+Al dividir entre $\sigma_X$ (cm) y $\sigma_Y$ (kg) se cancelan las unidades y queda un número puro, $\rho$, siempre entre
+$-1$ y $1$.
+
+\pregunta{Cómo leer el valor de $\rho$ (guía aproximada, no una regla oficial)}
+\begin{center}
+\begin{tikzpicture}[x=6.6cm]
+\shade[left color=rojo!70,right color=white] (-1,0) rectangle (0,0.35);
+\shade[left color=white,right color=verde!70] (0,0) rectangle (1,0.35);
+\draw[tinta] (-1,0) rectangle (1,0.35);
+\foreach \v/\t in {-1/{$-1$\\recta\\bajando},-0.6/{$-0.6$\\moderada},-0.3/{$-0.3$\\débil},0/{$0$\\nada\\lineal},0.3/{$0.3$\\débil},0.6/{$0.6$\\moderada},1/{$1$\\recta\\subiendo}}{
+  \draw[tinta] (\v,0)--(\v,-0.1);
+  \node[font=\scriptsize,align=center,anchor=north] at (\v,-0.12){\t};}
+\end{tikzpicture}
+\end{center}
+Ejemplos de tu serie: transistores $\rho=-\tfrac13$ (negativa, débil a moderada); neumáticos $\rho=-0.013$ (prácticamente nada).
+
+\pregunta{Qué es $\rho^2$}
+Es la fracción de la variación de $Y$ que se explica con una recta en $X$. En la tabacalera $\rho=-\tfrac23$, así que
+$\rho^2=\tfrac49\approx0.44$: conocer la proporción de turco explica (linealmente) cerca del 44\,\% de la variación del regional.
+
+\pregunta{Covariancia cero no quiere decir independencia}
+Sea $X$ que vale $-1$, $0$ o $1$, cada uno con probabilidad $\tfrac13$, y $Y=X^2$. Entonces $Y$ depende totalmente de $X$.
+Pero $\E(X)=0$ y $\E(XY)=\E(X^3)=\tfrac13(-1)+\tfrac13(0)+\tfrac13(1)=0$, así que $\Cov=0-0=0$. La relación existe, pero no
+es una recta (es una parábola), y la covariancia sólo detecta relaciones lineales. Por eso, para decidir independencia,
+siempre se compara la conjunta con el producto de marginales, nunca sólo la covariancia.
+\end{afondo}

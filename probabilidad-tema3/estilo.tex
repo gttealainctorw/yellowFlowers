@@ -203,3 +203,11 @@
   attach boxed title to top left={xshift=5mm,yshift=-2.6mm},
   boxed title style={colback=colY,colframe=colY,sharp corners,boxrule=0pt,left=4pt,right=4pt,top=1.5pt,bottom=1.5pt}}
 \newcommand{\comprueba}[1]{\par\vspace{2pt}{\small\color{tinta!80}{\sffamily\bfseries\color{verde}Comprueba \ding{220}}\ #1}\par}
+
+% A fondo: explicaci\'on conceptual detallada (de d\'onde sale y qu\'e significa)
+\newtcolorbox{afondo}[1]{enhanced,breakable,colback=colX!4,colframe=colX!4,boxrule=0pt,arc=0pt,
+  borderline north={2pt}{0pt}{colX},left=12pt,right=12pt,top=9pt,bottom=9pt,before skip=13pt,after skip=13pt,
+  before upper={{\sffamily\bfseries\scriptsize\color{colX}A FONDO\ \ \textbullet\ \ DE D\'ONDE SALE Y QU\'E SIGNIFICA}\par\vspace{-2pt}%
+    {\sffamily\bfseries\large\color{tinta}#1}\par\medskip}}
+% vi\~neta de razonamiento dentro de un a fondo
+\newcommand{\pregunta}[1]{\par\addvspace{6pt}\noindent{\sffamily\bfseries\color{colX}\ding{43}\ #1}\par\nobreak\vspace{1pt}}

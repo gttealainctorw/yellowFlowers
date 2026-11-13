@@ -1,0 +1,52 @@
+\subsection{El punto de partida: qué es una variable aleatoria}
+
+\begin{afondo}{Una variable aleatoria es una pregunta con respuesta numérica}
+Un experimento es algo cuyo resultado no se sabe de antemano: lanzar dos dados, revisar una fila del súper, medir la
+presión de un neumático. Una \textbf{variable aleatoria} es una regla que a cada resultado le asigna \textbf{un número}.
+Es como hacerle una pregunta al experimento:
+
+\begin{center}\small
+\begin{tabular}{|p{4.6cm}|p{5.2cm}|p{4.4cm}|}\hline
+\hd{Experimento} & \hd{Pregunta (variable)} & \hd{Respuestas posibles}\\\hline
+Lanzar dos dados & $X_1$: ¿qué salió en el primero? & 1, 2, 3, 4, 5, 6\\\hline
+Lanzar dos dados & $X_2$: ¿cuánto suman? & 2, 3, \ldots, 12\\\hline
+Un día en la fábrica & $X$: ¿cuántos produjo la línea uno? & 0, 1, 2\\\hline
+Una mezcla de tabaco & $X$: ¿qué proporción es turco? & cualquier número entre 0 y 1\\\hline
+\end{tabular}
+\end{center}
+
+\pregunta{¿Qué cambia en el Tema 3?}
+En el Tema 2 se le hacía \textbf{una} pregunta al experimento. Ahora se le hacen \textbf{dos a la vez}, sobre el
+\textbf{mismo} resultado. Por eso las respuestas pueden estar relacionadas: si el primer dado salió 6, la suma ya no puede
+ser 2. Estudiar esa relación es todo el tema.
+
+\pregunta{Discreta o continua}
+Si las respuestas se pueden \textbf{contar} (0, 1, 2, \ldots) la variable es \textbf{discreta} y todo se hace con tablas y sumas.
+Si las respuestas llenan un \textbf{intervalo} (proporciones, presiones, tiempos) es \textbf{continua} y todo se hace con
+fórmulas e integrales. Las ideas son las mismas en los dos casos; sólo cambia la herramienta.
+\end{afondo}
+
+\subsection{Cómo se leen los símbolos del tema}
+
+La mitad de la confusión en este tema viene de no leer bien la notación. La regla más importante:
+\textbf{mayúscula es la variable} (la pregunta) y \textbf{minúscula es un valor} (una respuesta concreta).
+$P(X=x)$ se lee \guillemotleft la probabilidad de que la variable $X$ tome el valor $x$\guillemotright.
+
+\begin{center}\small
+\rowcolors{2}{papel}{white}
+\begin{tabular}{|>{\centering\arraybackslash}p{3.0cm}|p{4.1cm}|p{7.6cm}|}\hline
+\hd{Símbolo} & \hd{Se lee} & \hd{Significa}\\\hline
+$P(X=1,\;Y=2)$ & «probabilidad de $X$ igual a 1 \textbf{y} $Y$ igual a 2» & La coma es \textbf{y al mismo tiempo}.\\\hline
+$\fxy(x,y)$ & «efe conjunta de $x$, $y$» & Probabilidad (o densidad) de cada pareja de valores.\\\hline
+$f_X(x)$ & «marginal de $X$» & Distribución de $X$ sola, sin importar $Y$.\\\hline
+$f_{X\mid y}(x\mid y)$ & «efe de $x$ dado $y$» & Distribución de $X$ cuando \textbf{ya se sabe} cuánto vale $Y$. La barra vertical se lee \textbf{dado que}.\\\hline
+$F_{XY}(x,y)$ & «efe mayúscula conjunta» & Probabilidad acumulada: $P(X\le x,\ Y\le y)$.\\\hline
+$\E(X)=\mu_X$ & «esperanza de $X$», «mu de $X$» & Valor promedio de $X$.\\\hline
+$\Var(X)=\sigma_X^2$ & «variancia de $X$» & Qué tan dispersa está $X$ alrededor de su media.\\\hline
+$\sigma_X$ & «sigma de $X$» & Desviación estándar: raíz de la variancia, en las mismas unidades que $X$.\\\hline
+$\Cov(X,Y)=\sigma_{XY}$ & «covariancia» & Si $X$ y $Y$ se mueven juntas (+) o en sentidos opuestos ($-$).\\\hline
+$\rho$ & «ro» & Coeficiente de correlación: la covariancia sin unidades, entre $-1$ y $1$.\\\hline
+$\E[Y\mid x]=\hat y$ & «esperanza de $Y$ dado $x$», «ye gorro» & Pronóstico de $Y$ cuando ya se conoce $X$.\\\hline
+\end{tabular}
+\rowcolors{1}{}{}
+\end{center}

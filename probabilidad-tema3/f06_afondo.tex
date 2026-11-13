@@ -1,0 +1,48 @@
+\begin{afondo}{El valor esperado es un promedio ponderado: el punto de equilibrio}
+Volviendo a los 100 días de la fábrica: la línea uno hizo 0 artículos en 20 días, 1 en 40 días y 2 en 40 días. El promedio
+de artículos por día es
+\[\frac{0\cdot20+1\cdot40+2\cdot40}{100}=0\,(0.20)+1\,(0.40)+2\,(0.40)=1.2\]
+Eso es $\E(X)=\sum x\,f_X(x)$: cada valor pesa según qué tan seguido ocurre. Si pones las probabilidades como pesos sobre
+una regla, $\E(X)$ es el punto donde la regla se equilibra.
+
+\begin{center}
+\begin{tikzpicture}[x=2.6cm,y=1.6cm]
+\draw[tinta,line width=1.2pt] (-0.25,0)--(2.25,0);
+\foreach \v/\p in {0/0.2,1/0.4,2/0.4}{
+  \fill[colX] (\v-0.12,0) rectangle (\v+0.12,\p*2.5);
+  \node[font=\footnotesize,above] at (\v,\p*2.5){$\p$};
+  \node[font=\footnotesize,below] at (\v,-0.02){$x=\v$};}
+\fill[colY] (1.2,0)--(1.12,-0.32)--(1.28,-0.32)--cycle;
+\node[font=\footnotesize\sffamily\bfseries,text=colY,anchor=north] at (1.2,-0.36){equilibrio en $\E(X)=1.2$};
+\end{tikzpicture}
+\end{center}
+
+\pregunta{Para promediar $g(X,Y)$ no hace falta la distribución de $g$}
+Si quieres el promedio de $X+Y$, no necesitas construir primero la tabla de $X+Y$. Basta con calcular $g$ en cada celda y
+promediar con los pesos de la tabla conjunta. Con la fábrica:
+\begin{center}\small
+\begin{tabular}{|C|C|C|C|c|C|C|C|C|}
+\cline{1-4}\cline{6-9}
+\hd{$x+y$} & \hx{0} & \hx{1} & \hx{2} & \quad & \hd{$(x+y)\fxy$} & \hx{0} & \hx{1} & \hx{2}\\\cline{1-4}\cline{6-9}
+\hy{0} & 0 & 1 & 2 & & \hy{0} & 0 & 0.20 & 0.40\\\cline{1-4}\cline{6-9}
+\hy{1} & 1 & 2 & 3 & & \hy{1} & 0.04 & 0.16 & 0.24\\\cline{1-4}\cline{6-9}
+\hy{2} & 2 & 3 & 4 & & \hy{2} & 0.12 & 0.36 & 0.48\\\cline{1-4}\cline{6-9}
+\end{tabular}
+\end{center}
+Sumando la tabla de la derecha: $\E(X+Y)=2.00$. Compáralo con $\E(X)+\E(Y)=1.2+0.8=2.0$.
+
+\pregunta{Por qué $\E(X+Y)=\E(X)+\E(Y)$ siempre}
+Se separa la suma en dos y se reconoce la marginal adentro:
+\[
+\E(X+Y)=\sum_x\sum_y(x+y)\fxy
+=\sum_x x\underbrace{\sum_y\fxy}_{f_X(x)}+\sum_y y\underbrace{\sum_x\fxy}_{f_Y(y)}
+=\E(X)+\E(Y)
+\]
+En ningún paso se usó independencia; por eso vale siempre. Lo mismo sale con integrales.
+
+\pregunta{Por qué $\E(XY)=\E(X)\E(Y)$ sólo si son independientes}
+Si son independientes, $\fxy=f_X\,f_Y$ y la doble suma se separa en un producto:
+\[\sum_x\sum_y xy\,f_X(x)f_Y(y)=\Big(\sum_x x\,f_X(x)\Big)\Big(\sum_y y\,f_Y(y)\Big)=\E(X)\,\E(Y)\]
+Si no lo son, la conjunta no se separa y no hay atajo. En los transistores (dependientes) $\E(XY)=2.1$, pero
+$\E(X)\E(Y)=1.5\cdot1.5=2.25$: usar el atajo daría un resultado equivocado.
+\end{afondo}
