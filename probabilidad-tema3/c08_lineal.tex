@@ -1,0 +1,156 @@
+\capitulo{Combinaciones lineales}{Media y variancia de expresiones como $2X-3Y+7$ sin volver a integrar ni a sumar.}{cap:lineal}
+\meta{70}{Ej. 3.13 \textbullet{} Serie 11 \textbullet{} Autoexamen 8 y 9}
+
+\subsection{Las dos f\'ormulas}
+
+Una combinaci\'on lineal es una suma de variables multiplicadas por constantes: $W=aX+bY+c$.
+Si ya conoces las medias, las variancias y la covariancia, la media y la variancia de $W$ salen con dos f\'ormulas.
+
+\begin{idea}{Media y variancia de $W=aX+bY+c$}
+\[
+\E(W)=a\,\E(X)+b\,\E(Y)+c
+\qquad\qquad
+\Var(W)=a^2\,\Var(X)+b^2\,\Var(Y)+2ab\,\Cov(X,Y)
+\]
+\textbf{C\'omo recordar la variancia:} es el binomio al cuadrado. As\'i como $(a+b)^2=a^2+b^2+2ab$,
+\[\Var(\hl{a}X+\hl{b}Y)=\hl{a^2}\Var(X)+\hl{b^2}\Var(Y)+\hl{2ab}\,\Cov(X,Y)\]
+\end{idea}
+
+\begin{center}
+\begin{tabular}{|p{6.4cm}|p{8.6cm}|}\hline
+\hd{Regla} & \hd{Consecuencia}\\\hline
+La constante suelta $c$ no cambia la variancia & $\Var(X+7)=\Var(X)$: mover todo 7 unidades no lo desparrama m\'as\\\hline
+Los coeficientes entran al cuadrado & $\Var(-3Y)=9\,\Var(Y)$: el signo menos desaparece\\\hline
+El signo s\'i cuenta en el t\'ermino cruzado & en $2X-3Y$: $2ab=2(2)(-3)=-12$\\\hline
+Si son independientes, $\Cov=0$ & $\Var(aX+bY+c)=a^2\Var(X)+b^2\Var(Y)$\\\hline
+Si dan $\rho$ en lugar de la covariancia & $\Cov(X,Y)=\rho\,\sigma_X\,\sigma_Y$\\\hline
+Si dan $\sigma$ (desviaci\'on est\'andar) & el\'evala al cuadrado: en la f\'ormula va $\sigma^2$\\\hline
+\end{tabular}
+\end{center}
+
+\begin{receta}{media y variancia de una combinaci\'on lineal}
+\begin{pasosreceta}
+\item \textbf{Junta los datos:} $\E(X)$, $\E(Y)$, $\Var(X)$, $\Var(Y)$, $\Cov(X,Y)$. Si te dan $\E(X^2)$, calcula $\Var(X)=\E(X^2)-[\E(X)]^2$.
+Si te dan $\sigma$, el\'evala al cuadrado. Si te dan $\rho$, calcula $\Cov=\rho\,\sigma_X\sigma_Y$.
+\item \textbf{Identifica} $a$, $b$ y $c$ \textbf{con su signo}.
+\item \textbf{Media:} sustituye en $a\,\E(X)+b\,\E(Y)+c$.
+\item \textbf{Variancia:} sustituye en $a^2\Var(X)+b^2\Var(Y)+2ab\,\Cov(X,Y)$. La $c$ no aparece.
+\end{pasosreceta}
+\end{receta}
+
+\begin{resuelto}{Variables independientes}{Serie 3 \textbullet{} problema 11}
+\begin{enunciado}
+$X$ y $Y$ independientes con $\E(X)=3$, $\E(X^2)=25$, $\E(Y)=10$, $\E(Y^2)=164$. Calcular los incisos a) a k).
+\end{enunciado}
+\begin{pasos}
+\paso{Junto los datos: variancias y desviaciones \textnormal{(son los incisos c, d, e, f)}}
+\begin{align*}
+\Var(X)&=\E(X^2)-[\E(X)]^2=25-3^2=\res{16} & \sigma_X&=\sqrt{16}=\res{4}\\
+\Var(Y)&=\E(Y^2)-[\E(Y)]^2=164-10^2=\res{64} & \sigma_Y&=\sqrt{64}=\res{8}
+\end{align*}
+Como son independientes, $\Cov(X,Y)=0$.
+\paso{Incisos a y b: medias}
+\begin{align*}
+\E(3X+Y-8)&=3(3)+10-8=\res{11}\\
+\E(2X-3Y+7)&=2(3)-3(10)+7=6-30+7=\res{-17}
+\end{align*}
+\paso{Incisos g y h: variancias \textnormal{(sin t\'ermino cruzado; las constantes $-8$ y $+7$ no cuentan)}}
+\begin{align*}
+\Var(3X+Y-8)&=3^2(16)+1^2(64)=144+64=\res{208}\\
+\Var(2X-3Y+7)&=2^2(16)+(-3)^2(64)=64+576=\res{640}
+\end{align*}
+\paso{Inciso i: $\dfrac{X-3}{4}$}
+Lo escribo como combinaci\'on lineal: $\dfrac{X-3}{4}=\dfrac14X-\dfrac34$, con $a=\tfrac14$ y $c=-\tfrac34$.
+\[\E\Big[\tfrac{X-3}{4}\Big]=\tfrac14(3)-\tfrac34=\res{0}\qquad\Var\Big[\tfrac{X-3}{4}\Big]=\Big(\tfrac14\Big)^2(16)=\res{1}\]
+\paso{Inciso j: $\dfrac{Y-10}{8}$}
+\[\E\Big[\tfrac{Y-10}{8}\Big]=\tfrac18(10)-\tfrac{10}{8}=\res{0}\qquad\Var\Big[\tfrac{Y-10}{8}\Big]=\Big(\tfrac18\Big)^2(64)=\res{1}\]
+\paso{Inciso k: la conjetura}
+En los dos casos se rest\'o la media y se dividi\'o entre la desviaci\'on est\'andar ($3$ y $4$; $10$ y $8$). Para cualquier variable,
+\[Z=\frac{X-\mu}{\sigma}\quad\Rightarrow\quad\E(Z)=\frac{\mu-\mu}{\sigma}=0\qquad\Var(Z)=\frac{1}{\sigma^2}\,\sigma^2=1\]
+\res{\text{S\'i: toda variable estandarizada tiene media 0 y variancia 1}}
+\end{pasos}
+\end{resuelto}
+
+\begin{resuelto}{Con covariancia dada por $\rho$}{Apuntes \textbullet{} Autoexamen 9}
+\begin{enunciado}
+$X$ y $Y$ son los rendimientos de dos acciones con $\mu_X=10$, $\sigma_X=15$, $\mu_Y=15$, $\sigma_Y=20$ y $\rho_{XY}=-0.1$.
+Obtener la media y la desviaci\'on est\'andar de $R=0.4X+0.6Y$.
+\end{enunciado}
+\begin{pasos}
+\paso{Junto los datos}
+Me dan desviaciones: las elevo al cuadrado. Me dan $\rho$: saco la covariancia.
+\[\Var(X)=15^2=225\qquad\Var(Y)=20^2=400\qquad\Cov(X,Y)=\rho\,\sigma_X\sigma_Y=(-0.1)(15)(20)=-30\]
+\paso{Identifico coeficientes}
+$a=0.4$, $b=0.6$, $c=0$.
+\paso{Media}
+\[\E(R)=0.4(10)+0.6(15)=4+9=\res{13}\]
+\paso{Variancia}
+\[\Var(R)=(0.4)^2(225)+(0.6)^2(400)+2(0.4)(0.6)(-30)=36+144-14.4=165.6\]
+\paso{Desviaci\'on est\'andar}
+\[\sigma_R=\sqrt{165.6}=\res{12.87}\]
+\end{pasos}
+\enpalabras{es el inciso D del autoexamen. La correlaci\'on negativa hizo que el t\'ermino cruzado restara: combinar las dos acciones reduce la variaci\'on.}
+\end{resuelto}
+
+\subsection{Tres o m\'as variables}
+
+\begin{idea}{Teorema 3.3 de tus apuntes}
+Para $W=a_1X_1+a_2X_2+\cdots+a_nX_n$:
+\[\E(W)=\sum_i a_i\,\mu_i\qquad\qquad\Var(W)=\sum_i a_i^2\,\Var(X_i)+2\sum_{i<j}a_ia_j\,\Cov(X_i,X_j)\]
+Con tres variables el t\'ermino cruzado tiene \textbf{tres parejas}: (1,2), (1,3) y (2,3).
+En forma matricial es $\Var(W)=\mathbf a^{T}\,\Sigma\,\mathbf a$, donde $\Sigma$ es la matriz de variancia-covariancia
+(variancias en la diagonal, covariancias fuera de ella).
+\end{idea}
+
+\begin{resuelto}{Tres variables}{Apuntes \textbullet{} Ej.~3.13 (en blanco en tus apuntes)}
+\begin{enunciado}
+$\E(Y_1)=2$, $\E(Y_2)=-1$, $\E(Y_3)=4$;\quad $\Var(Y_1)=4$, $\Var(Y_2)=6$, $\Var(Y_3)=8$;\quad
+$\Cov(Y_1,Y_2)=1$, $\Cov(Y_1,Y_3)=-1$, $\Cov(Y_2,Y_3)=0$.\quad
+Obtener $\E(3Y_1+4Y_2-6Y_3)$ y $\Var(3Y_1+4Y_2-6Y_3)$.
+\end{enunciado}
+\begin{pasos}
+\paso{Identifico coeficientes con su signo}
+$a_1=3$, $a_2=4$, $a_3=-6$.
+\paso{Media}
+\[\E(W)=3(2)+4(-1)+(-6)(4)=6-4-24=\res{-22}\]
+\paso{Variancia, parte de los cuadrados}
+\[a_1^2\Var(Y_1)+a_2^2\Var(Y_2)+a_3^2\Var(Y_3)=9(4)+16(6)+36(8)=36+96+288=420\]
+\paso{Variancia, parte cruzada: las tres parejas}
+\begin{center}\small
+\begin{tabular}{|D|p{4.6cm}|D|}\hline
+\hd{Pareja} & \hd{$a_i\,a_j\,\Cov(Y_i,Y_j)$} & \hd{Valor}\\\hline
+(1, 2) & $(3)(4)(1)$ & $12$\\\hline
+(1, 3) & $(3)(-6)(-1)$ & $18$\\\hline
+(2, 3) & $(4)(-6)(0)$ & $0$\\\hline
+\end{tabular}
+\end{center}
+\[2\,(12+18+0)=60\]
+\paso{Sumo las dos partes}
+\[\Var(W)=420+60=\res{480}\]
+\end{pasos}
+\verifica{con la forma matricial se obtiene lo mismo:
+$\begin{bmatrix}3&4&-6\end{bmatrix}
+\begin{bmatrix}4&1&-1\\1&6&0\\-1&0&8\end{bmatrix}
+\begin{bmatrix}3\\4\\-6\end{bmatrix}
+=\begin{bmatrix}3&4&-6\end{bmatrix}\begin{bmatrix}22\\27\\-51\end{bmatrix}=66+108+306=480$.}
+\end{resuelto}
+
+\begin{turno}
+\textbf{1.} (Autoexamen 8) $\mu_X=10$, $\mu_Y=15$, $\sigma_X^2=3$, $\sigma_Y^2=4$, $\Cov(X,Y)=2$. Calcula $\Var(2X-Y)$.
+
+\textbf{2.} $\E(X)=4$, $\Var(X)=9$, $\E(Y)=-2$, $\Var(Y)=4$, $\rho=-0.5$. Calcula $\E(W)$ y $\Var(W)$ para $W=2X-3Y+5$.
+\comprueba{\textbf{1.} $a=2$, $b=-1$: $4(3)+1(4)+2(2)(-1)(2)=12+4-8=8$ (inciso E). Las medias no se usan.\quad
+\textbf{2.} $\E(W)=2(4)-3(-2)+5=19$. $\Cov=(-0.5)(3)(2)=-3$.
+$\Var(W)=4(9)+9(4)+2(2)(-3)(-3)=36+36+36=108$.}
+\end{turno}
+
+\begin{ojo}
+\mal{$\Var(2X-3Y)=4\Var(X)-9\Var(Y)$.}
+\bien{Los cuadrados siempre suman: $4\Var(X)+9\Var(Y)$, m\'as el cruzado $2(2)(-3)\Cov(X,Y)$.}
+\mal{Sumar la constante: $\Var(3X+Y-8)=\ldots-8$.}
+\bien{La constante suelta no aparece en la variancia.}
+\mal{Meter $\sigma_X=15$ directo en la f\'ormula.}
+\bien{En la f\'ormula va la variancia: $15^2=225$.}
+\mal{Olvidar el t\'ermino cruzado cuando no dicen que son independientes.}
+\bien{Sin independencia, el t\'ermino $2ab\Cov(X,Y)$ es obligatorio.}
+\end{ojo}

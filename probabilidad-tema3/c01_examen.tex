@@ -1,0 +1,107 @@
+\capitulo{El examen por dentro}{Qu\'e va a venir, de d\'onde sale cada problema y c\'omo usar esta gu\'ia.}{cap:examen}
+
+\subsection{Lo que revela tu examen del Tema 2}
+
+Tu segundo parcial tuvo \textbf{5 problemas}, uno por subtema, todos de procedimiento. Al compararlo con la Serie 2
+se ve de d\'onde sali\'o cada uno:
+
+\begin{center}\small
+\begin{tabular}{|>{\centering\arraybackslash}p{0.7cm}|p{6.7cm}|p{7.2cm}|}\hline
+\hd{\#} & \hd{Qu\'e pidi\'o} & \hd{De d\'onde sale el molde}\\\hline
+1 & Dada $F_X$: media, variancia y una probabilidad & Serie 2, problema 9: misma idea con otra funci\'on\\\hline
+2 & Dada $F$ discreta: funci\'on de masa y $P(4<X\le7)$ & \cellcolor{marca}Serie 2, problema 7: \textbf{casi id\'entico}\\\hline
+3 & Densidad: media, mediana, moda y sesgo & Serie 2, problemas 13 y 15\\\hline
+4 & Hallar $c$, obtener $F_Y$, graficar y usarla & Serie 2, problemas 8 y 13\\\hline
+5 & Valor esperado de un costo $120X+10$ & Serie 2, problema 14 y propiedades de $\E$\\\hline
+\end{tabular}
+\end{center}
+
+\begin{idea}{El patr\'on de la profesora}
+\begin{itemize}
+\item Toma \textbf{un problema de la serie casi tal cual} y arma los dem\'as con el mismo molde, cambiando la funci\'on o los n\'umeros.
+\item Recorre el temario \textbf{en orden}: un problema por subtema.
+\item Pide \textbf{incisos cortos y encadenados}: el resultado de a) se usa en b).
+\item Califica \textbf{procedimiento y resultado}, y pide que el resultado est\'e resaltado.
+\end{itemize}
+Conclusi\'on: si dominas los moldes de la Serie 3 y de los ejemplos 3.3 a 3.13 de tus apuntes, no hay sorpresa posible.
+\end{idea}
+
+\subsection{Pron\'ostico del examen del Tema 3}
+
+Las probabilidades son \textbf{mi estimaci\'on}, hecha con el patr\'on anterior, el espacio que ocupa cada subtema en tus
+apuntes y cu\'antas veces aparece en la serie. No son un dato oficial.
+
+\begin{center}
+\begin{tikzpicture}[x=0.072cm,y=-0.66cm]
+\foreach \lab/\p [count=\k from 0] in {
+  {Tabla discreta: eventos, marginales y condicional}/95,
+  {Densidad: hallar $k$ y una probabilidad sobre una regi\'on}/95,
+  {Marginales y condicionales continuas}/85,
+  {Covariancia y coeficiente de correlaci\'on}/85,
+  {?`Son independientes? (como inciso)}/75,
+  {$\E$ y $\Var$ de una combinaci\'on lineal}/70,
+  {Valor esperado con contexto (costo, sobrante)}/65,
+  {Curva de regresi\'on}/45,
+  {Construir la tabla desde un experimento}/30,
+  {Funci\'on de distribuci\'on conjunta}/25,
+  {Generadora de momentos de una suma}/10}{
+  \node[anchor=east,font=\small,text=tinta] at (-2,\k) {\lab};
+  \fill[tinta!9] (0,\k-0.27) rectangle (100,\k+0.27);
+  \ifnum\p>79 \fill[colY] (0,\k-0.27) rectangle (\p,\k+0.27);
+  \else\ifnum\p>59 \fill[colY!65] (0,\k-0.27) rectangle (\p,\k+0.27);
+  \else \fill[tinta!45] (0,\k-0.27) rectangle (\p,\k+0.27);\fi\fi
+  \node[anchor=west,font=\sffamily\bfseries\small,text=tinta] at (\p+1,\k) {\p\,\%};
+}
+\end{tikzpicture}
+\end{center}
+
+\textbf{El examen m\'as probable} tiene estos cinco problemas:
+
+\begin{enumerate}[label=\protect\circnum{\arabic*},leftmargin=10mm,labelsep=3mm]
+\item Una \textbf{tabla} conjunta: probabilidad de un evento, marginales, una condicional y si son independientes.
+\item Una \textbf{densidad} con constante por determinar y una probabilidad sobre un tri\'angulo.
+\item La \textbf{marginal y la condicional} de una densidad, con una probabilidad condicional.
+\item \textbf{Covariancia y correlaci\'on} (de una tabla o de una densidad).
+\item Una \textbf{combinaci\'on lineal} o un \textbf{valor esperado con contexto}.
+\end{enumerate}
+
+\subsection{Mapa: del enunciado a lo que tienes que hacer}
+
+Todo el tema son diez acciones. Lee qu\'e pide el inciso, busca la frase en la columna izquierda y haz lo de la derecha.
+
+\begin{center}\small
+\rowcolors{2}{papel}{white}
+\begin{tabular}{|p{5.6cm}|p{8.1cm}|>{\centering\arraybackslash}p{1.2cm}|}\hline
+\hd{Si el inciso dice\ldots} & \hd{\ldots haces esto} & \hd{Cap.}\\\hline
+\guillemotleft Probabilidad de que\ldots\guillemotright{} (tabla) & Marcas las celdas que cumplen y las sumas & \ref{cap:discretas}\\\hline
+\guillemotleft Probabilidad de que\ldots\guillemotright{} (f\'ormula) & Dibujas la regi\'on y haces una integral doble & \ref{cap:continuas}\\\hline
+\guillemotleft Valor de $k$, $c$, $a$\guillemotright & Igualas a 1 la suma o la integral de toda la funci\'on & \ref{cap:continuas}\\\hline
+\guillemotleft Funci\'on marginal\guillemotright & Sumas o integras \textbf{la otra} variable & \ref{cap:discretas}, \ref{cap:margcond}\\\hline
+\guillemotleft Condicional\guillemotright, \guillemotleft dado que\guillemotright, \guillemotleft si se sabe que\guillemotright & Conjunta entre la marginal de lo que ya conoces & \ref{cap:discretas}, \ref{cap:margcond}\\\hline
+\guillemotleft ?`Son independientes?\guillemotright & Comparas la conjunta con el producto de las marginales & \ref{cap:discretas}, \ref{cap:margcond}\\\hline
+\guillemotleft Valor esperado\guillemotright, \guillemotleft promedio\guillemotright, \guillemotleft costo esperado\guillemotright & Multiplicas lo que se promedia por la conjunta y sumas o integras & \ref{cap:esperanza}\\\hline
+\guillemotleft Curva de regresi\'on\guillemotright, \guillemotleft pron\'ostico\guillemotright & Valor esperado usando la condicional & \ref{cap:esperanza}\\\hline
+\guillemotleft Covariancia\guillemotright, \guillemotleft correlaci\'on\guillemotright & Calculas cinco esperanzas y aplicas dos f\'ormulas & \ref{cap:cov}\\\hline
+\guillemotleft $\E$ o $\Var$ de $aX+bY+c$\guillemotright & Aplicas las dos f\'ormulas de combinaci\'on lineal & \ref{cap:lineal}\\\hline
+\end{tabular}
+\rowcolors{1}{}{}
+\end{center}
+
+\subsection{C\'omo leer esta gu\'ia}
+
+\begin{center}\small
+\begin{tabular}{|p{4.3cm}|p{11.1cm}|}\hline
+\hd{Vas a ver} & \hd{Significa}\\\hline
+\cx{\textbf{Verde azulado}} y \cy{\textbf{naranja}} & Todo lo que pertenece a $\cx{X}$ va en verde azulado y todo lo de $\cy{Y}$ en naranja, en tablas, f\'ormulas y figuras.\\\hline
+\hlt{Marcatextos} & Las celdas de un evento, o la parte de una f\'ormula que cambi\'o en ese paso.\\\hline
+\res{\text{Recuadro verde}} & Resultado final de un inciso. En tu examen enci\'erralo igual: las instrucciones lo piden.\\\hline
+\circnum{1}\ \circnum{2}\ \circnum{3} & Pasos en orden. Cada paso tiene un t\'itulo que dice \textbf{qu\'e} se hace.\\\hline
+\textcolor{colX}{\sffamily\bfseries ?`Por qu\'e?} & La raz\'on del paso, para que lo entiendas y no s\'olo lo copies.\\\hline
+\textcolor{verde}{\sffamily\bfseries \ding{51} Verifica} & Una comprobaci\'on de diez segundos que detecta errores.\\\hline
+\textcolor{colY}{\sffamily\bfseries TU TURNO} & Ejercicio para hacer sin ver. La respuesta viene con sus n\'umeros intermedios.\\\hline
+\end{tabular}
+\end{center}
+
+\textbf{Plan de estudio sugerido} (unas 7 horas): cap\'itulos \ref{cap:bases} y \ref{cap:discretas} en la primera sesi\'on;
+\ref{cap:continuas} y \ref{cap:margcond} con l\'apiz en la segunda; \ref{cap:esperanza}, \ref{cap:cov} y \ref{cap:lineal} en la tercera;
+el simulacro del cap\'itulo \ref{cap:cierre} con reloj el d\'ia anterior al examen.

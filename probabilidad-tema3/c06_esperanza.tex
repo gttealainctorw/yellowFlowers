@@ -1,0 +1,280 @@
+\capitulo{Valor esperado y curva de regresi\'on}{Promediar cualquier cosa que dependa de $X$ y $Y$, y pronosticar una variable cuando se conoce la otra.}{cap:esperanza}
+\meta{65}{Ej. 3.9, 3.10 y 3.11 \textbullet{} Serie 4, 5, 6 y 8 \textbullet{} Autoexamen 5 y 6}
+
+\subsection{Valor esperado de una funci\'on de $X$ y $Y$}
+
+En el Tema 2, $\E(X)$ era \guillemotleft cada valor por su probabilidad, y sumo\guillemotright. Con dos variables es igual,
+s\'olo que lo que se promedia puede ser cualquier expresi\'on $g(X,Y)$: la suma $X+Y$, el producto $XY$, una diferencia, un costo.
+
+\begin{idea}{Valor esperado de $g(X,Y)$}
+\[
+\E\big[g(X,Y)\big]=\sum_x\sum_y \hl{g(x,y)}\,\fxy(x,y)
+\qquad\text{o}\qquad
+\E\big[g(X,Y)\big]=\iint \hl{g(x,y)}\,\fxy(x,y)\,dx\,dy
+\]
+Receta mental: \textbf{lo que quiero promediar} (marcado) \textbf{por la conjunta}, y sumo o integro sobre todo el soporte.
+Los casos que m\'as se usan:
+\begin{center}
+\begin{tabular}{|C|C|C|C|C|}\hline
+\hd{$g$} & $x$ & $y$ & $xy$ & $x^2$\\\hline
+\hd{da} & $\E(X)$ & $\E(Y)$ & $\E(XY)$ & $\E(X^2)$\\\hline
+\end{tabular}
+\end{center}
+\end{idea}
+
+\begin{idea}{Propiedades que ahorran trabajo}
+\begin{enumerate}[label=\protect\circnum{\arabic*},leftmargin=10mm,labelsep=3mm]
+\item $\E(c)=c$ \quad (el promedio de una constante es ella misma).
+\item $\E(aX+bY+c)=a\,\E(X)+b\,\E(Y)+c$ \quad \textbf{siempre}, sean o no independientes.
+\item \textbf{S\'olo si son independientes:} $\E(XY)=\E(X)\,\E(Y)$.
+\end{enumerate}
+\end{idea}
+
+\begin{receta}{traducir el enunciado a $g(X,Y)$}
+\begin{center}\small
+\begin{tabular}{|p{7.2cm}|p{6.6cm}|}\hline
+\hd{El enunciado dice} & \hd{Lo que se promedia}\\\hline
+\guillemotleft total\guillemotright, \guillemotleft entre los dos\guillemotright, \guillemotleft las dos l\'ineas\guillemotright & $g=X+Y$\\\hline
+\guillemotleft lo que queda\guillemotright, \guillemotleft sobrante\guillemotright & $g=Y-X$ \ (lo que hab\'ia menos lo que sali\'o)\\\hline
+\guillemotleft diferencia entre el m\'as caro y el m\'as barato\guillemotright & $g=|X-Y|$\\\hline
+\guillemotleft proporci\'on de una proporci\'on\guillemotright & $g=XY$\\\hline
+\guillemotleft cuesta $aX+b$\guillemotright & $g=aX+b$\\\hline
+\end{tabular}
+\end{center}
+\end{receta}
+
+\begin{resuelto}{Tabla con variables independientes}{Serie 3 \textbullet{} problema 4}
+\begin{enunciado}
+$X$ y $Y$ son independientes, con
+\begin{center}\small
+\begin{tabular}{|C|C|C|}\hline
+\hd{$y\,\backslash\,x$} & \hx{2} & \hx{4}\\\hline
+\hy{1} & 0.10 & 0.15\\\hline
+\hy{3} & 0.20 & 0.30\\\hline
+\hy{5} & 0.10 & 0.15\\\hline
+\end{tabular}
+\end{center}
+Encontrar a) $\E(2X-3Y)$\quad b) $\E(XY)$.
+\end{enunciado}
+\begin{pasos}
+\paso{Saco las marginales}
+Columnas: $f_X(2)=0.10+0.20+0.10=0.40$,\ \ $f_X(4)=0.15+0.30+0.15=0.60$.\\
+Renglones: $f_Y(1)=0.25$,\ \ $f_Y(3)=0.50$,\ \ $f_Y(5)=0.25$.
+\paso{Calculo las medias con las marginales}
+\[\E(X)=2(0.40)+4(0.60)=0.8+2.4=3.2\qquad\E(Y)=1(0.25)+3(0.50)+5(0.25)=0.25+1.5+1.25=3\]
+\paso{Inciso a: propiedad 2}
+\[\E(2X-3Y)=2\,\E(X)-3\,\E(Y)=2(3.2)-3(3)=6.4-9=\res{-2.6}\]
+\paso{Inciso b: como son independientes, propiedad 3}
+\[\E(XY)=\E(X)\,\E(Y)=3.2\,(3)=\res{9.6}\]
+\end{pasos}
+\verifica{con la definici\'on, celda por celda:
+$(2)(1)(0.10)+(4)(1)(0.15)+(2)(3)(0.20)+(4)(3)(0.30)+(2)(5)(0.10)+(4)(5)(0.15)=0.2+0.6+1.2+3.6+1.0+3.0=9.6$.}
+\end{resuelto}
+
+\begin{resuelto}{Restaurante: costo total y devoluci\'on}{Serie 3 \textbullet{} problema 8 d, e}
+\begin{enunciado}
+Con la tabla del restaurante (cap\'itulo \ref{cap:discretas}):
+d) ?`Cu\'al es el costo total esperado de la comida de las dos personas?\quad
+e) La galleta dice: \guillemotleft recibir\'as la diferencia entre el costo de la comida m\'as cara y la menos cara\guillemotright. ?`Cu\'anto espera devolver el restaurante?
+\end{enunciado}
+
+\inciso{d}{Costo total esperado}
+\begin{pasos}
+\paso{Traduzco}
+\guillemotleft Costo total\guillemotright{} es $X+Y$. Por la propiedad 2, $\E(X+Y)=\E(X)+\E(Y)$.
+\paso{Medias con las marginales \textnormal{($f_X=0.20,\,0.50,\,0.30$ y $f_Y=0.10,\,0.35,\,0.55$)}}
+\begin{align*}
+\E(X)&=7(0.20)+9(0.50)+10(0.30)=1.4+4.5+3.0=8.90\\
+\E(Y)&=7(0.10)+9(0.35)+10(0.55)=0.7+3.15+5.5=9.35
+\end{align*}
+\paso{Sumo}
+\[\E(X+Y)=8.90+9.35=\res{18.25}\]
+\end{pasos}
+
+\inciso{e}{Devoluci\'on esperada}
+\begin{pasos}
+\paso{Traduzco}
+La m\'as cara menos la m\'as barata es la diferencia sin signo: $g(X,Y)=|X-Y|$. Aqu\'i no hay atajo: uso la definici\'on.
+\paso{Hago una tabla con el valor de $|x-y|$ en cada celda}
+\begin{center}\small
+\begin{tabular}{|C|C|C|C|c|C|C|C|C|}
+\cline{1-4}\cline{6-9}
+\hd{$\fxy$} & \hy{7} & \hy{9} & \hy{10} & \quad & \hd{$|x-y|$} & \hy{7} & \hy{9} & \hy{10}\\\cline{1-4}\cline{6-9}
+\hx{7} & 0.05 & 0.05 & 0.10 & & \hx{7} & 0 & 2 & 3\\\cline{1-4}\cline{6-9}
+\hx{9} & 0.05 & 0.10 & 0.35 & & \hx{9} & 2 & 0 & 1\\\cline{1-4}\cline{6-9}
+\hx{10} & 0 & 0.20 & 0.10 & & \hx{10} & 3 & 1 & 0\\\cline{1-4}\cline{6-9}
+\end{tabular}
+\end{center}
+\paso{Multiplico celda por celda y sumo \textnormal{(la diagonal aporta cero)}}
+\[\E|X-Y|=2(0.05)+3(0.10)+2(0.05)+1(0.35)+3(0)+1(0.20)=0.10+0.30+0.10+0.35+0+0.20=\res{1.05}\]
+\end{pasos}
+\end{resuelto}
+
+\begin{resuelto}{Queroseno: lo que queda en el tanque}{Serie 3 \textbullet{} problema 5}
+\begin{enunciado}
+$Y$ = queroseno (miles de litros) al principio del d\'ia, $X$ = cantidad vendida, con $x\le y$ y
+$\fxy(x,y)=2$ para $0\le x\le y$, $0\le y\le1$. Obtener la cantidad promedio que queda al final del d\'ia.
+\end{enunciado}
+\begin{minipage}{0.27\textwidth}\centering
+\begin{tikzpicture}[scale=2.5]
+\draw[eje] (-0.1,0)--(1.3,0) node[right,et]{$x$}; \draw[eje] (0,-0.1)--(0,1.3) node[above,et]{$y$};
+\draw[reg] (0,0)--(0,1)--(1,1)--cycle;
+\draw[fx] (-0.06,0.6)--(0.72,0.6);
+\node[right,et] at (0.55,0.45){$x=y$};
+\node[left,et] at (0,0.6){$y$};
+\node[left,et] at (0,1){1};
+\end{tikzpicture}
+\end{minipage}\hfill
+\begin{minipage}{0.70\textwidth}
+\begin{pasos}
+\paso{Traduzco}
+Queda lo que hab\'ia menos lo que se vendi\'o: $g(X,Y)=Y-X$. Busco $\E(Y-X)$.
+\paso{Dibujo el soporte y pongo l\'imites}
+$0\le x\le y\le1$ es el tri\'angulo sobre la diagonal. Dejo $y$ afuera (de 0 a 1); la \cx{flecha horizontal entra en $x=0$ y sale en $x=y$}.
+\[\E(Y-X)=\int_0^1\!\!\int_0^{y}(y-x)\cdot2\,dx\,dy\]
+\end{pasos}
+\end{minipage}
+\begin{pasos}
+\setcounter{paso}{2}
+\paso{Integro adentro \textnormal{(en $x$, con $y$ quieta)}}
+\[\int_0^y2(y-x)\,dx=\Big[2yx-x^2\Big]_{x=0}^{x=y}=2y^2-y^2=y^2\]
+\paso{Integro afuera}
+\[\int_0^1y^2\,dy=\Big[\tfrac{y^3}{3}\Big]_0^1=\res{\tfrac13}\]
+\end{pasos}
+\enpalabras{en promedio queda un tercio de mil litros, unos 333 litros.}
+\verifica{por la propiedad 2, $\E(Y)-\E(X)$ debe dar lo mismo. Con $f_Y=2y$ y $f_X=2(1-x)$:
+$\E(Y)=\int_0^12y^2dy=\tfrac23$, \ $\E(X)=\int_0^12x(1-x)\,dx=\tfrac13$, \ y $\tfrac23-\tfrac13=\tfrac13$.}
+\end{resuelto}
+
+\begin{resuelto}{Impurezas: proporci\'on de una proporci\'on}{Apuntes \textbullet{} Ej.~3.9}
+\begin{enunciado}
+$X$ = proporci\'on de impurezas en una muestra, $Y$ = proporci\'on de impureza tipo I \textbf{entre las impurezas}, con
+$\fxy(x,y)=2-2x$ para $0\le x\le1$, $0\le y\le1$. Encontrar el valor esperado de la proporci\'on de impurezas tipo I en la muestra.
+\end{enunciado}
+\begin{pasos}
+\paso{Traduzco}
+Si el 20\,\% de la muestra son impurezas ($X=0.2$) y la mitad de ellas son tipo I ($Y=0.5$), el tipo I es $0.2\times0.5=0.10$ de la muestra, es decir el 10\,\%.
+Una proporci\'on de una proporci\'on es un producto: $g=XY$.
+\paso{Planteo}
+\[\E(XY)=\int_0^1\!\!\int_0^1xy\,(2-2x)\,dy\,dx\]
+\paso{Integro adentro \textnormal{(en $y$; lo que trae $x$ es constante)}}
+\[x(2-2x)\int_0^1y\,dy=x(2-2x)\cdot\tfrac12=x(1-x)=x-x^2\]
+\paso{Integro afuera}
+\[\int_0^1(x-x^2)\,dx=\tfrac12-\tfrac13=\res{\tfrac16}\]
+\end{pasos}
+\end{resuelto}
+
+\begin{turno}
+\textbf{1.} (Autoexamen 5) $\fxy(0,1)=0.1$, $\fxy(0,2)=0.3$, $\fxy(1,1)=0.4$, $\fxy(1,2)=0.2$. Calcula $\E(XY)$.
+
+\textbf{2.} (Autoexamen 6) Dos l\'ineas de ensamble: obt\'en el n\'umero esperado de piezas que producen entre las dos, con
+\begin{center}\small
+\begin{tabular}{|C|C|C|C|}\hline
+\hd{$y\,\backslash\,x$} & \hx{0} & \hx{1} & \hx{2}\\\hline
+\hy{0} & 0.20 & 0.10 & 0.05\\\hline
+\hy{1} & 0.10 & 0.15 & 0.10\\\hline
+\hy{2} & 0.05 & 0.12 & 0.13\\\hline
+\end{tabular}
+\end{center}
+\comprueba{\textbf{1.} las celdas con $x=0$ aportan cero: $(1)(1)(0.4)+(1)(2)(0.2)=0.8$ (inciso B).\quad
+\textbf{2.} $f_X=(0.35,\,0.37,\,0.28)$, $\E(X)=0.37+0.56=0.93$; $f_Y=(0.35,\,0.35,\,0.30)$, $\E(Y)=0.35+0.60=0.95$;
+$\E(X+Y)=1.88$ (inciso D).}
+\end{turno}
+
+\subsection{Valor esperado condicional y curva de regresi\'on}
+
+Si ya s\'e que $X=x$, ?`cu\'anto espero que valga $Y$? El mejor pron\'ostico es el promedio de $Y$ calculado con su
+\textbf{distribuci\'on condicional}.
+
+\begin{idea}{Esperanza condicional y curva de regresi\'on}
+\[
+\hat y=\mu_{Y\mid x}=\E[\,Y\mid X=x\,]=\int y\,f_{Y\mid x}(y\mid x)\,dy
+\qquad\qquad
+\hat x=\mu_{X\mid y}=\E[\,X\mid Y=y\,]=\int x\,f_{X\mid y}(x\mid y)\,dx
+\]
+(con sumas si las variables son discretas). El resultado es una \textbf{f\'ormula que depende de la variable conocida}.
+Su gr\'afica es la \textbf{curva de regresi\'on}: para cada $x$ dice qu\'e $y$ pronosticar.
+Si son independientes, la curva es una constante: $\E[Y\mid x]=\E(Y)$.
+\end{idea}
+
+\begin{receta}{curva de regresi\'on de $Y$ dado $x$}
+\begin{pasosreceta}
+\item Marginal de la variable conocida: $f_X(x)$.
+\item Condicional: $f_{Y\mid x}=\fxy/f_X$, con su intervalo de $y$.
+\item Integra $y\cdot f_{Y\mid x}$ en $y$ sobre ese intervalo.
+\item Simplifica. Di si es una recta (la $x$ aparece s\'olo a la primera potencia) o no.
+\end{pasosreceta}
+Para la regresi\'on de $X$ dado $y$ se intercambian los papeles.
+\end{receta}
+
+\begin{resuelto}{Curvas de regresi\'on}{Apuntes \textbullet{} Ej.~3.10 (en blanco en tus apuntes)}
+\begin{enunciado}
+Con $\fxy(x,y)=x^3+\tfrac38xy^2$ para $0\le x\le1$, $0\le y\le2$, obtener las esperanzas condicionales para cualquier valor.
+Del cap\'itulo \ref{cap:margcond} ya se tienen las condicionales:
+\[f_{Y\mid x}(y\mid x)=\frac{8x^2+3y^2}{8(2x^2+1)},\ 0\le y\le2\qquad\qquad f_{X\mid y}(x\mid y)=\frac{2x(8x^2+3y^2)}{4+3y^2},\ 0\le x\le1\]
+\end{enunciado}
+
+\inciso{a}{Regresi\'on de $Y$ dado $x$}
+\begin{pasos}
+\paso{Planteo: $y$ por la condicional de $Y$, integrando en $y$}
+\[\E[Y\mid x]=\int_0^2y\cdot\frac{8x^2+3y^2}{8(2x^2+1)}\,dy\]
+\paso{Saco lo que no depende de $y$ y distribuyo}
+\[=\frac{1}{8(2x^2+1)}\int_0^2\big(8x^2y+3y^3\big)\,dy\]
+\paso{Integro en $y$}
+\[\int_0^2\big(8x^2y+3y^3\big)\,dy=\Big[4x^2y^2+\tfrac34y^4\Big]_0^2=16x^2+12\]
+\paso{Simplifico}
+\[\E[Y\mid x]=\frac{16x^2+12}{8(2x^2+1)}=\res{\frac{4x^2+3}{2\,(2x^2+1)}},\qquad0\le x\le1\]
+\end{pasos}
+
+\inciso{b}{Regresi\'on de $X$ dado $y$}
+\begin{pasos}
+\paso{Planteo: $x$ por la condicional de $X$, integrando en $x$}
+\[\E[X\mid y]=\int_0^1x\cdot\frac{2x(8x^2+3y^2)}{4+3y^2}\,dx=\frac{1}{4+3y^2}\int_0^1\big(16x^4+6x^2y^2\big)\,dx\]
+\paso{Integro en $x$}
+\[\int_0^1\big(16x^4+6x^2y^2\big)\,dx=\Big[\tfrac{16}{5}x^5+2x^3y^2\Big]_0^1=\tfrac{16}5+2y^2\]
+\paso{Simplifico \textnormal{(multiplico arriba y abajo por 5)}}
+\[\E[X\mid y]=\frac{\frac{16}{5}+2y^2}{4+3y^2}=\res{\frac{2\,(5y^2+8)}{5\,(3y^2+4)}},\qquad0\le y\le2\]
+\end{pasos}
+\enpalabras{ninguna es recta. Uso como pron\'ostico: si $X=\tfrac12$, espero $Y=\dfrac{4(\frac14)+3}{2(2\cdot\frac14+1)}=\dfrac{4}{3}\approx1.33$.}
+\end{resuelto}
+
+\begin{resuelto}{Una regresi\'on que s\'i es recta}{Molde del Ej.~3.8}
+\begin{enunciado}
+Con $\fxy(x,y)=\tfrac83x(x+y)$ para $0\le y\le x\le1$, determinar la curva de regresi\'on de $Y$ dado $x$.
+\end{enunciado}
+\begin{pasos}
+\paso{Marginal de la variable conocida}
+Del cap\'itulo \ref{cap:margcond}: $f_X(x)=4x^3$.
+\paso{Condicional de $Y$ dado $x$}
+\[f_{Y\mid x}(y\mid x)=\frac{\frac83x(x+y)}{4x^3}=\frac{2(x+y)}{3x^2},\qquad0\le y\le x\]
+\paso{Integro $y$ por la condicional, de 0 a $x$}
+\[\E[Y\mid x]=\int_0^xy\cdot\frac{2(x+y)}{3x^2}\,dy=\frac{2}{3x^2}\int_0^x\big(xy+y^2\big)\,dy=\frac{2}{3x^2}\Big[\tfrac{xy^2}{2}+\tfrac{y^3}{3}\Big]_0^x\]
+\paso{Eval\'uo y simplifico}
+\[=\frac{2}{3x^2}\Big(\tfrac{x^3}{2}+\tfrac{x^3}{3}\Big)=\frac{2}{3x^2}\cdot\frac{5x^3}{6}=\res{\tfrac59x}\]
+\end{pasos}
+\enpalabras{es una recta que pasa por el origen: por cada unidad que aumenta $x$, el pron\'ostico de $Y$ aumenta $\tfrac59$.}
+\end{resuelto}
+
+\begin{turno}
+\textbf{1.} (Serie 6 c) Calcio y colesterol, $\fxy=\tfrac1{240}$ en $8.5\le x\le10.5$, $120\le y\le240$. Determina las dos curvas de regresi\'on. ?`Son rectas?
+
+\textbf{2.} (Serie 5) Con $\fxy=2$ para $0\le x\le y\le1$, obt\'en $\E[X\mid y]$ y $\E[Y\mid x]$.
+
+\textbf{3.} (Tabla de la f\'abrica) Calcula $\E[X\mid Y=1]$.
+\comprueba{\textbf{1.} hay independencia, as\'i que son constantes: $\hat x=\E(X)=\tfrac{8.5+10.5}{2}=9.5$ y $\hat y=\E(Y)=\tfrac{120+240}{2}=180$. S\'i son rectas (una vertical y una horizontal).\quad
+\textbf{2.} $f_{X\mid y}=\tfrac{2}{2y}=\tfrac1y$ en $0\le x\le y$, $\E[X\mid y]=\int_0^y\tfrac xy\,dx=\tfrac y2$.
+$f_{Y\mid x}=\tfrac{2}{2(1-x)}=\tfrac1{1-x}$ en $x\le y\le1$, $\E[Y\mid x]=\tfrac{1}{1-x}\cdot\tfrac{1-x^2}{2}=\tfrac{1+x}{2}$.\quad
+\textbf{3.} con la condicional $(0.2,\,0.4,\,0.4)$: $0(0.2)+1(0.4)+2(0.4)=1.2$.}
+\end{turno}
+
+\subsection{Funci\'on generadora de momentos de una suma}
+
+Es poco probable en el examen, pero es un solo rengl\'on.
+
+\begin{idea}{Teorema 3.1 de tus apuntes}
+Si $X_1,\dots,X_n$ son \textbf{independientes} y $Y=X_1+\cdots+X_n$, entonces la generadora de la suma es el producto de las generadoras:
+\[M_Y(\theta)=M_{X_1}(\theta)\,M_{X_2}(\theta)\cdots M_{X_n}(\theta)\]
+\end{idea}
+
+\textbf{Ej.~3.11.} $X$ y $Y$ independientes con $M_X(\theta)=\dfrac{2}{2-\theta}$ y $M_Y(\theta)=\dfrac{1}{1-\theta}$. Para $T=X+Y$:
+\[M_T(\theta)=M_X(\theta)\,M_Y(\theta)=\res{\frac{2}{(2-\theta)(1-\theta)}}\]

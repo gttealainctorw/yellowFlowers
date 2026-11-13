@@ -1,64 +1,17 @@
-\documentclass[11pt,letterpaper]{article}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage[spanish,es-nodecimaldot,es-noshorthands,es-tabla]{babel}
-\usepackage{lmodern}
-\usepackage[margin=2.1cm]{geometry}
-\usepackage{amsmath,amssymb}
-\usepackage{array,booktabs,multirow}
-\usepackage{enumitem}
-\usepackage{xcolor}
-\usepackage{tikz}
-\usepackage[most]{tcolorbox}
-\usepackage{fancyhdr}
-\usepackage[hidelinks]{hyperref}
-
-\definecolor{azul}{HTML}{1F4E79}
-\definecolor{verde}{HTML}{2E6B3E}
-\definecolor{rojo}{HTML}{9C2B2B}
-\definecolor{naranja}{HTML}{B5651D}
-\definecolor{gris}{HTML}{555555}
-
-\newtcolorbox{teoria}[1]{enhanced,breakable,colback=azul!4,colframe=azul,
-  title={#1},fonttitle=\bfseries,left=6pt,right=6pt,top=4pt,bottom=4pt}
-\newtcolorbox{receta}[1]{enhanced,breakable,colback=verde!5,colframe=verde,
-  title={Receta: #1},fonttitle=\bfseries,left=6pt,right=6pt,top=4pt,bottom=4pt}
-\newtcolorbox{ejemplo}[1]{enhanced,breakable,colback=white,colframe=gris,
-  title={#1},fonttitle=\bfseries,left=6pt,right=6pt,top=4pt,bottom=4pt}
-\newtcolorbox{trampa}{enhanced,breakable,colback=rojo!5,colframe=rojo,
-  title={Trampa t\'ipica},fonttitle=\bfseries,left=6pt,right=6pt,top=4pt,bottom=4pt}
-\newtcolorbox{mecaniza}{enhanced,breakable,colback=naranja!6,colframe=naranja,
-  title={Mecaniza (hazlo sin ver y compara)},fonttitle=\bfseries,left=6pt,right=6pt,top=4pt,bottom=4pt}
-
-\newcommand{\E}{\operatorname{E}}
-\newcommand{\Var}{\operatorname{Var}}
-\newcommand{\Cov}{\operatorname{Cov}}
-\newcommand{\fxy}{f_{XY}}
-\newcommand{\resp}[1]{\textcolor{verde}{\ensuremath{\boldsymbol{#1}}}}
-\newcommand{\origen}[1]{\hfill{\small\normalfont\itshape #1}}
-
-\setlist{itemsep=2pt,topsep=3pt}
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{5pt}
-\pagestyle{fancy}\fancyhf{}
-\lhead{\small Probabilidad --- Tema 3}\rhead{\small Variables aleatorias conjuntas}
-\cfoot{\thepage}
+\documentclass[10pt,letterpaper]{article}
+\input{estilo}
 
 \begin{document}
 
-\begin{center}
-{\LARGE\bfseries Gu\'ia para el examen del Tema 3}\\[4pt]
-{\Large Variables aleatorias conjuntas}\\[4pt]
-{\small Probabilidad, Facultad de Ingenier\'ia --- basada en tus apuntes, tu formulario y la Serie 3 (2027-1)}
-\end{center}
-
-\tableofcontents
-\newpage
-
-\input{sec1_radiografia}
-\input{sec2_discretas}
-\input{sec3_continuas}
-\input{sec4_esperanza}
-\input{sec5_simulacro}
+\input{c00_portada}
+\input{c01_examen}
+\input{c02_bases}
+\input{c03_discretas}
+\input{c04_continuas}
+\input{c05_margcond}
+\input{c06_esperanza}
+\input{c07_covarianza}
+\input{c08_lineal}
+\input{c09_cierre}
 
 \end{document}

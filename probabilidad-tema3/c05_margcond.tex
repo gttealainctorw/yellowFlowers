@@ -1,0 +1,333 @@
+\capitulo{Marginales, condicionales e independencia}{Las mismas tres ideas de la tabla, ahora con integrales: olvidar una variable, fijar una variable y comparar.}{cap:margcond}
+\meta{85}{Ej. 3.6, 3.8 y 3.12 \textbullet{} Serie 3, 6 y 7 \textbullet{} Autoexamen 3 y 4}
+
+\subsection{Marginal de una densidad}
+
+En la tabla, la marginal de $X$ era el total de cada columna. Aqu\'i una \guillemotleft columna\guillemotright{} es una
+l\'inea vertical en una $x$ fija, y \guillemotleft sumar\guillemotright{} es integrar a lo largo de ella.
+
+\begin{idea}{Marginal = integrar la variable que no me interesa}
+\[f_X(\cx{x})=\int_{-\infty}^{\infty}\fxy(\cx{x},\cy{y})\,\cy{dy}\qquad\qquad f_Y(\cy{y})=\int_{-\infty}^{\infty}\fxy(\cx{x},\cy{y})\,\cx{dx}\]
+Los l\'imites reales no son infinitos: son los puntos donde la flecha entra y sale del soporte.
+\end{idea}
+
+\begin{receta}{marginal de una densidad}
+\begin{pasosreceta}
+\item Dibuja el soporte.
+\item Para $f_X(x)$ integra en $\cy{y}$: traza la \cy{flecha vertical} y lee d\'onde entra y d\'onde sale.
+Para $f_Y(y)$ integra en $\cx{x}$: traza la \cx{flecha horizontal}.
+\item Integra. El resultado s\'olo puede traer la variable de la marginal.
+\item Escribe \textbf{el intervalo} donde vale (y \guillemotleft 0 en otro caso\guillemotright).
+\item Verifica que la marginal integre 1.
+\end{pasosreceta}
+\end{receta}
+
+\subsection{Condicional de una densidad}
+
+Misma idea que en la tabla: tomo una \guillemotleft rebanada\guillemotright{} de la conjunta en el valor conocido y la divido entre
+su total para que integre 1.
+
+\begin{idea}{Condicional = conjunta entre la marginal de lo que ya conozco}
+\[
+f_{X\mid y_0}(x\mid Y=y_0)=\frac{\fxy(x,y_0)}{f_Y(y_0)}
+\qquad\qquad
+f_{Y\mid x_0}(y\mid X=x_0)=\frac{\fxy(x_0,y)}{f_X(x_0)}
+\]
+El resultado es una densidad de \textbf{una} variable (la que est\'a antes de la barra); la otra queda como un valor fijo.
+\end{idea}
+
+\begin{receta}{condicional y probabilidad condicional}
+\begin{pasosreceta}
+\item Calcula la marginal de la variable \textbf{conocida} (la que va despu\'es de la barra).
+\item Divide la conjunta entre esa marginal y simplifica.
+\item Escribe el intervalo de la variable libre \textbf{cuando la otra vale $y_0$}. En un tri\'angulo ese intervalo cambia con $y_0$.
+\item Si piden una probabilidad como $P(X<a\mid Y=y_0)$: sustituye $y_0$ en la condicional e integra en $x$ hasta $a$.
+\end{pasosreceta}
+\end{receta}
+
+\begin{ojo}
+Hay dos condicionales distintas y se resuelven diferente:
+\mal{$P(X<a\mid \hl{Y<b})$ con la densidad condicional.}
+\bien{Si se condiciona a un \textbf{evento} (una desigualdad), usa $\dfrac{P(X<a,\ Y<b)}{P(Y<b)}$: dos integrales dobles (Ej.~5.5 c).}
+\mal{$P(X<a\mid \hl{Y=y_0})$ con $P(A\cap B)/P(B)$: el denominador $P(Y=y_0)$ vale cero.}
+\bien{Si se condiciona a un \textbf{valor exacto}, usa la densidad condicional e integra una sola vez.}
+\end{ojo}
+
+\begin{resuelto}{Todo el recorrido con una densidad}{Apuntes \textbullet{} Ej.~3.6 (en blanco en tus apuntes)}
+\begin{enunciado}
+$\fxy(x,y)=x^3+\dfrac{xy^2}{a}$ para $0\le x\le1$, $0\le y\le2$.\quad
+a) Valor de $a$.\quad b) $P(X\le Y)$.\quad c) Marginales.\quad d) Condicionales.
+\end{enunciado}
+
+\inciso{a}{Valor de $a$}
+\begin{pasos}
+\paso{Planteo: volumen total igual a 1}
+\[1=\int_0^2\!\!\int_0^1\Big(x^3+\frac{xy^2}{a}\Big)dx\,dy\]
+\paso{Integro adentro \textnormal{(en $x$)}}
+\[\int_0^1\Big(x^3+\frac{xy^2}{a}\Big)dx=\Big[\frac{x^4}{4}+\frac{x^2y^2}{2a}\Big]_0^1=\frac14+\frac{y^2}{2a}\]
+\paso{Integro afuera \textnormal{(en $y$)}}
+\[\int_0^2\Big(\frac14+\frac{y^2}{2a}\Big)dy=\Big[\frac y4+\frac{y^3}{6a}\Big]_0^2=\frac12+\frac{8}{6a}=\frac12+\frac{4}{3a}\]
+\paso{Despejo}
+\[\frac12+\frac4{3a}=1\ \Rightarrow\ \frac{4}{3a}=\frac12\ \Rightarrow\ 3a=8\ \Rightarrow\ \res{a=\tfrac83}\]
+La densidad queda $\fxy(x,y)=x^3+\tfrac38xy^2$ (es la misma del Ej.~3.10).
+\end{pasos}
+
+\inciso{b}{$P(X\le Y)$}
+\begin{minipage}{0.24\textwidth}\centering
+\begin{tikzpicture}[scale=1.75]
+\draw[eje] (-0.1,0)--(1.4,0) node[right,et]{$x$}; \draw[eje] (0,-0.1)--(0,2.3) node[above,et]{$y$};
+\draw[reg] (0,0) rectangle (1,2);
+\draw[ev] (0,0)--(1,1)--(1,2)--(0,2)--cycle;
+\draw[fy] (0.45,0.45)--(0.45,2.1);
+\node[et] at (0.72,0.3){$y=x$};
+\node[below,et] at (1,0){1}; \node[left,et] at (0,2){2};
+\end{tikzpicture}
+\end{minipage}\hfill
+\begin{minipage}{0.73\textwidth}
+\begin{pasos}
+\paso{Dibujo}
+El soporte es el rect\'angulo. $X\le Y$ es $y\ge x$: la zona \textbf{arriba} de la recta $y=x$.
+\paso{L\'imites}
+Afuera $x$, de 0 a 1. La flecha vertical \cy{entra en $y=x$} y \cy{sale en $y=2$}.
+\[P(X\le Y)=\int_0^1\!\!\int_{x}^{2}\Big(x^3+\tfrac38xy^2\Big)dy\,dx\]
+\end{pasos}
+\end{minipage}
+\begin{pasos}
+\setcounter{paso}{2}
+\paso{Integro adentro \textnormal{(en $y$)}}
+\[\Big[x^3y+\tfrac18xy^3\Big]_{y=x}^{y=2}=\big(2x^3+x\big)-\Big(x^4+\tfrac18x^4\Big)=x+2x^3-\tfrac98x^4\]
+\paso{Integro afuera}
+\[\int_0^1\Big(x+2x^3-\tfrac98x^4\Big)dx=\Big[\tfrac{x^2}{2}+\tfrac{x^4}{2}-\tfrac{9x^5}{40}\Big]_0^1=\tfrac12+\tfrac12-\tfrac9{40}=\res{\tfrac{31}{40}=0.775}\]
+\end{pasos}
+
+\inciso{c}{Marginales}
+\begin{pasos}
+\paso{$f_X(x)$: integro en $y$ todo su recorrido, de 0 a 2}
+\[f_X(x)=\int_0^2\Big(x^3+\tfrac38xy^2\Big)dy=\Big[x^3y+\tfrac18xy^3\Big]_0^2=\res{2x^3+x},\qquad0\le x\le1\]
+\paso{$f_Y(y)$: integro en $x$ todo su recorrido, de 0 a 1}
+\[f_Y(y)=\int_0^1\Big(x^3+\tfrac38xy^2\Big)dx=\Big[\tfrac{x^4}{4}+\tfrac{3}{16}x^2y^2\Big]_0^1=\res{\tfrac14+\tfrac3{16}y^2},\qquad0\le y\le2\]
+\end{pasos}
+\verifica{$\int_0^1(2x^3+x)\,dx=\tfrac12+\tfrac12=1$ \ y \ $\int_0^2\big(\tfrac14+\tfrac3{16}y^2\big)dy=\tfrac12+\tfrac12=1$.}
+
+\inciso{d}{Condicionales}
+\begin{pasos}
+\paso{$X$ dado $Y=y_0$: conjunta entre $f_Y$}
+\[f_{X\mid y_0}(x\mid y_0)=\frac{x^3+\frac38xy_0^2}{\frac14+\frac3{16}y_0^2}\]
+\paso{Limpio las fracciones multiplicando arriba y abajo por 16}
+\[\frac{16x^3+6xy_0^2}{4+3y_0^2}=\res{\frac{2x\,(8x^2+3y_0^2)}{4+3y_0^2}},\qquad0\le x\le1\]
+\paso{$Y$ dado $X=x_0$: conjunta entre $f_X$}
+\[f_{Y\mid x_0}(y\mid x_0)=\frac{x_0^3+\frac38x_0y^2}{2x_0^3+x_0}\]
+\paso{Multiplico arriba y abajo por 8 y cancelo $x_0$}
+\[\frac{8x_0^3+3x_0y^2}{16x_0^3+8x_0}=\frac{x_0\,(8x_0^2+3y^2)}{8x_0\,(2x_0^2+1)}=\res{\frac{8x_0^2+3y^2}{8\,(2x_0^2+1)}},\qquad0\le y\le2\]
+\end{pasos}
+\verifica{son exactamente las condicionales que trae impresas el Ej.~3.10 de tus apuntes.}
+
+\inciso{e}{Extra: una probabilidad condicional, $P(Y\le1\mid X=\tfrac12)$}
+\begin{pasos}
+\paso{Sustituyo $x_0=\tfrac12$ en la condicional de $Y$}
+$8x_0^2=8\cdot\tfrac14=2$ \ y \ $8(2x_0^2+1)=8\cdot\tfrac32=12$:
+\[f_{Y\mid 1/2}(y)=\frac{2+3y^2}{12},\qquad0\le y\le2\]
+\paso{Integro en $y$ hasta 1}
+\[P\big(Y\le1\mid X=\tfrac12\big)=\int_0^1\frac{2+3y^2}{12}\,dy=\frac1{12}\Big[2y+y^3\Big]_0^1=\frac3{12}=\res{0.25}\]
+\end{pasos}
+\end{resuelto}
+
+\begin{resuelto}{Tabacalera: marginal y condicional en un tri\'angulo}{Serie 3 \textbullet{} problema 3 b, c}
+\begin{enunciado}
+$\fxy(x,y)=24xy$ para $0\le x\le1$, $0\le y\le1$, $x+y\le1$.\quad
+b) Marginal de la proporci\'on de tabaco regional ($Y$).\quad
+c) Probabilidad de que el turco sea menor de $\tfrac18$ si se sabe que la mezcla contiene $\tfrac34$ de regional.
+\end{enunciado}
+
+\inciso{b}{Marginal de $Y$}
+\begin{minipage}{0.27\textwidth}\centering
+\begin{tikzpicture}[scale=2.5]
+\draw[eje] (-0.1,0)--(1.3,0) node[right,et]{$x$}; \draw[eje] (0,-0.1)--(0,1.3) node[above,et]{$y$};
+\draw[reg] (0,0)--(1,0)--(0,1)--cycle;
+\draw[fx] (-0.06,0.4)--(0.7,0.4);
+\node[right,et] at (0.42,0.68){$x=1-y$};
+\node[left,et] at (0,0.4){$y$};
+\node[below,et] at (1,0){1}; \node[left,et] at (0,1){1};
+\end{tikzpicture}
+\end{minipage}\hfill
+\begin{minipage}{0.70\textwidth}
+\begin{pasos}
+\paso{Decido en qu\'e integro}
+Quiero $f_Y$, as\'i que desaparezco $x$: integro en $\cx{x}$ con \cx{flecha horizontal}.
+\paso{L\'imites con la flecha}
+A una altura $y$ fija, la flecha \cx{entra en $x=0$} y \cx{sale en la recta}. De $x+y=1$ despejo $x=1-y$.
+\paso{Integro \textnormal{($24y$ es constante)}}
+\[f_Y(y)=\int_0^{1-y}24xy\,dx=24y\Big[\tfrac{x^2}{2}\Big]_0^{1-y}=\res{12y(1-y)^2},\quad0\le y\le1\]
+\end{pasos}
+\end{minipage}
+
+\inciso{c}{$P(X<\tfrac18\mid Y=\tfrac34)$}
+\begin{minipage}{0.27\textwidth}\centering
+\begin{tikzpicture}[scale=2.5]
+\draw[eje] (-0.1,0)--(1.3,0) node[right,et]{$x$}; \draw[eje] (0,-0.1)--(0,1.3) node[above,et]{$y$};
+\draw[reg] (0,0)--(1,0)--(0,1)--cycle;
+\draw[tinta,line width=1.6pt] (0,0.75)--(0.25,0.75);
+\draw[marca!60!colY,line width=3pt] (0,0.75)--(0.125,0.75);
+\draw[dashed,tinta!60] (0.25,0.75)--(0.25,0);
+\node[left,et] at (0,0.75){$\tfrac34$}; \node[below,et] at (0.25,0){$\tfrac14$};
+\node[below,et] at (1,0){1};
+\end{tikzpicture}
+\end{minipage}\hfill
+\begin{minipage}{0.70\textwidth}
+\begin{pasos}
+\paso{Reconozco el tipo}
+\guillemotleft Si se sabe que contiene $\tfrac34$ de regional\guillemotright{} es un valor exacto: $Y=\tfrac34$. Uso la densidad condicional de $X$ dado $Y=\tfrac34$.
+\paso{Intervalo de $x$ en esa rebanada}
+Con $y=\tfrac34$, el tri\'angulo s\'olo deja $x$ entre $0$ y $1-\tfrac34=\tfrac14$ (l\'inea gruesa de la figura).
+\end{pasos}
+\end{minipage}
+\begin{pasos}
+\setcounter{paso}{2}
+\paso{Eval\'uo la conjunta y la marginal en $y=\tfrac34$}
+\[\fxy\big(x,\tfrac34\big)=24x\cdot\tfrac34=18x\qquad\qquad f_Y\big(\tfrac34\big)=12\cdot\tfrac34\cdot\big(\tfrac14\big)^2=9\cdot\tfrac1{16}=\tfrac9{16}\]
+\paso{Divido}
+\[f_{X\mid 3/4}(x)=\frac{18x}{9/16}=18x\cdot\frac{16}{9}=32x,\qquad0\le x\le\tfrac14\]
+\verifica{$\int_0^{1/4}32x\,dx=16\cdot\tfrac1{16}=1$.}
+\paso{Integro hasta $\tfrac18$}
+\[P\big(X<\tfrac18\mid Y=\tfrac34\big)=\int_0^{1/8}32x\,dx=\Big[16x^2\Big]_0^{1/8}=\tfrac{16}{64}=\res{0.25}\]
+\end{pasos}
+\end{resuelto}
+
+\begin{resuelto}{Calcio y colesterol: densidad uniforme}{Serie 3 \textbullet{} problema 6 a, b}
+\begin{enunciado}
+$X$ = nivel de calcio, $Y$ = nivel de colesterol, con $\fxy(x,y)=\tfrac1{240}$ para $8.5\le x\le10.5$, $120\le y\le240$.\quad
+a) Obtener $f_{X\mid y}$ y compararla con $f_X$.\quad b) Obtener $f_{Y\mid x}$ y compararla con $f_Y$.
+\end{enunciado}
+\begin{pasos}
+\paso{Marginal de $X$: integro en $y$, de 120 a 240}
+\[f_X(x)=\int_{120}^{240}\tfrac1{240}\,dy=\tfrac{240-120}{240}=\tfrac12,\qquad8.5\le x\le10.5\]
+\paso{Marginal de $Y$: integro en $x$, de 8.5 a 10.5}
+\[f_Y(y)=\int_{8.5}^{10.5}\tfrac1{240}\,dx=\tfrac{10.5-8.5}{240}=\tfrac1{120},\qquad120\le y\le240\]
+\paso{Condicionales: conjunta entre marginal}
+\[f_{X\mid y}(x\mid y)=\frac{1/240}{1/120}=\res{\tfrac12}=f_X(x)\qquad\qquad f_{Y\mid x}(y\mid x)=\frac{1/240}{1/2}=\res{\tfrac1{120}}=f_Y(y)\]
+\paso{Interpreto}
+Las condicionales son \textbf{iguales} a las marginales porque $\fxy=f_X\cdot f_Y$ $\big(\tfrac12\cdot\tfrac1{120}=\tfrac1{240}\big)$: hay independencia.
+\end{pasos}
+\enpalabras{la raz\'on f\'isica es que conocer el nivel de calcio de una persona no dice nada sobre su colesterol, y al rev\'es.}
+\end{resuelto}
+
+\subsection{Independencia de variables continuas}
+
+La definici\'on no cambia: $X$ y $Y$ son independientes si $\fxy(x,y)=f_X(x)\,f_Y(y)$ para \textbf{todo} $x$ y $y$.
+
+\begin{receta}{decidir independencia}
+\begin{pasosreceta}
+\item \textbf{Mira el soporte.} Si \textbf{no} es un rect\'angulo (los l\'imites de una variable dependen de la otra: $y\le x$, $x+y\le1$),
+son \textbf{dependientes}.
+\item Si es un rect\'angulo, calcula $f_X$ y $f_Y$, multipl\'icalas y compara con $\fxy$.
+\item \textbf{Atajo para saber qu\'e va a salir:} si la f\'ormula se separa como (algo s\'olo de $x$)$\times$(algo s\'olo de $y$), como $4xy$, saldr\'a independiente;
+si es una suma, como $x+y$ o $x^2+y^2$, no.
+\item En el examen escribe las dos marginales, su producto y la comparaci\'on. Eso es la justificaci\'on.
+\end{pasosreceta}
+\end{receta}
+
+\porque{Si el soporte es un tri\'angulo, hay puntos del rect\'angulo que lo envuelve donde la conjunta vale 0 pero las dos marginales son positivas,
+as\'i que el producto no puede ser igual a la conjunta en todos los puntos.}
+
+\begin{resuelto}{Soporte triangular}{Apuntes \textbullet{} Ej.~3.8 (en blanco en tus apuntes)}
+\begin{enunciado}
+Determinar si $X$ y $Y$ son independientes, con $\fxy(x,y)=\tfrac83x(x+y)$ para $0\le x\le1$, $0\le y\le x$. Justificar.
+\end{enunciado}
+\begin{minipage}{0.27\textwidth}\centering
+\begin{tikzpicture}[scale=2.5]
+\draw[eje] (-0.1,0)--(1.3,0) node[right,et]{$x$}; \draw[eje] (0,-0.1)--(0,1.3) node[above,et]{$y$};
+\draw[reg] (0,0)--(1,0)--(1,1)--cycle;
+\draw[fy] (0.7,-0.06)--(0.7,0.8);
+\draw[fx] (0.22,0.3)--(1.1,0.3);
+\node[left,et] at (0.5,0.62){$y=x$};
+\node[below,et] at (1,0){1};
+\end{tikzpicture}
+\end{minipage}\hfill
+\begin{minipage}{0.70\textwidth}
+\begin{pasos}
+\paso{Miro el soporte}
+Es un tri\'angulo ($y$ llega s\'olo hasta $x$): ya s\'e que la respuesta ser\'a \guillemotleft no\guillemotright. Falta justificarlo con las marginales.
+\paso{Leo las dos flechas}
+\cy{Vertical} (para $f_X$): entra en $y=0$, sale en $y=x$.\\
+\cx{Horizontal} (para $f_Y$): entra en $x=y$, sale en $x=1$.
+\end{pasos}
+\end{minipage}
+\begin{pasos}
+\setcounter{paso}{2}
+\paso{Marginal de $X$}
+\[f_X(x)=\int_0^x\tfrac83(x^2+xy)\,dy=\tfrac83\Big[x^2y+\tfrac{xy^2}{2}\Big]_0^x=\tfrac83\Big(x^3+\tfrac{x^3}{2}\Big)=\tfrac83\cdot\tfrac32x^3=4x^3,\quad0\le x\le1\]
+\paso{Marginal de $Y$}
+\begin{align*}
+f_Y(y)&=\int_y^1\tfrac83(x^2+xy)\,dx=\tfrac83\Big[\tfrac{x^3}{3}+\tfrac{x^2y}{2}\Big]_{x=y}^{x=1}
+=\tfrac83\Big[\Big(\tfrac13+\tfrac y2\Big)-\Big(\tfrac{y^3}{3}+\tfrac{y^3}{2}\Big)\Big]\\
+&=\tfrac83\Big(\tfrac13+\tfrac y2-\tfrac56y^3\Big)=\tfrac89+\tfrac43y-\tfrac{20}{9}y^3,\quad0\le y\le1
+\end{align*}
+\paso{Comparo el producto con la conjunta}
+\[f_X(x)\,f_Y(y)=4x^3\Big(\tfrac89+\tfrac43y-\tfrac{20}{9}y^3\Big)\ \ne\ \tfrac83x(x+y)=\fxy(x,y)\]
+\paso{Concluyo}
+\res{\text{No son independientes}}
+\end{pasos}
+\verifica{un punto basta como contraejemplo. En $(0.2,\,0.8)$ la conjunta vale 0 (porque $y>x$), pero $f_X(0.2)=0.032$ y $f_Y(0.8)\approx0.818$ son positivas.}
+\end{resuelto}
+
+\begin{resuelto}{Soporte rectangular y f\'ormula que se separa}{Apuntes \textbullet{} Ej.~3.12 a, b (en blanco en tus apuntes)}
+\begin{enunciado}
+$\fxy(x,y)=4xy\,e^{-(x^2+y^2)}$ para $0\le x<\infty$, $0\le y<\infty$. Obtener las marginales y las condicionales.
+\end{enunciado}
+\begin{pasos}
+\paso{Separo la f\'ormula}
+$e^{-(x^2+y^2)}=e^{-x^2}e^{-y^2}$, as\'i que $\fxy=\big(2x\,e^{-x^2}\big)\big(2y\,e^{-y^2}\big)$: algo de $x$ por algo de $y$, sobre un soporte rectangular.
+\paso{Una integral que se usa dos veces}
+Con el cambio $u=y^2$, $du=2y\,dy$:
+\[\int_0^\infty2y\,e^{-y^2}dy=\int_0^\infty e^{-u}\,du=\Big[-e^{-u}\Big]_0^\infty=0-(-1)=1\]
+\paso{Marginal de $X$: integro en $y$; lo que trae $x$ sale como constante}
+\[f_X(x)=\int_0^\infty4xy\,e^{-x^2}e^{-y^2}dy=2x\,e^{-x^2}\underbrace{\int_0^\infty2y\,e^{-y^2}dy}_{1}=\res{2x\,e^{-x^2}},\quad x\ge0\]
+\paso{Marginal de $Y$: por simetr\'ia}
+\[f_Y(y)=\res{2y\,e^{-y^2}},\quad y\ge0\]
+\paso{Comparo}
+$f_X(x)\,f_Y(y)=4xy\,e^{-x^2}e^{-y^2}=\fxy(x,y)$ en todo punto: \res{\text{independientes}}
+\paso{Condicionales}
+Al ser independientes, condicionar no cambia nada:
+\[f_{X\mid y}(x\mid y)=\frac{\fxy}{f_Y}=\res{2x\,e^{-x^2}}\qquad\qquad f_{Y\mid x}(y\mid x)=\res{2y\,e^{-y^2}}\]
+\end{pasos}
+Los incisos c y d de este ejemplo se terminan en los cap\'itulos \ref{cap:esperanza} y \ref{cap:cov}.
+\end{resuelto}
+
+\begin{resuelto}{Neum\'aticos: marginal e independencia}{Serie 3 \textbullet{} problema 7 d, e}
+\begin{enunciado}
+$\fxy(x,y)=K(x^2+y^2)$, $K=\tfrac{3}{380000}$, para $20\le x\le30$, $20\le y\le30$.\quad
+d) Marginal del neum\'atico derecho.\quad e) ?`Son independientes?
+\end{enunciado}
+\begin{pasos}
+\paso{Marginal de $X$: integro en $y$, de 20 a 30}
+\[f_X(x)=K\int_{20}^{30}(x^2+y^2)\,dy=K\Big[x^2y+\tfrac{y^3}{3}\Big]_{20}^{30}=K\Big(10x^2+\tfrac{19000}{3}\Big)\]
+\paso{Sustituyo $K$}
+\[f_X(x)=\tfrac{3}{380000}\cdot10x^2+\tfrac{3}{380000}\cdot\tfrac{19000}{3}=\res{\tfrac{3x^2}{38000}+\tfrac1{20}},\qquad20\le x\le30\]
+\paso{Independencia}
+Por simetr\'ia $f_Y(y)=\tfrac{3y^2}{38000}+\tfrac1{20}$. El producto $f_Xf_Y$ contiene un t\'ermino con $x^2y^2$ y la conjunta no lo tiene:
+$f_X\,f_Y\ne\fxy$. \res{\text{No son independientes}}
+\end{pasos}
+\enpalabras{aunque el soporte es un cuadrado, la f\'ormula es una suma ($x^2+y^2$) y no se puede separar en un producto.}
+\end{resuelto}
+
+\begin{turno}
+\textbf{1.} (Autoexamen 3) $\fxy=\dfrac{3x-y}{18}$ para $1<x<4$, $1<y<2$. Obt\'en la densidad del tiempo de llegada ($X$).
+
+\textbf{2.} (Autoexamen 4) $\fxy=8xy$ para $0<x<y<1$. Obt\'en la condicional de $X$ dado $y$.
+
+\textbf{3.} (Serie 5) $\fxy=2$ para $0\le x\le y\le1$. Obt\'en $f_X$, $f_Y$ y di si son independientes.
+\comprueba{\textbf{1.} integro en $y$ de 1 a 2: $\tfrac1{18}\big[3xy-\tfrac{y^2}{2}\big]_1^2=\tfrac1{18}\big(3x-\tfrac32\big)=\tfrac x6-\tfrac1{12}$ (inciso B).\quad
+\textbf{2.} $f_Y(y)=\int_0^y8xy\,dx=4y^3$; $f_{X\mid y}=\tfrac{8xy}{4y^3}=\tfrac{2x}{y^2}$, $0<x<y$ (inciso B).\quad
+\textbf{3.} $f_X(x)=\int_x^12\,dy=2(1-x)$; $f_Y(y)=\int_0^y2\,dx=2y$; el producto $4y(1-x)\ne2$ y el soporte es triangular: no.}
+\end{turno}
+
+\begin{ojo}
+\mal{En un tri\'angulo, integrar la marginal de 0 a 1.}
+\bien{Los l\'imites son los de la flecha: de $0$ a $1-y$, de $y$ a $1$, de $0$ a $x$, seg\'un la regi\'on.}
+\mal{Una \guillemotleft marginal de $X$\guillemotright{} que todav\'ia trae $y$.}
+\bien{Si queda la otra letra, los l\'imites est\'an mal o integraste en la variable equivocada.}
+\mal{Dar la condicional sin su intervalo, o con $0\le x\le1$ cuando la rebanada es m\'as corta.}
+\bien{Di siempre d\'onde vale. En la tabacalera con $y=\tfrac34$ era $0\le x\le\tfrac14$.}
+\mal{Decir \guillemotleft son independientes porque el soporte es un cuadrado\guillemotright.}
+\bien{El soporte rectangular es necesario pero no basta: hay que comparar $f_Xf_Y$ con $\fxy$.}
+\end{ojo}

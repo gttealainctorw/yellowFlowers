@@ -1,0 +1,453 @@
+\capitulo{Variables conjuntas discretas: la tabla}{Leer la tabla, calcular probabilidades de eventos, sacar marginales, condicionar y decidir independencia.}{cap:discretas}
+\meta{95}{Ej. 3.3 y 3.7 \textbullet{} Serie 1, 8 y 10}
+
+\subsection{Qu\'e es una funci\'on de probabilidad conjunta}
+
+En el Tema 2 un experimento contestaba \textbf{una} pregunta ($X$). Ahora contesta \textbf{dos} a la vez: $\cx{X}$ y $\cy{Y}$.
+Por ejemplo, en una f\'abrica con dos l\'ineas: $\cx{X}$ = art\'iculos que produce la l\'inea uno en un d\'ia,
+$\cy{Y}$ = art\'iculos que produce la l\'inea dos ese mismo d\'ia.
+
+La \textbf{funci\'on de probabilidad conjunta} dice qu\'e tan probable es cada \emph{pareja} de resultados:
+\[\fxy(\cx{x},\cy{y})=P(\cx{X=x},\ \cy{Y=y})\qquad\text{la coma se lee \guillemotleft y al mismo tiempo\guillemotright}\]
+
+Cuando las variables son discretas, la conjunta es una \textbf{tabla}. \'Esta es la de la f\'abrica (Ej.~3.3 de tus apuntes)
+y la vamos a usar en todo el cap\'itulo:
+
+\begin{center}
+\begin{tabular}{|C|C|C|C|}\hline
+\hd{$y\,\backslash\,x$} & \hx{0} & \hx{1} & \hx{2}\\\hline
+\hy{0} & 0.10 & \ce{0.20} & 0.20\\\hline
+\hy{1} & 0.04 & 0.08 & 0.08\\\hline
+\hy{2} & 0.06 & 0.12 & 0.12\\\hline
+\end{tabular}
+\end{center}
+
+\textbf{C\'omo se lee una celda.} La celda marcada est\'a en la columna $\cx{x=1}$ y el rengl\'on $\cy{y=0}$:
+$\fxy(1,0)=P(X=1,\,Y=0)=0.20$. \enpalabras{en el 20\,\% de los d\'ias la l\'inea uno produce 1 art\'iculo y, ese mismo d\'ia,
+la l\'inea dos produce 0.}
+
+\begin{idea}{Las dos condiciones de toda tabla conjunta}
+\begin{enumerate}[label=\protect\circnum{\arabic*},leftmargin=10mm,labelsep=3mm]
+\item Cada celda est\'a entre 0 y 1: \quad $0\le\fxy(x,y)\le1$.
+\item Todas las celdas juntas suman 1: \quad $\displaystyle\sum_x\sum_y\fxy(x,y)=1$.
+\end{enumerate}
+Si en una tabla falta un valor (un \guillemotleft?\guillemotright), se encuentra con la condici\'on 2.
+\end{idea}
+
+\begin{ojo}
+\mal{Suponer que los renglones siempre son $x$.}
+\bien{Revisa el encabezado. En esta tabla los renglones son $\cy{y}$ y las columnas $\cx{x}$; en la Serie~3, problema~1,
+es al rev\'es. Escribe arriba de tu hoja: \guillemotleft renglones = \ldots, columnas = \ldots\guillemotright.}
+\end{ojo}
+
+\subsection{Probabilidad de un evento: marcar y sumar}
+
+Un evento es una condici\'on sobre las dos variables: $X>Y$, $X=Y$, $X+Y\le2$.
+Su probabilidad es la suma de las celdas que cumplen la condici\'on.
+
+\begin{resuelto}{Probabilidad de que la l\'inea uno produzca m\'as}{Apuntes \textbullet{} Ej.~3.3 a}
+\begin{enunciado}
+Con la tabla de la f\'abrica, calcular $P(X>Y)$.
+\end{enunciado}
+\begin{pasos}
+\paso{Reviso celda por celda si se cumple $x>y$}
+Voy por renglones. En $y=0$: ?`$0>0$? no; ?`$1>0$? s\'i; ?`$2>0$? s\'i.
+En $y=1$: ?`$0>1$? no; ?`$1>1$? no; ?`$2>1$? s\'i. En $y=2$: ninguna cumple.
+\paso{Marco las que cumplen}
+\begin{center}
+\begin{tabular}{|C|C|C|C|}\hline
+\hd{$y\,\backslash\,x$} & \hx{0} & \hx{1} & \hx{2}\\\hline
+\hy{0} & 0.10 & \ce{0.20} & \ce{0.20}\\\hline
+\hy{1} & 0.04 & 0.08 & \ce{0.08}\\\hline
+\hy{2} & 0.06 & 0.12 & 0.12\\\hline
+\end{tabular}
+\end{center}
+\paso{Sumo las marcadas}
+\[P(X>Y)=0.20+0.20+0.08=\res{0.48}\]
+\end{pasos}
+\porque{Cada celda es la probabilidad de una pareja distinta. Como no pueden ocurrir dos parejas a la vez, sus probabilidades se suman.}
+\end{resuelto}
+
+\begin{turno}
+Con la misma tabla calcula \textbf{a)} $P(X=Y)$ \quad \textbf{b)} $P(X+Y\le2)$.
+\comprueba{\textbf{a)} la diagonal: $0.10+0.08+0.12=0.30$.\quad
+\textbf{b)} celdas $(0,0),(1,0),(2,0),(0,1),(1,1),(0,2)$: $0.10+0.20+0.20+0.04+0.08+0.06=0.68$.}
+\end{turno}
+
+\subsection{Marginales: quedarse con una sola variable}
+
+A veces s\'olo importa una variable. ?`Cu\'al es la probabilidad de que la l\'inea uno produzca 1 art\'iculo,
+\textbf{sin importar} qu\'e haga la l\'inea dos? Hay tres maneras de que $X=1$ ocurra (con $Y=0$, con $Y=1$ o con $Y=2$);
+se suman las tres.
+
+\begin{idea}{Marginal = sumar la variable que no me interesa}
+\[f_X(\cx{x})=\sum_{\cy{y}}\fxy(\cx{x},\cy{y})\qquad\qquad f_Y(\cy{y})=\sum_{\cx{x}}\fxy(\cx{x},\cy{y})\]
+En la tabla: la marginal de $\cx{X}$ es el \textbf{total de cada columna de $x$}; la marginal de $\cy{Y}$ es el
+\textbf{total de cada rengl\'on de $y$}. Se llaman marginales porque se escriben al margen de la tabla.
+\end{idea}
+
+\begin{center}
+\begin{tikzpicture}[x=1.7cm,y=-0.85cm,
+  celda/.style={draw=tinta!30,minimum width=1.5cm,minimum height=0.72cm,font=\small},
+  hX/.style={fill=colX,text=white,minimum width=1.5cm,minimum height=0.72cm,font=\sffamily\bfseries\small},
+  hY/.style={fill=colY,text=white,minimum width=1.5cm,minimum height=0.72cm,font=\sffamily\bfseries\small}]
+\foreach \v [count=\i from 0] in {0,1,2} \node[hX] at (\i,-1) {$x=\v$};
+\foreach \v [count=\j from 0] in {0,1,2} \node[hY] at (-1,\j) {$y=\v$};
+\foreach \row [count=\j from 0] in {{0.10,0.20,0.20},{0.04,0.08,0.08},{0.06,0.12,0.12}}
+  \foreach \v [count=\i from 0] in \row \node[celda] at (\i,\j) {\v};
+\foreach \v [count=\j from 0] in {0.50,0.20,0.30}{
+  \draw[-{Stealth},colY,line width=1.1pt] (2.52,\j)--(3.2,\j);
+  \node[celda,fill=colY!18,draw=colY,font=\bfseries\small] at (3.7,\j) {\v};}
+\foreach \v [count=\i from 0] in {0.20,0.40,0.40}{
+  \draw[-{Stealth},colX,line width=1.1pt] (\i,2.5)--(\i,3.15);
+  \node[celda,fill=colX!16,draw=colX,font=\bfseries\small] at (\i,3.65) {\v};}
+\node[font=\sffamily\bfseries\small,text=colY] at (3.7,-1) {$f_Y(y)$};
+\node[font=\sffamily\bfseries\small,text=colX] at (-1,3.65) {$f_X(x)$};
+\node[font=\small,text=colY,anchor=west] at (4.3,1) {sumo cada rengl\'on};
+\node[font=\small,text=colX,anchor=north] at (1,4.15) {sumo cada columna};
+\end{tikzpicture}
+\end{center}
+
+\begin{resuelto}{Marginales de la f\'abrica}{Apuntes \textbullet{} Ej.~3.3 b}
+\begin{pasos}
+\paso{Marginal de $X$: sumo cada columna}
+\begin{align*}
+f_X(0)&=0.10+0.04+0.06=0.20\\
+f_X(1)&=0.20+0.08+0.12=0.40\\
+f_X(2)&=0.20+0.08+0.12=0.40
+\end{align*}
+\paso{Marginal de $Y$: sumo cada rengl\'on}
+\begin{align*}
+f_Y(0)&=0.10+0.20+0.20=0.50\\
+f_Y(1)&=0.04+0.08+0.08=0.20\\
+f_Y(2)&=0.06+0.12+0.12=0.30
+\end{align*}
+\paso{Las escribo al margen de la tabla}
+\begin{center}
+\begin{tabular}{|C|C|C|C|C|}\hline
+\hd{$y\,\backslash\,x$} & \hx{0} & \hx{1} & \hx{2} & \hy{$f_Y(y)$}\\\hline
+\hy{0} & 0.10 & 0.20 & 0.20 & \my{0.50}\\\hline
+\hy{1} & 0.04 & 0.08 & 0.08 & \my{0.20}\\\hline
+\hy{2} & 0.06 & 0.12 & 0.12 & \my{0.30}\\\hline
+\hx{$f_X(x)$} & \mx{0.20} & \mx{0.40} & \mx{0.40} & \textbf{1}\\\hline
+\end{tabular}
+\end{center}
+\end{pasos}
+\verifica{cada marginal suma 1 ($0.20+0.40+0.40=1$ y $0.50+0.20+0.30=1$). Si no, hay un error de suma.}
+\enpalabras{$f_X(1)=0.40$ significa que la l\'inea uno produce 1 art\'iculo el 40\,\% de los d\'ias, haga lo que haga la l\'inea dos.}
+\end{resuelto}
+
+\subsection{Condicional: cuando ya s\'e cu\'anto vali\'o la otra}
+
+Ahora me informan algo: \guillemotleft hoy la l\'inea dos produjo 1 art\'iculo\guillemotright{} ($\cy{Y=1}$). Con ese dato,
+ya no me interesa toda la tabla: \textbf{s\'olo el rengl\'on $y=1$}. Pero ese rengl\'on suma $0.20$, no 1, as\'i que lo
+\textbf{divido entre su total} para que vuelva a ser una distribuci\'on.
+
+\begin{center}
+\begin{tikzpicture}[x=1.7cm,y=-0.85cm,
+  celda/.style={draw=tinta!30,minimum width=1.5cm,minimum height=0.72cm,font=\small}]
+\node[font=\small,anchor=east] at (-0.6,0) {rengl\'on $\cy{y=1}$:};
+\foreach \v [count=\i from 0] in {0.04,0.08,0.08} \node[celda,fill=marca] at (\i,0) {\v};
+\node[font=\small,anchor=west] at (2.6,0) {suma $0.20=f_Y(1)$};
+\draw[-{Stealth},tinta,line width=1.1pt] (1,0.55)--(1,1.45) node[midway,right,font=\small] {divido cada celda entre $0.20$};
+\node[font=\small,anchor=east] at (-0.6,2) {$f_{X\mid Y=1}(x)$:};
+\foreach \v [count=\i from 0] in {0.2,0.4,0.4} \node[celda,fill=verde!10,draw=verde] at (\i,2) {\v};
+\node[font=\small,anchor=west] at (2.6,2) {ahora suma 1};
+\end{tikzpicture}
+\end{center}
+
+\begin{idea}{Condicional = conjunta entre la marginal de lo que ya conozco}
+\[
+f_{X\mid y_0}(x\mid Y=y_0)=\frac{\fxy(x,y_0)}{f_Y(y_0)}
+\qquad\qquad
+f_{Y\mid x_0}(y\mid X=x_0)=\frac{\fxy(x_0,y)}{f_X(x_0)}
+\]
+Abajo va siempre la marginal de la variable \textbf{que est\'a despu\'es de la barra} (la que ya se conoce).
+\end{idea}
+
+\begin{resuelto}{Condicional de $X$ dado $Y=1$}{Apuntes \textbullet{} Ej.~3.3 c, d}
+\begin{enunciado}
+Determinar la funci\'on de probabilidad condicional de $X$ dado $Y=1$ y calcular $P(X<2\mid Y=1)$.
+\end{enunciado}
+\begin{pasos}
+\paso{Identifico qu\'e se conoce}
+Se conoce $Y=1$. Uso el rengl\'on $y=1$ y su total, $f_Y(1)=0.20$.
+\paso{Divido cada celda del rengl\'on entre el total}
+\begin{align*}
+P(X=0\mid Y=1)&=\frac{\fxy(0,1)}{f_Y(1)}=\frac{0.04}{0.20}=0.2\\[2pt]
+P(X=1\mid Y=1)&=\frac{\fxy(1,1)}{f_Y(1)}=\frac{0.08}{0.20}=0.4\\[2pt]
+P(X=2\mid Y=1)&=\frac{\fxy(2,1)}{f_Y(1)}=\frac{0.08}{0.20}=0.4
+\end{align*}
+\paso{Presento la condicional como tabla}
+\begin{center}
+\begin{tabular}{|D|C|C|C|}\hline
+\hx{$x$} & 0 & 1 & 2\\\hline
+\hx{$f_{X\mid Y=1}$} & 0.2 & 0.4 & 0.4\\\hline
+\end{tabular}
+\end{center}
+\verifica{$0.2+0.4+0.4=1$.}
+\paso{Calculo la probabilidad pedida con esa tabla}
+$X<2$ significa $X=0$ o $X=1$:
+\[P(X<2\mid Y=1)=0.2+0.4=\res{0.6}\]
+\end{pasos}
+\end{resuelto}
+
+\subsection{Independencia: ?`una variable informa sobre la otra?}
+
+Compara lo que acabamos de obtener: la condicional $f_{X\mid Y=1}=(0.2,\,0.4,\,0.4)$ es \textbf{id\'entica} a la marginal
+$f_X=(0.20,\,0.40,\,0.40)$. Saber que $Y=1$ no cambi\'o nada lo que se espera de $X$. Eso es independencia.
+
+\begin{idea}{Independencia}
+$X$ y $Y$ son independientes si y s\'olo si, \textbf{en todas las celdas},
+\[\fxy(x,y)=f_X(x)\cdot f_Y(y)\]
+\begin{itemize}
+\item Para decir que \textbf{no} son independientes basta \textbf{una} celda donde falle.
+\item Para decir que \textbf{s\'i} lo son hay que revisar \textbf{todas}.
+\end{itemize}
+\end{idea}
+
+\begin{resuelto}{?`Son independientes las dos l\'ineas?}{Apuntes \textbullet{} Ej.~3.3}
+\begin{pasos}
+\paso{Tengo la tabla con sus m\'argenes}
+$f_X=(0.20,\,0.40,\,0.40)$ y $f_Y=(0.50,\,0.20,\,0.30)$.
+\paso{Construyo la tabla de productos \textnormal{(marginal de la columna por marginal del rengl\'on)}}
+\begin{center}\small
+\begin{tabular}{|C|D|D|D|}\hline
+\hd{$f_X\cdot f_Y$} & \hx{$x=0$} & \hx{$x=1$} & \hx{$x=2$}\\\hline
+\hy{$y=0$} & $0.2(0.5)=0.10$ & $0.4(0.5)=0.20$ & $0.4(0.5)=0.20$\\\hline
+\hy{$y=1$} & $0.2(0.2)=0.04$ & $0.4(0.2)=0.08$ & $0.4(0.2)=0.08$\\\hline
+\hy{$y=2$} & $0.2(0.3)=0.06$ & $0.4(0.3)=0.12$ & $0.4(0.3)=0.12$\\\hline
+\end{tabular}
+\end{center}
+\paso{Comparo con la tabla original}
+Las nueve celdas coinciden con la conjunta. \res{\text{S\'i son independientes}}
+\end{pasos}
+\end{resuelto}
+
+\begin{receta}{cualquier problema con tabla}
+\begin{pasosreceta}
+\item \textbf{Ubica qui\'en es qui\'en:} qu\'e variable est\'a en renglones y cu\'al en columnas.
+\item \textbf{Agrega los m\'argenes:} total de cada rengl\'on y de cada columna. Comprueba que todo sume 1.
+\item \textbf{Evento} ($X>Y$, $X+Y=4$\ldots): marca las celdas que cumplen y s\'umalas.
+\item \textbf{Condicional:} toma el rengl\'on o la columna del valor conocido y divide entre su total.
+\item \textbf{Independencia:} compara cada celda con (su margen de rengl\'on)$\times$(su margen de columna).
+\end{pasosreceta}
+\end{receta}
+
+\begin{resuelto}{Supermercado}{Serie 3 \textbullet{} problema 1}
+\begin{enunciado}
+$X_1$ = clientes en la fila de la caja r\'apida, $X_2$ = clientes en la fila de la caja superveloz.
+\begin{center}\small
+\begin{tabular}{|C|C|C|C|C|}\hline
+\hd{$x_1\backslash\,x_2$} & \hy{0} & \hy{1} & \hy{2} & \hy{3}\\\hline
+\hx{0} & 0.08 & 0.07 & 0.04 & 0.00\\\hline
+\hx{1} & 0.06 & 0.15 & 0.05 & 0.04\\\hline
+\hx{2} & 0.05 & 0.04 & 0.10 & 0.06\\\hline
+\hx{3} & 0.00 & 0.03 & 0.04 & 0.07\\\hline
+\hx{4} & 0.00 & 0.01 & 0.05 & 0.06\\\hline
+\end{tabular}
+\end{center}
+a) $P(X_1=1,X_2=1)$.\quad b) $P(X_1=X_2)$.\quad c) $A$ = hay por lo menos dos clientes m\'as en una fila que en la otra; expresar $A$ y calcular $P(A)$.\quad
+d) Probabilidad de que el total de clientes sea exactamente cuatro, y de que sea por lo menos cuatro.
+\end{enunciado}
+Aqu\'i los renglones son $\cx{x_1}$ y las columnas $\cy{x_2}$.
+
+\inciso{a}{Exactamente un cliente en cada fila}
+Es una sola celda: rengl\'on $x_1=1$, columna $x_2=1$. \quad $P(X_1=1,X_2=1)=\res{0.15}$
+
+\inciso{b}{Mismo n\'umero de clientes en las dos filas}
+\begin{pasos}
+\paso{Marco las celdas con $x_1=x_2$ \textnormal{(la diagonal)}}
+\begin{center}\small
+\begin{tabular}{|C|C|C|C|C|}\hline
+\hd{$x_1\backslash\,x_2$} & \hy{0} & \hy{1} & \hy{2} & \hy{3}\\\hline
+\hx{0} & \ce{0.08} & 0.07 & 0.04 & 0.00\\\hline
+\hx{1} & 0.06 & \ce{0.15} & 0.05 & 0.04\\\hline
+\hx{2} & 0.05 & 0.04 & \ce{0.10} & 0.06\\\hline
+\hx{3} & 0.00 & 0.03 & 0.04 & \ce{0.07}\\\hline
+\hx{4} & 0.00 & 0.01 & 0.05 & 0.06\\\hline
+\end{tabular}
+\end{center}
+\paso{Sumo}
+\[P(X_1=X_2)=0.08+0.15+0.10+0.07=\res{0.40}\]
+\end{pasos}
+
+\inciso{c}{Por lo menos dos clientes m\'as en una fila que en la otra}
+\begin{pasos}
+\paso{Traduzco la frase a s\'imbolos}
+\guillemotleft Dos m\'as en una que en la otra\guillemotright{} habla de la \textbf{diferencia} sin importar cu\'al fila es mayor,
+y \guillemotleft por lo menos\guillemotright{} es $\ge$: \quad $A=\{\,|X_1-X_2|\ge2\,\}$.
+\paso{Marco las celdas donde la diferencia es 2 o m\'as}
+\begin{center}\small
+\begin{tabular}{|C|C|C|C|C|}\hline
+\hd{$x_1\backslash\,x_2$} & \hy{0} & \hy{1} & \hy{2} & \hy{3}\\\hline
+\hx{0} & 0.08 & 0.07 & \ce{0.04} & \ce{0.00}\\\hline
+\hx{1} & 0.06 & 0.15 & 0.05 & \ce{0.04}\\\hline
+\hx{2} & \ce{0.05} & 0.04 & 0.10 & 0.06\\\hline
+\hx{3} & \ce{0.00} & \ce{0.03} & 0.04 & 0.07\\\hline
+\hx{4} & \ce{0.00} & \ce{0.01} & \ce{0.05} & 0.06\\\hline
+\end{tabular}
+\end{center}
+\paso{Sumo}
+\[P(A)=0.04+0.00+0.04+0.05+0.00+0.03+0.00+0.01+0.05=\res{0.22}\]
+\end{pasos}
+
+\inciso{d}{Total exactamente cuatro, y por lo menos cuatro}
+\begin{pasos}
+\paso{Exactamente cuatro: celdas con $x_1+x_2=4$}
+Son $(1,3)$, $(2,2)$, $(3,1)$ y $(4,0)$:
+\[P(X_1+X_2=4)=0.04+0.10+0.03+0.00=\res{0.17}\]
+\paso{Por lo menos cuatro: agrego las celdas que suman 5, 6 y 7}
+\begin{center}\small
+\begin{tabular}{|C|C|C|C|C|}\hline
+\hd{$x_1\backslash\,x_2$} & \hy{0} & \hy{1} & \hy{2} & \hy{3}\\\hline
+\hx{0} & 0.08 & 0.07 & 0.04 & 0.00\\\hline
+\hx{1} & 0.06 & 0.15 & 0.05 & \ce{0.04}\\\hline
+\hx{2} & 0.05 & 0.04 & \ce{0.10} & \ce{0.06}\\\hline
+\hx{3} & 0.00 & \ce{0.03} & \ce{0.04} & \ce{0.07}\\\hline
+\hx{4} & \ce{0.00} & \ce{0.01} & \ce{0.05} & \ce{0.06}\\\hline
+\end{tabular}
+\end{center}
+\[P(X_1+X_2\ge4)=\underbrace{0.17}_{\text{suman }4}+\underbrace{0.06+0.04+0.01}_{\text{suman }5}+\underbrace{0.07+0.05}_{\text{suman }6}+\underbrace{0.06}_{\text{suman }7}=\res{0.46}\]
+\end{pasos}
+\end{resuelto}
+
+\begin{resuelto}{Restaurante}{Serie 3 \textbullet{} problema 8, incisos a, b, c}
+\begin{enunciado}
+$X$ = costo de la comida del hombre, $Y$ = costo de la comida de la mujer (7, 9 o 10 pesos).
+\begin{center}\small
+\begin{tabular}{|C|C|C|C|}\hline
+\hd{$x\,\backslash\,y$} & \hy{7} & \hy{9} & \hy{10}\\\hline
+\hx{7} & 0.05 & 0.05 & 0.10\\\hline
+\hx{9} & 0.05 & 0.10 & 0.35\\\hline
+\hx{10} & 0 & 0.20 & 0.10\\\hline
+\end{tabular}
+\end{center}
+a) Marginales.\quad b) Probabilidad de que ambas comidas cuesten a lo sumo \$9.\quad c) ?`Son independientes?
+\end{enunciado}
+
+\inciso{a}{Marginales}
+\begin{pasos}
+\paso{Marginal de $X$ \textnormal{(aqu\'i $x$ est\'a en renglones)}: sumo cada rengl\'on}
+$f_X(7)=0.05+0.05+0.10=0.20$;\quad $f_X(9)=0.05+0.10+0.35=0.50$;\quad $f_X(10)=0+0.20+0.10=0.30$.
+\paso{Marginal de $Y$: sumo cada columna}
+$f_Y(7)=0.05+0.05+0=0.10$;\quad $f_Y(9)=0.05+0.10+0.20=0.35$;\quad $f_Y(10)=0.10+0.35+0.10=0.55$.
+\paso{Resultado}
+\begin{center}\small
+\begin{tabular}{|C|C|C|C|C|}\hline
+\hd{$x\,\backslash\,y$} & \hy{7} & \hy{9} & \hy{10} & \hx{$f_X(x)$}\\\hline
+\hx{7} & 0.05 & 0.05 & 0.10 & \mx{0.20}\\\hline
+\hx{9} & 0.05 & 0.10 & 0.35 & \mx{0.50}\\\hline
+\hx{10} & 0 & 0.20 & 0.10 & \mx{0.30}\\\hline
+\hy{$f_Y(y)$} & \my{0.10} & \my{0.35} & \my{0.55} & \textbf{1}\\\hline
+\end{tabular}
+\end{center}
+\end{pasos}
+
+\inciso{b}{Ambas cuestan a lo sumo \$9}
+\guillemotleft A lo sumo 9\guillemotright{} es $\le9$, para las dos: $X\le9$ \textbf{y} $Y\le9$. Son las cuatro celdas de la esquina superior izquierda:
+\[P(X\le9,\,Y\le9)=0.05+0.05+0.05+0.10=\res{0.25}\]
+
+\inciso{c}{?`Independientes?}
+\begin{pasos}
+\paso{Busco una celda sospechosa}
+Un cero en la tabla casi siempre delata dependencia. Tomo $\fxy(10,7)=0$.
+\paso{Comparo con el producto de sus m\'argenes}
+\[f_X(10)\cdot f_Y(7)=0.30\,(0.10)=0.03\ne0=\fxy(10,7)\]
+\paso{Concluyo}
+Fall\'o en una celda, y con una basta. \res{\text{No son independientes}}
+\end{pasos}
+\end{resuelto}
+
+\begin{turno}
+Con la tabla del restaurante obt\'en la funci\'on condicional de $X$ dado $Y=9$ y despu\'es $P(X\ge9\mid Y=9)$.
+\comprueba{se conoce $Y=9$: uso la columna $y=9$, que vale $0.05,\ 0.10,\ 0.20$ y suma $0.35$.
+$f_{X\mid Y=9}(7)=\tfrac{0.05}{0.35}=\tfrac17$,\ \ $f_{X\mid Y=9}(9)=\tfrac{0.10}{0.35}=\tfrac27$,\ \ $f_{X\mid Y=9}(10)=\tfrac{0.20}{0.35}=\tfrac47$.
+Entonces $P(X\ge9\mid Y=9)=\tfrac27+\tfrac47=\tfrac67\approx0.857$.}
+\end{turno}
+
+\subsection{Funci\'on de distribuci\'on conjunta (la tabla acumulada)}
+
+\begin{idea}{$F_{XY}$ acumula hacia abajo y hacia la izquierda}
+\[F_{XY}(x,y)=P(X\le x,\ Y\le y)\]
+Cada celda de $F$ es la suma de todas las celdas de $f$ que est\'an \textbf{arriba y a la izquierda} de ella, incluy\'endola.
+\end{idea}
+
+\begin{resuelto}{Distribuci\'on conjunta de la f\'abrica}{Apuntes \textbullet{} Ej.~3.7 (en blanco en tus apuntes)}
+\begin{pasos}
+\paso{Primer rengl\'on ($y=0$): acumulo s\'olo hacia la derecha}
+$F(0,0)=0.10$;\quad $F(1,0)=0.10+0.20=0.30$;\quad $F(2,0)=0.10+0.20+0.20=0.50$.
+\paso{Segundo rengl\'on ($y=1$): acumulo los renglones $y=0$ y $y=1$}
+$F(0,1)=0.10+0.04=0.14$;\quad $F(1,1)=0.10+0.20+0.04+0.08=0.42$;\quad
+$F(2,1)=0.50+0.20=0.70$.
+\paso{Tercer rengl\'on ($y=2$): acumulo los tres renglones}
+$F(0,2)=0.10+0.04+0.06=0.20$;\quad $F(1,2)=0.20+0.40=0.60$;\quad $F(2,2)=1.00$.
+\paso{Resultado}
+\begin{center}
+\begin{tabular}{|C|C|C|C|}\hline
+\hd{$F_{XY}$} & \hx{$x=0$} & \hx{$x=1$} & \hx{$x=2$}\\\hline
+\hy{$y=0$} & 0.10 & 0.30 & 0.50\\\hline
+\hy{$y=1$} & 0.14 & \ce{0.42} & 0.70\\\hline
+\hy{$y=2$} & 0.20 & 0.60 & 1.00\\\hline
+\end{tabular}
+\end{center}
+\end{pasos}
+\verifica{la \'ultima celda vale 1; el \'ultimo rengl\'on $(0.20,\,0.60,\,1.00)$ es la acumulada de $X$ sola y la \'ultima columna
+$(0.50,\,0.70,\,1.00)$ es la acumulada de $Y$ sola.}
+\enpalabras{la celda marcada dice que $P(X\le1,\,Y\le1)=0.42$.}
+\end{resuelto}
+
+\subsection{Construir la tabla desde el experimento}
+
+A veces no te dan la tabla: hay que armarla. La receta es listar todos los resultados posibles, anotar cu\'anto valen
+$X$ y $Y$ en cada uno y calcular su probabilidad.
+
+\begin{resuelto}{Transistores defectuosos}{Serie 3 \textbullet{} problema 10 a}
+\begin{enunciado}
+Un dispositivo tiene cinco transistores, tres de ellos defectuosos. Se prueban uno por uno.
+$X$ = n\'umero de pruebas hasta encontrar el primer defectuoso; $Y$ = n\'umero de pruebas \textbf{adicionales} hasta encontrar el segundo.
+Determinar la funci\'on de probabilidad conjunta.
+\end{enunciado}
+\begin{pasos}
+\paso{Entiendo las variables con un caso}
+Llamo D a defectuoso y B a bueno. Si las pruebas salen B, D, B, D: el primer D apareci\'o en la prueba 2 ($X=2$)
+y el segundo D apareci\'o 2 pruebas despu\'es ($Y=2$).
+\paso{Listo todas las secuencias posibles hasta el segundo D}
+S\'olo hay 2 buenos, as\'i que antes del segundo D puede haber 0, 1 o 2 buenos repartidos de seis maneras.
+\paso{Calculo cada probabilidad multiplicando, sin reemplazo}
+Cada factor es (los que quedan del tipo que sale) entre (los que quedan en total).
+\begin{center}\small
+\begin{tabular}{|>{\centering\arraybackslash}p{2.1cm}|C|C|p{5.6cm}|C|}\hline
+\hd{Secuencia} & \hx{$X$} & \hy{$Y$} & \hd{C\'alculo} & \hd{Prob.}\\\hline
+D D & 1 & 1 & $\tfrac35\cdot\tfrac24$ & $\tfrac{3}{10}$\\\hline
+D B D & 1 & 2 & $\tfrac35\cdot\tfrac24\cdot\tfrac23$ & $\tfrac{2}{10}$\\\hline
+D B B D & 1 & 3 & $\tfrac35\cdot\tfrac24\cdot\tfrac13\cdot1$ & $\tfrac{1}{10}$\\\hline
+B D D & 2 & 1 & $\tfrac25\cdot\tfrac34\cdot\tfrac23$ & $\tfrac{2}{10}$\\\hline
+B D B D & 2 & 2 & $\tfrac25\cdot\tfrac34\cdot\tfrac13\cdot1$ & $\tfrac{1}{10}$\\\hline
+B B D D & 3 & 1 & $\tfrac25\cdot\tfrac14\cdot1\cdot1$ & $\tfrac{1}{10}$\\\hline
+\end{tabular}
+\end{center}
+\porque{Ejemplo con D B D: al inicio hay 3 defectuosos de 5 ($\tfrac35$). Sacado uno, quedan 4 piezas y 2 son buenas ($\tfrac24$).
+Sacado el bueno, quedan 3 piezas y 2 son defectuosas ($\tfrac23$).}
+\paso{Acomodo en la tabla}
+\begin{center}
+\begin{tabular}{|C|C|C|C|C|}\hline
+\hd{$x\,\backslash\,y$} & \hy{1} & \hy{2} & \hy{3} & \hx{$f_X(x)$}\\\hline
+\hx{1} & 0.3 & 0.2 & 0.1 & \mx{0.6}\\\hline
+\hx{2} & 0.2 & 0.1 & 0 & \mx{0.3}\\\hline
+\hx{3} & 0.1 & 0 & 0 & \mx{0.1}\\\hline
+\hy{$f_Y(y)$} & \my{0.6} & \my{0.3} & \my{0.1} & \textbf{1}\\\hline
+\end{tabular}
+\end{center}
+\end{pasos}
+\verifica{las seis probabilidades suman $\tfrac{10}{10}=1$: no falt\'o ninguna secuencia.
+Esta tabla se vuelve a usar en el cap\'itulo \ref{cap:cov} para calcular la correlaci\'on.}
+\end{resuelto}
+
+\begin{turno}
+(Ej.~3.1 de tus apuntes.) Se lanzan dos dados. $X_1$ = resultado del primero, $X_2$ = suma de los dos.
+\textbf{a)} $\fxy(2,5)$\quad \textbf{b)} $\fxy(3,2)$\quad \textbf{c)} $f_{X_2}(4)$.
+\comprueba{\textbf{a)} primer dado 2 y suma 5 obliga a que el segundo sea 3: un caso de 36, $\tfrac1{36}$.\quad
+\textbf{b)} imposible (con un 3 la suma m\'inima es 4): $0$.\quad
+\textbf{c)} suma 4 con $(1,3),(2,2),(3,1)$: $\tfrac{3}{36}$.}
+\end{turno}

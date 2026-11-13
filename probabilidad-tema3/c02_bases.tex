@@ -1,0 +1,135 @@
+\capitulo{Lo m\'inimo que debes traer}{Dos herramientas del pasado que se usan en todos los problemas: los par\'ametros de una variable y la integral doble.}{cap:bases}
+
+Si estas dos cosas te salen sin pensar, el Tema 3 es s\'olo aprender a acomodarlas. L\'eelo aunque creas que ya lo sabes:
+toma diez minutos.
+
+\subsection{Del Tema 2: media y variancia de \emph{una} variable}
+
+Una variable aleatoria $X$ tiene una funci\'on $f_X(x)$ que reparte la probabilidad entre sus valores.
+Con ella se calculan tres n\'umeros:
+
+\begin{center}
+\begin{tabular}{|p{3.6cm}|p{5.4cm}|p{5.4cm}|}\hline
+\hd{Par\'ametro} & \hd{$X$ discreta (tabla)} & \hd{$X$ continua (f\'ormula)}\\\hline
+Media $\mu_X=\E(X)$ & $\displaystyle\sum x\,f_X(x)$ & $\displaystyle\int x\,f_X(x)\,dx$\\[6pt]\hline
+Segundo momento $\E(X^2)$ & $\displaystyle\sum x^2 f_X(x)$ & $\displaystyle\int x^2 f_X(x)\,dx$\\[6pt]\hline
+Variancia $\sigma_X^2=\Var(X)$ & \multicolumn{2}{c|}{$\E(X^2)-[\E(X)]^2$ \qquad y la desviaci\'on est\'andar es $\sigma_X=\sqrt{\Var(X)}$}\\\hline
+\end{tabular}
+\end{center}
+
+\enpalabras{la media es el promedio a la larga; la variancia mide qu\'e tan desparramados est\'an los valores alrededor de esa media.}
+
+\begin{resuelto}{Par\'ametros de una variable discreta}{Repaso}
+\begin{enunciado}
+\begin{center}
+\begin{tabular}{|C|C|C|C|}\hline
+\hx{$x$} & 0 & 1 & 2\\\hline
+\hx{$f_X(x)$} & 0.2 & 0.4 & 0.4\\\hline
+\end{tabular}
+\end{center}
+Obtener $\E(X)$ y $\Var(X)$.
+\end{enunciado}
+\begin{pasos}
+\paso{Media: cada valor por su probabilidad, y sumo}
+\[\E(X)=0(0.2)+1(0.4)+2(0.4)=0+0.4+0.8=1.2\]
+\paso{Segundo momento: igual, pero con los valores al cuadrado}
+\[\E(X^2)=0^2(0.2)+1^2(0.4)+2^2(0.4)=0+0.4+1.6=2.0\]
+\paso{Variancia: segundo momento menos media al cuadrado}
+\[\Var(X)=2.0-(1.2)^2=2.0-1.44=\res{0.56}\qquad\E(X)=\res{1.2}\]
+\end{pasos}
+\end{resuelto}
+
+\begin{resuelto}{Par\'ametros de una variable continua}{Repaso}
+\begin{enunciado}
+$f_X(x)=2x$ para $0\le x\le1$ (cero en otro caso). Obtener $\E(X)$ y $\Var(X)$.
+\end{enunciado}
+\begin{pasos}
+\paso{Media}
+\[\E(X)=\int_0^1 x\,(2x)\,dx=\int_0^1 2x^2\,dx=\Big[\tfrac{2x^3}{3}\Big]_0^1=\tfrac23\]
+\paso{Segundo momento}
+\[\E(X^2)=\int_0^1 x^2(2x)\,dx=\int_0^1 2x^3\,dx=\Big[\tfrac{x^4}{2}\Big]_0^1=\tfrac12\]
+\paso{Variancia}
+\[\Var(X)=\tfrac12-\Big(\tfrac23\Big)^2=\tfrac12-\tfrac49=\tfrac{9}{18}-\tfrac{8}{18}=\res{\tfrac1{18}}\qquad\E(X)=\res{\tfrac23}\]
+\end{pasos}
+\end{resuelto}
+
+\subsection{La integral doble, sin miedo}
+
+En el Tema 3 casi todo termina en una integral doble. No es una integral nueva: son \textbf{dos integrales simples,
+una dentro de la otra}.
+
+\begin{idea}{Las tres reglas de la integral doble}
+\begin{enumerate}[label=\protect\circnum{\arabic*},leftmargin=10mm,labelsep=3mm]
+\item \textbf{Se resuelve de adentro hacia afuera.} El diferencial pegado a la funci\'on ($dy$ en $\int\!\!\int f\,\cy{dy}\,\cx{dx}$) manda en la integral de adentro.
+\item \textbf{Adentro, la otra variable es un n\'umero.} Si integras respecto a $\cy{y}$, la $\cx{x}$ se trata como si fuera un 5: se queda quieta.
+\item \textbf{Al terminar la de adentro, su variable desaparece.} Si integraste en $\cy{y}$ y todav\'ia ves una $\cy{y}$, sustituiste mal los l\'imites.
+\end{enumerate}
+\end{idea}
+
+\begin{resuelto}{Integral doble con l\'imites num\'ericos}{Mecanizaci\'on}
+\begin{enunciado}
+Calcular $\displaystyle\int_0^1\!\!\int_0^2 (x+y)\,dy\,dx$.
+\end{enunciado}
+\begin{pasos}
+\paso{Identifico cu\'al va adentro}
+El diferencial pegado a la funci\'on es $\cy{dy}$, as\'i que adentro se integra en $\cy{y}$ de 0 a 2. Afuera queda $\cx{x}$ de 0 a 1:
+\[\int_{\cx{0}}^{\cx{1}}\underbrace{\Big[\int_{\cy{0}}^{\cy{2}}(x+y)\,\cy{dy}\Big]}_{\text{primero esto}}\cx{dx}\]
+\paso{Integro adentro, con $x$ quieta}
+La integral de $x$ respecto a $y$ es $xy$ (como integrar un 5: da $5y$). La de $y$ es $\tfrac{y^2}{2}$.
+\[\int_0^2(x+y)\,dy=\Big[xy+\tfrac{y^2}{2}\Big]_{y=0}^{y=2}\]
+\paso{Sustituyo los l\'imites en $y$: arriba menos abajo}
+\[\Big(x\cdot2+\tfrac{2^2}{2}\Big)-\Big(x\cdot0+\tfrac{0^2}{2}\Big)=2x+2\]
+\verifica{ya no hay $y$. Regla 3 cumplida.}
+\paso{Integro afuera lo que qued\'o}
+\[\int_0^1(2x+2)\,dx=\Big[x^2+2x\Big]_0^1=(1+2)-0=\res{3}\]
+\end{pasos}
+\end{resuelto}
+
+\begin{resuelto}{Integral doble con un l\'imite que depende de la otra variable}{Mecanizaci\'on}
+\begin{enunciado}
+Calcular $\displaystyle\int_0^1\!\!\int_0^{x} 8xy\,dy\,dx$.
+\end{enunciado}
+\begin{pasos}
+\paso{Identifico cu\'al va adentro}
+Adentro se integra en $\cy{y}$, desde $0$ hasta $\cx{x}$. El l\'imite de arriba no es un n\'umero: es la variable de afuera. No pasa nada, se trata igual.
+\paso{Integro adentro, con $x$ quieta}
+$8x$ es constante y sale; la integral de $y$ es $\tfrac{y^2}{2}$:
+\[\int_0^{x}8xy\,dy=8x\Big[\tfrac{y^2}{2}\Big]_{y=0}^{y=x}\]
+\paso{Sustituyo los l\'imites en $y$}
+Donde dice $y$ pongo $x$ (l\'imite de arriba) y luego $0$ (l\'imite de abajo):
+\[8x\Big(\tfrac{x^2}{2}-0\Big)=4x^3\]
+\paso{Integro afuera}
+\[\int_0^1 4x^3\,dx=\Big[x^4\Big]_0^1=\res{1}\]
+\end{pasos}
+\porque{Los l\'imites de \textbf{afuera} siempre son n\'umeros. Los de \textbf{adentro} pueden traer la variable de afuera,
+nunca la suya. Si al final te queda una letra, el orden est\'a mal.}
+\end{resuelto}
+
+\begin{turno}
+\textbf{1.} $\displaystyle\int_0^1\!\!\int_0^1 6x^2y\,dx\,dy$ \qquad
+\textbf{2.} $\displaystyle\int_0^1\!\!\int_x^1 2\,dy\,dx$ \qquad
+\textbf{3.} $\displaystyle\int_0^1\!\!\int_0^{1-x} 24xy\,dy\,dx$
+\comprueba{\textbf{1.} adentro va $x$: $\int_0^16x^2y\,dx=2y$; afuera $\int_0^12y\,dy=1$.\quad
+\textbf{2.} adentro: $[2y]_x^1=2-2x$; afuera: $[2x-x^2]_0^1=1$.\quad
+\textbf{3.} adentro: $24x\big[\tfrac{y^2}{2}\big]_0^{1-x}=12x(1-x)^2=12x-24x^2+12x^3$; afuera: $[6x^2-8x^3+3x^4]_0^1=1$.}
+\end{turno}
+
+\subsection{Las cuentas que m\'as se repiten}
+
+\begin{center}
+\begin{tabular}{|p{7.4cm}|p{7.4cm}|}\hline
+\hd{Cuenta} & \hd{Resultado}\\\hline
+$\displaystyle\int x^n\,dx$ & $\dfrac{x^{n+1}}{n+1}$ \quad (sube el exponente y divide entre \'el)\\[8pt]\hline
+$(1-x)^2$ & $1-2x+x^2$ \quad (desarr\'ollalo antes de integrar)\\\hline
+$(a-b)^2$ & $a^2-2ab+b^2$\\\hline
+Evaluar $\big[F(x)\big]_a^b$ & $F(b)-F(a)$: \textbf{arriba menos abajo}, con par\'entesis\\\hline
+$\displaystyle\int_0^\infty e^{-u}\,du$ & $1$\\\hline
+\end{tabular}
+\end{center}
+
+\begin{ojo}
+\mal{Evaluar los l\'imites sin par\'entesis: $\big[\tfrac{x^2}{2}+xy\big]_{0.5}^{1}=\tfrac12+y-\tfrac18+\tfrac y2$.}
+\bien{Siempre con par\'entesis: $\big(\tfrac12+y\big)-\big(\tfrac18+\tfrac y2\big)=\tfrac38+\tfrac y2$. El signo menos afecta a todo el segundo par\'entesis.}
+\mal{Integrar $12x(1-x)^2$ \guillemotleft como va\guillemotright.}
+\bien{Primero desarrolla: $12x(1-2x+x^2)=12x-24x^2+12x^3$, y luego integra t\'ermino por t\'ermino.}
+\end{ojo}

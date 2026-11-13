@@ -1,0 +1,205 @@
+% =====================================================================
+%  estilo.tex  --  sistema de dise\~no de la gu\'ia del Tema 3
+% =====================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-nodecimaldot,es-noshorthands,es-tabla]{babel}
+\usepackage[scaled=.98]{XCharter}
+\usepackage[charter,scaled=1.0]{newtxmath}
+\usepackage[scaled=.90,lining,tabular]{FiraSans}
+\usepackage[letterpaper,left=2.3cm,right=2.3cm,top=2.4cm,bottom=2.3cm,headheight=15pt,headsep=14pt]{geometry}
+\usepackage{amsmath}
+\usepackage{array,multirow}
+\usepackage[table]{xcolor}
+\usepackage{enumitem}
+\usepackage{pifont}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning,decorations.pathreplacing,shapes.geometric}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage{needspace}
+\usepackage[hidelinks]{hyperref}
+
+% ---------------------------------------------------------------- colores
+\definecolor{tinta}{HTML}{16213E}   % azul marino: estructura
+\definecolor{colX}{HTML}{0B7A75}    % verde azulado: todo lo de X
+\definecolor{colY}{HTML}{CF5C36}    % naranja quemado: todo lo de Y
+\definecolor{marca}{HTML}{FFE08A}   % marcatextos
+\definecolor{papel}{HTML}{F6F1E7}   % fondo c\'alido
+\definecolor{verde}{HTML}{1D7A46}   % resultados
+\definecolor{rojo}{HTML}{B23A48}    % errores
+\definecolor{gris}{HTML}{6B7280}
+\definecolor{tinta2}{HTML}{26355F}
+
+% ---------------------------------------------------------------- p\'arrafos
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\linespread{1.04}
+\setlist{itemsep=2pt,topsep=3pt,parsep=2pt}
+\renewcommand{\arraystretch}{1.3}
+\arrayrulecolor{tinta!30}
+\allowdisplaybreaks
+\AtBeginDocument{%
+  \setlength{\abovedisplayskip}{5pt plus 2pt minus 2pt}\setlength{\belowdisplayskip}{5pt plus 2pt minus 2pt}%
+  \setlength{\abovedisplayshortskip}{2pt plus 2pt}\setlength{\belowdisplayshortskip}{4pt plus 2pt minus 1pt}}
+
+% ---------------------------------------------------------------- operadores
+\newcommand{\E}{\operatorname{E}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\fxy}{f_{XY}}
+\newcommand{\cx}[1]{{\color{colX}#1}}
+\newcommand{\cy}[1]{{\color{colY}#1}}
+
+% ---------------------------------------------------------------- resaltados
+\newcommand{\resbox}[1]{{\setlength{\fboxsep}{3pt}\setlength{\fboxrule}{0.9pt}%
+  \fcolorbox{verde}{verde!9}{$#1$}}}
+% resultado final: va encerrado, como lo pide el examen
+\newcommand{\res}[1]{\ensuremath{\mathchoice{\resbox{\displaystyle #1}}{\resbox{\textstyle #1}}%
+  {\resbox{\scriptstyle #1}}{\resbox{\scriptscriptstyle #1}}}}
+\newcommand{\hlbox}[1]{{\setlength{\fboxsep}{1.5pt}\colorbox{marca}{$#1$}}}
+\newcommand{\hl}[1]{\ensuremath{\mathchoice{\hlbox{\displaystyle #1}}{\hlbox{\textstyle #1}}%
+  {\hlbox{\scriptstyle #1}}{\hlbox{\scriptscriptstyle #1}}}}
+\newcommand{\hlt}[1]{{\setlength{\fboxsep}{1.5pt}\colorbox{marca}{#1}}}
+\newcommand{\si}{\textcolor{verde}{\ding{51}}}
+\newcommand{\no}{\textcolor{rojo}{\ding{55}}}
+\newcommand{\flecha}{\textcolor{colY}{\ding{220}}}
+
+% ---------------------------------------------------------------- tablas
+\newcolumntype{C}{>{\centering\arraybackslash}p{1.25cm}}
+\newcolumntype{D}{>{\centering\arraybackslash}p{1.6cm}}
+\newcommand{\hd}[1]{\cellcolor{tinta}\textcolor{white}{\sffamily\bfseries #1}}
+\newcommand{\hx}[1]{\cellcolor{colX}\textcolor{white}{\sffamily\bfseries #1}}
+\newcommand{\hy}[1]{\cellcolor{colY}\textcolor{white}{\sffamily\bfseries #1}}
+\newcommand{\ce}[1]{\cellcolor{marca}#1}          % celda del evento
+\newcommand{\mx}[1]{\cellcolor{colX!16}\textbf{#1}} % marginal de X
+\newcommand{\my}[1]{\cellcolor{colY!18}\textbf{#1}} % marginal de Y
+
+% ---------------------------------------------------------------- n\'umeros en c\'irculo
+\newcommand{\circnum}[1]{\tikz[baseline=(n.base)]\node[circle,fill=tinta,text=white,
+  font=\sffamily\bfseries\scriptsize,inner sep=0pt,minimum size=4.6mm](n){#1};}
+\newcommand{\circlet}[1]{\tikz[baseline=(n.base)]\node[circle,fill=colY,text=white,
+  font=\sffamily\bfseries\small,inner sep=0pt,minimum size=5.4mm](n){#1};}
+
+% ---------------------------------------------------------------- encabezado y pie
+\pagestyle{fancy}\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[L]{\sffamily\scriptsize\color{gris}TEMA 3 \textcolor{colY}{\rule[0.1ex]{0.9ex}{0.9ex}} VARIABLES ALEATORIAS CONJUNTAS}
+\fancyhead[R]{\sffamily\scriptsize\color{gris}\nouppercase{\leftmark}}
+\fancyfoot[R]{\tikz[baseline=(p.base)]\node[fill=tinta,text=white,font=\sffamily\bfseries\footnotesize,
+  inner xsep=6pt,inner ysep=3pt](p){\thepage};}
+\fancyfoot[L]{\sffamily\scriptsize\color{gris}Gu\'ia de examen \textbullet{} Probabilidad}
+\fancypagestyle{plain}{\fancyhf{}}
+
+% ---------------------------------------------------------------- apertura de cap\'itulo
+% \capitulo{t\'itulo}{subt\'itulo}{etiqueta}
+\newcommand{\capitulo}[3]{%
+  \clearpage\refstepcounter{section}\label{#3}%
+  \addcontentsline{toc}{section}{\protect\numberline{\thesection}#1}%
+  \markboth{\thesection\ \ #1}{}%
+  \noindent\begin{tikzpicture}
+    \clip (0,0) rectangle (\textwidth,3.5);
+    \fill[tinta] (0,0) rectangle (\textwidth,3.5);
+    \fill[colY] (0,0) rectangle (0.22,3.5);
+    \node[anchor=south east,font=\sffamily\bfseries\fontsize{96}{96}\selectfont,text=white,opacity=.12,inner sep=0pt]
+      at (\textwidth-0.45cm,0.3) {\thesection};
+    \node[anchor=north west,font=\sffamily\bfseries\footnotesize,text=marca] at (0.75,3.05) {CAP\'ITULO \thesection};
+    \node[anchor=north west,font=\sffamily\bfseries\fontsize{21}{24}\selectfont,text=white,
+      text width=\textwidth-3.2cm,align=left] at (0.75,2.55) {#1};
+    \node[anchor=south west,font=\sffamily\small,text=white!85!tinta,text width=\textwidth-3.6cm,align=left]
+      at (0.75,0.35) {#2};
+  \end{tikzpicture}\par\nobreak}
+
+% franja con la probabilidad de que venga y los moldes
+% \meta{porcentaje}{moldes}
+\newcommand{\meta}[2]{%
+  \vspace{-7pt}\noindent\begin{tikzpicture}
+    \fill[papel] (0,0) rectangle (\textwidth,1.0);
+    \node[anchor=west,font=\sffamily\bfseries\scriptsize,text=gris] at (0.3,0.5) {PROBABILIDAD DE QUE VENGA};
+    \fill[tinta!15] (4.4,0.36) rectangle (7.4,0.64);
+    \fill[colY] (4.4,0.36) rectangle ({4.4+3*#1/100},0.64);
+    \node[anchor=west,font=\sffamily\bfseries\small,text=tinta] at (7.5,0.5) {#1\,\%};
+    \node[anchor=east,font=\sffamily\scriptsize,text=gris] at (\textwidth-0.3cm,0.5)
+      {\textbf{MOLDES}\quad #2};
+  \end{tikzpicture}\par\medskip}
+
+% subsecciones
+\titleformat{\subsection}{\sffamily\bfseries\large\color{tinta}}
+  {\textcolor{colY}{\thesubsection}}{0.7em}{}[{\color{tinta!25}\titlerule[0.5pt]}]
+\titlespacing*{\subsection}{0pt}{16pt}{6pt}
+\let\subsectionorig\subsection
+\renewcommand{\subsection}{\Needspace{5\baselineskip}\subsectionorig}
+\titleformat{\subsubsection}{\sffamily\bfseries\normalsize\color{tinta}}{}{0pt}{}
+\titlespacing*{\subsubsection}{0pt}{10pt}{2pt}
+
+% \'indice
+\titlecontents{section}[0em]{\addvspace{5.5pt}\sffamily\bfseries\small\color{tinta}}
+  {\makebox[2.2em][l]{\textcolor{colY}{\thecontentslabel}}}{}{\hfill\contentspage}
+\titlecontents{subsection}[2.2em]{\footnotesize\sffamily\color{gris}\vspace{-1.5pt}}
+  {\makebox[2.6em][l]{\thecontentslabel}}{}{\titlerule*[.6pc]{.}\contentspage}
+
+% ---------------------------------------------------------------- cajas
+\tcbset{parbox=false}
+
+% Idea clave
+\newtcolorbox{idea}[1]{enhanced,breakable,frame hidden,boxrule=0pt,sharp corners,colback=papel,
+  borderline west={3.5pt}{0pt}{tinta},left=12pt,right=10pt,top=7pt,bottom=7pt,
+  before skip=11pt,after skip=11pt,
+  before upper={{\sffamily\bfseries\scriptsize\color{colY}IDEA CLAVE}\par\vspace{-3pt}%
+    {\sffamily\bfseries\large\color{tinta}#1}\par\smallskip}}
+
+% Receta
+\newtcolorbox{receta}[1]{enhanced,breakable,colback=white,colframe=tinta,boxrule=0.9pt,arc=2.5pt,
+  left=8pt,right=8pt,top=6pt,bottom=6pt,before skip=11pt,after skip=11pt,
+  title={\sffamily\bfseries\footnotesize\textcolor{marca}{RECETA}\quad\normalsize #1},
+  colbacktitle=tinta,coltitle=white,toptitle=3pt,bottomtitle=3pt}
+\newenvironment{pasosreceta}{\begin{enumerate}[label=\protect\circnum{\arabic*},leftmargin=10mm,labelsep=3mm,itemsep=4pt]}{\end{enumerate}}
+
+% Ejemplo resuelto (no es caja: fluye en la p\'agina para que los pasos puedan partirse)
+\newcounter{resuelto}
+\newenvironment{resuelto}[2]{\par\Needspace{7\baselineskip}\addvspace{18pt}\stepcounter{resuelto}%
+  \noindent{\color{tinta}\rule{\linewidth}{1.6pt}}\par\nobreak\vspace{-1pt}%
+  \noindent{\setlength{\fboxsep}{3pt}\colorbox{tinta}{\sffamily\bfseries\scriptsize\color{white}\ RESUELTO \theresuelto\ }}%
+  \ \ {\sffamily\bfseries\color{tinta}#1}\hfill{\sffamily\scriptsize\color{gris}#2}\par\nobreak\smallskip}
+  {\par\addvspace{14pt}}
+
+% Enunciado
+\newtcolorbox{enunciado}{enhanced,breakable,frame hidden,boxrule=0pt,arc=2pt,colback=papel,
+  left=9pt,right=9pt,top=5pt,bottom=5pt,before skip=4pt,after skip=8pt,
+  before upper={{\sffamily\bfseries\scriptsize\color{gris}ENUNCIADO}\par\vspace{-2pt}}}
+
+% Inciso
+\newcommand{\inciso}[2]{\par\Needspace{4\baselineskip}\addvspace{9pt}\noindent\circlet{#1}\ \ \textbf{#2}\par\nobreak\vspace{1pt}}
+
+% Pasos con l\'inea de tiempo
+\newcounter{paso}
+\newtcolorbox{pasos}{blanker,breakable,left=9mm,borderline west={0.8pt}{2.45mm}{tinta!28},
+  before skip=5pt,after skip=7pt,before upper={\setcounter{paso}{0}\setlength{\parskip}{4pt}}}
+\newcommand{\paso}[1]{\par\ifnum\value{paso}>0 \vspace{6pt}\fi\stepcounter{paso}\noindent
+  \llap{\circnum{\thepaso}\hspace{4.1mm}}{\sffamily\bfseries\color{tinta}#1}\par\nobreak\vspace{-1pt}}
+
+% Notas cortas
+\newtcolorbox{notacorta}[2]{enhanced,breakable,frame hidden,boxrule=0pt,sharp corners,colback=#1!7,
+  borderline west={2pt}{0pt}{#1},left=8pt,right=8pt,top=4pt,bottom=4pt,before skip=6pt,after skip=6pt,
+  fontupper=\small,before upper={{\sffamily\bfseries\color{#1}#2}\ \ }}
+\newcommand{\porque}[1]{\begin{notacorta}{colX}{?`Por qu\'e?}#1\end{notacorta}}
+\newcommand{\enpalabras}[1]{\begin{notacorta}{tinta}{En palabras:}#1\end{notacorta}}
+\newcommand{\verifica}[1]{\begin{notacorta}{verde}{\ding{51}\ Verifica:}#1\end{notacorta}}
+
+% Cuidado (errores)
+\newtcolorbox{ojo}{enhanced,breakable,frame hidden,boxrule=0pt,sharp corners,colback=rojo!6,
+  borderline west={3.5pt}{0pt}{rojo},left=12pt,right=10pt,top=6pt,bottom=6pt,before skip=11pt,after skip=11pt,
+  before upper={{\sffamily\bfseries\scriptsize\color{rojo}CUIDADO: AQU\'I SE PIERDEN PUNTOS}\par\smallskip}}
+\newcommand{\mal}[1]{\par\noindent\hangindent=1.6em\hangafter=1\makebox[1.6em][l]{\no}#1\par}
+\newcommand{\bien}[1]{\par\noindent\hangindent=1.6em\hangafter=1\makebox[1.6em][l]{\si}#1\par\vspace{3pt}}
+
+% Tu turno
+\newtcolorbox{turno}{enhanced,breakable,colback=white,frame hidden,boxrule=0pt,arc=3pt,
+  borderline={0.9pt}{0pt}{colY,dashed},left=10pt,right=10pt,top=11pt,bottom=7pt,
+  before skip=16pt,after skip=12pt,
+  title={TU TURNO},fonttitle=\sffamily\bfseries\scriptsize,coltitle=white,
+  attach boxed title to top left={xshift=5mm,yshift=-2.6mm},
+  boxed title style={colback=colY,colframe=colY,sharp corners,boxrule=0pt,left=4pt,right=4pt,top=1.5pt,bottom=1.5pt}}
+\newcommand{\comprueba}[1]{\par\vspace{2pt}{\small\color{tinta!80}{\sffamily\bfseries\color{verde}Comprueba \ding{220}}\ #1}\par}

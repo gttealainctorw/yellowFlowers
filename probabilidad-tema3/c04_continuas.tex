@@ -1,0 +1,436 @@
+\capitulo{Variables conjuntas continuas: la densidad}{Qu\'e significa una densidad conjunta, c\'omo se halla la constante y c\'omo se calcula una probabilidad poniendo bien los l\'imites.}{cap:continuas}
+\meta{95}{Ej. 3.4 y 5.5 \textbullet{} Serie 2, 3 y 7 \textbullet{} Autoexamen 1 y 2}
+
+\tikzset{
+  eje/.style={-{Stealth[length=4pt]},tinta},
+  reg/.style={fill=tinta!9,draw=tinta,line width=0.6pt},
+  ev/.style={fill=marca,draw=tinta,line width=0.6pt},
+  fy/.style={-{Stealth[length=5pt]},colY,line width=1.3pt},
+  fx/.style={-{Stealth[length=5pt]},colX,line width=1.3pt},
+  et/.style={font=\footnotesize,text=tinta}}
+
+\subsection{Qu\'e significa una densidad conjunta}
+
+Cuando $X$ y $Y$ son continuas (proporciones, presiones, tiempos) ya no hay tabla, porque hay infinitas parejas.
+En su lugar hay una f\'ormula $\fxy(x,y)$, la \textbf{densidad conjunta}, que se puede imaginar como un \textbf{techo}
+levantado sobre el plano $xy$.
+
+\begin{minipage}{0.40\textwidth}\centering
+\begin{tikzpicture}[x={(1.55cm,-0.42cm)},y={(-1.25cm,-0.62cm)},z={(0cm,1.25cm)}]
+  \draw[eje] (0,0,0)--(1.45,0,0) node[right,et]{$x$};
+  \draw[eje] (0,0,0)--(0,1.5,0) node[left,et]{$y$};
+  \draw[eje] (0,0,0)--(0,0,2.3) node[above,et]{$\fxy$};
+  \fill[tinta!22] (1,0,0)--(1,1,0)--(1,1,2)--(1,0,1)--cycle;
+  \fill[tinta!38] (0,1,0)--(1,1,0)--(1,1,2)--(0,1,1)--cycle;
+  \fill[marca] (0,0,0)--(1,0,1)--(1,1,2)--(0,1,1)--cycle;
+  \draw[tinta,line width=0.5pt] (0,0,0)--(1,0,1)--(1,1,2)--(0,1,1)--cycle;
+  \draw[tinta,line width=0.5pt] (1,0,0)--(1,1,0)--(0,1,0);
+  \draw[tinta,line width=0.5pt] (1,0,0)--(1,0,1) (1,1,0)--(1,1,2) (0,1,0)--(0,1,1);
+  \node[et] at (0.55,0.5,1.25) {techo};
+\end{tikzpicture}
+\end{minipage}\hfill
+\begin{minipage}{0.57\textwidth}
+En la figura, $\fxy(x,y)=x+y$ sobre el cuadrado $0\le x\le1$, $0\le y\le1$.
+\begin{itemize}
+\item La \textbf{base} del s\'olido es la regi\'on donde la densidad no es cero. Se llama \textbf{soporte}.
+\item La \textbf{altura} en cada punto es el valor de $\fxy$.
+\item La \textbf{probabilidad} de que $(X,Y)$ caiga en una zona es el \textbf{volumen} que hay sobre esa zona.
+\item El volumen de \textbf{todo} el s\'olido vale 1.
+\end{itemize}
+\end{minipage}
+
+\begin{idea}{Las tres propiedades de una densidad conjunta}
+\begin{enumerate}[label=\protect\circnum{\arabic*},leftmargin=10mm,labelsep=3mm]
+\item No es negativa: \quad $\fxy(x,y)\ge0$.
+\item El volumen total es 1: \quad $\displaystyle\iint\fxy(x,y)\,dx\,dy=1$ \quad (sirve para \textbf{hallar la constante}).
+\item La probabilidad es el volumen sobre la regi\'on: \quad $\displaystyle P\big((X,Y)\in R\big)=\iint_R\fxy(x,y)\,dx\,dy$.
+\end{enumerate}
+Es lo mismo que en la tabla, cambiando sumas por integrales: \guillemotleft sumar celdas\guillemotright{} se vuelve \guillemotleft integrar sobre la regi\'on\guillemotright.
+\end{idea}
+
+\subsection{Hallar la constante}
+
+\begin{receta}{hallar $k$}
+\begin{pasosreceta}
+\item Escribe la condici\'on: la integral doble de la densidad sobre \textbf{todo el soporte} es igual a 1.
+\item Saca $k$ de la integral (es constante) y resuelve la integral doble de lo que queda.
+\item Despeja $k$.
+\item \textbf{Reescribe la densidad} ya con el valor de $k$. Los incisos siguientes la usan as\'i.
+\end{pasosreceta}
+\end{receta}
+
+\subsection{Probabilidades: el arte de poner los l\'imites}
+
+La \'unica dificultad real del cap\'itulo es decidir los l\'imites de la integral doble. Se resuelve con un dibujo y una flecha.
+
+\begin{receta}{poner l\'imites con el m\'etodo de la flecha}
+\begin{pasosreceta}
+\item \textbf{Dibuja el soporte} (la regi\'on donde la densidad no es cero) y sombrea encima \textbf{la zona del evento}.
+\item Decide qu\'e variable va \textbf{afuera}. Sus l\'imites son \textbf{n\'umeros}: el valor m\'as chico y el m\'as grande que toma en la zona sombreada.
+\item Para la variable de \textbf{adentro}, traza una flecha que cruce la zona: \cy{vertical si adentro va $y$}, \cx{horizontal si adentro va $x$}.
+La curva por donde la flecha \textbf{entra} es el l\'imite inferior; por donde \textbf{sale}, el superior.
+\item Si la flecha entra o sale por curvas distintas seg\'un d\'onde la pongas, \textbf{parte la integral} en dos.
+\item Integra adentro, luego afuera (cap\'itulo \ref{cap:bases}).
+\end{pasosreceta}
+\end{receta}
+
+Estas cuatro regiones cubren casi todos los problemas de tus apuntes y de la serie. La flecha naranja es vertical (adentro va $\cy{y}$):
+
+\begin{center}
+\begin{tikzpicture}[scale=2.25]
+\begin{scope}
+\draw[eje] (-0.1,0)--(1.3,0) node[right,et]{$x$}; \draw[eje] (0,-0.1)--(0,1.3) node[above,et]{$y$};
+\draw[reg] (0,0) rectangle (1,1);
+\draw[fy] (0.55,-0.06)--(0.55,1.1);
+\node[below,et] at (1,0){1}; \node[left,et] at (0,1){1};
+\node[et,colY] at (0.55,-0.22){entra en $0$}; \node[et,colY] at (0.55,1.24){sale en $1$};
+\node[align=center,font=\small] at (0.5,-0.75){Rect\'angulo\\[3pt]$\displaystyle\int_0^1\!\!\int_{\cy{0}}^{\cy{1}}\cy{dy}\,dx$};
+\end{scope}
+\begin{scope}[xshift=1.9cm]
+\draw[eje] (-0.1,0)--(1.3,0) node[right,et]{$x$}; \draw[eje] (0,-0.1)--(0,1.3) node[above,et]{$y$};
+\draw[reg] (0,0)--(1,0)--(0,1)--cycle;
+\draw[fy] (0.35,-0.06)--(0.35,0.75);
+\node[right,et] at (0.42,0.66){$y=1-x$};
+\node[align=center,font=\small] at (0.5,-0.75){$x+y\le1$\\[3pt]$\displaystyle\int_0^1\!\!\int_{\cy{0}}^{\cy{1-x}}\cy{dy}\,dx$};
+\end{scope}
+\begin{scope}[xshift=3.8cm]
+\draw[eje] (-0.1,0)--(1.3,0) node[right,et]{$x$}; \draw[eje] (0,-0.1)--(0,1.3) node[above,et]{$y$};
+\draw[reg] (0,0)--(1,0)--(1,1)--cycle;
+\draw[fy] (0.65,-0.06)--(0.65,0.75);
+\node[left,et] at (0.5,0.62){$y=x$};
+\node[align=center,font=\small] at (0.5,-0.75){$0\le y\le x\le1$\\[3pt]$\displaystyle\int_0^1\!\!\int_{\cy{0}}^{\cy{x}}\cy{dy}\,dx$};
+\end{scope}
+\begin{scope}[xshift=5.7cm]
+\draw[eje] (-0.1,0)--(1.3,0) node[right,et]{$x$}; \draw[eje] (0,-0.1)--(0,1.3) node[above,et]{$y$};
+\draw[reg] (0,0)--(0,1)--(1,1)--cycle;
+\draw[fy] (0.35,0.29)--(0.35,1.1);
+\node[right,et] at (0.55,0.48){$y=x$};
+\node[align=center,font=\small] at (0.5,-0.75){$0\le x\le y\le1$\\[3pt]$\displaystyle\int_0^1\!\!\int_{\cy{x}}^{\cy{1}}\cy{dy}\,dx$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\porque{Poner una flecha vertical en una $x$ fija es preguntarse: \guillemotleft para este valor de $x$, ?`entre qu\'e valores puede estar $y$?\guillemotright.
+Eso es justo lo que significan los l\'imites de la integral de adentro.}
+
+\begin{resuelto}{Densidad sobre un cuadrado}{Apuntes \textbullet{} Ej.~3.4}
+\begin{enunciado}
+$\fxy(x,y)=k(x+y)$ para $0\le x\le1$, $0\le y\le1$ (cero en otro caso).\quad
+a) Calcular $k$.\quad b) $P(0.5\le X\le1,\ 0.5\le Y\le1)$.\quad c) $P(X+Y\le1)$.
+\end{enunciado}
+
+\inciso{a}{Valor de $k$}
+\begin{pasos}
+\paso{Escribo la condici\'on de volumen total igual a 1}
+El soporte es el cuadrado, as\'i que los cuatro l\'imites son n\'umeros:
+\[1=\int_0^1\!\!\int_0^1 k(x+y)\,dx\,dy=k\int_0^1\!\!\int_0^1 (x+y)\,dx\,dy\]
+\paso{Integro adentro \textnormal{(en $x$, con $y$ quieta)}}
+\[\int_0^1(x+y)\,dx=\Big[\tfrac{x^2}{2}+xy\Big]_{x=0}^{x=1}=\Big(\tfrac12+y\Big)-0=\tfrac12+y\]
+\paso{Integro afuera \textnormal{(en $y$)}}
+\[\int_0^1\Big(\tfrac12+y\Big)dy=\Big[\tfrac y2+\tfrac{y^2}{2}\Big]_0^1=\tfrac12+\tfrac12=1\]
+\paso{Despejo}
+\[1=k\,(1)\quad\Rightarrow\quad\res{k=1}\qquad\text{y la densidad queda }\fxy(x,y)=x+y\]
+\end{pasos}
+
+\inciso{b}{$P(0.5\le X\le1,\ 0.5\le Y\le1)$}
+\begin{minipage}{0.27\textwidth}\centering
+\begin{tikzpicture}[scale=2.6]
+\draw[eje] (-0.1,0)--(1.3,0) node[right,et]{$x$}; \draw[eje] (0,-0.1)--(0,1.3) node[above,et]{$y$};
+\draw[reg] (0,0) rectangle (1,1); \draw[ev] (0.5,0.5) rectangle (1,1);
+\node[below,et] at (0.5,0){0.5}; \node[below,et] at (1,0){1};
+\node[left,et] at (0,0.5){0.5}; \node[left,et] at (0,1){1};
+\end{tikzpicture}
+\end{minipage}\hfill
+\begin{minipage}{0.70\textwidth}
+\begin{pasos}
+\paso{Dibujo el evento}
+Es un cuadrito dentro del soporte: todos los l\'imites son n\'umeros, de $0.5$ a $1$ en las dos variables.
+\paso{Planteo}
+\[P=\int_{0.5}^{1}\!\!\int_{0.5}^{1}(x+y)\,dx\,dy\]
+\end{pasos}
+\end{minipage}
+\begin{pasos}
+\setcounter{paso}{2}
+\paso{Integro adentro \textnormal{(en $x$)}}
+\[\int_{0.5}^1(x+y)\,dx=\Big[\tfrac{x^2}{2}+xy\Big]_{x=0.5}^{x=1}=\Big(\tfrac12+y\Big)-\Big(\tfrac18+\tfrac y2\Big)=\tfrac38+\tfrac y2\]
+\paso{Integro afuera \textnormal{(en $y$)}}
+\[\int_{0.5}^{1}\Big(\tfrac38+\tfrac y2\Big)dy=\Big[\tfrac38y+\tfrac{y^2}{4}\Big]_{0.5}^{1}=\Big(\tfrac38+\tfrac14\Big)-\Big(\tfrac{3}{16}+\tfrac1{16}\Big)=\tfrac58-\tfrac14=\res{\tfrac38=0.375}\]
+\end{pasos}
+
+\inciso{c}{$P(X+Y\le1)$}
+\begin{minipage}{0.27\textwidth}\centering
+\begin{tikzpicture}[scale=2.6]
+\draw[eje] (-0.1,0)--(1.3,0) node[right,et]{$x$}; \draw[eje] (0,-0.1)--(0,1.3) node[above,et]{$y$};
+\draw[reg] (0,0) rectangle (1,1); \draw[ev] (0,0)--(1,0)--(0,1)--cycle;
+\draw[fy] (0.3,-0.06)--(0.3,0.8);
+\node[right,et] at (0.48,0.6){$y=1-x$};
+\node[below,et] at (1,0){1}; \node[left,et] at (0,1){1};
+\end{tikzpicture}
+\end{minipage}\hfill
+\begin{minipage}{0.70\textwidth}
+\begin{pasos}
+\paso{Dibujo el evento}
+$x+y\le1$ es lo mismo que $y\le1-x$: la zona \textbf{debajo} de la recta $y=1-x$. Es un tri\'angulo.
+\paso{Pongo los l\'imites con la flecha}
+Afuera $x$, de $0$ a $1$. La flecha vertical \cy{entra en $y=0$} y \cy{sale en $y=1-x$}:
+\[P=\int_0^1\!\!\int_{\cy{0}}^{\cy{1-x}}(x+y)\,\cy{dy}\,dx\]
+\end{pasos}
+\end{minipage}
+\begin{pasos}
+\setcounter{paso}{2}
+\paso{Integro adentro \textnormal{(en $y$, con $x$ quieta)}}
+\[\int_0^{1-x}(x+y)\,dy=\Big[xy+\tfrac{y^2}{2}\Big]_{y=0}^{y=1-x}=x(1-x)+\tfrac{(1-x)^2}{2}\]
+\paso{Simplifico antes de seguir}
+\[x-x^2+\tfrac{1-2x+x^2}{2}=x-x^2+\tfrac12-x+\tfrac{x^2}{2}=\tfrac12-\tfrac{x^2}{2}\]
+\paso{Integro afuera}
+\[\int_0^1\Big(\tfrac12-\tfrac{x^2}{2}\Big)dx=\Big[\tfrac x2-\tfrac{x^3}{6}\Big]_0^1=\tfrac12-\tfrac16=\res{\tfrac13\approx0.333}\]
+\end{pasos}
+\end{resuelto}
+
+\begin{resuelto}{Tabacalera: probabilidad sobre un tri\'angulo}{Serie 3 \textbullet{} problema 3 a}
+\begin{enunciado}
+$X$ = proporci\'on de tabaco turco, $Y$ = proporci\'on de tabaco regional en una mezcla, con
+$\fxy(x,y)=24xy$ para $0\le x\le1$, $0\le y\le1$, $x+y\le1$.
+Obtener la probabilidad de que el tabaco turco sea m\'as de la mitad de la mezcla.
+\end{enunciado}
+\begin{minipage}{0.27\textwidth}\centering
+\begin{tikzpicture}[scale=2.6]
+\draw[eje] (-0.1,0)--(1.3,0) node[right,et]{$x$}; \draw[eje] (0,-0.1)--(0,1.3) node[above,et]{$y$};
+\draw[reg] (0,0)--(1,0)--(0,1)--cycle;
+\draw[ev] (0.5,0)--(1,0)--(0.5,0.5)--cycle;
+\draw[fy] (0.68,-0.06)--(0.68,0.42);
+\node[below,et] at (0.5,0){$\tfrac12$}; \node[below,et] at (1,0){1}; \node[left,et] at (0,1){1};
+\node[right,et] at (0.4,0.7){$y=1-x$};
+\end{tikzpicture}
+\end{minipage}\hfill
+\begin{minipage}{0.70\textwidth}
+\begin{pasos}
+\paso{Traduzco la frase}
+\guillemotleft El turco es m\'as de la mitad\guillemotright{} es $X>\tfrac12$. De $Y$ no se dice nada: puede valer lo que el soporte permita.
+\paso{Dibujo}
+El soporte es el tri\'angulo bajo $y=1-x$. El evento es la parte que queda a la derecha de $x=\tfrac12$.
+\paso{L\'imites}
+Afuera $x$, de $\tfrac12$ a $1$. La flecha vertical \cy{entra en $y=0$} y \cy{sale en $y=1-x$}.
+\end{pasos}
+\end{minipage}
+\begin{pasos}
+\setcounter{paso}{3}
+\paso{Planteo}
+\[P\big(X>\tfrac12\big)=\int_{1/2}^{1}\!\!\int_{0}^{1-x}24xy\,dy\,dx\]
+\paso{Integro adentro \textnormal{(en $y$; $24x$ es constante)}}
+\[\int_0^{1-x}24xy\,dy=24x\Big[\tfrac{y^2}{2}\Big]_0^{1-x}=12x(1-x)^2\]
+\paso{Desarrollo para poder integrar}
+\[12x(1-2x+x^2)=12x-24x^2+12x^3\]
+\paso{Integro afuera}
+\[\int_{1/2}^{1}(12x-24x^2+12x^3)\,dx=\Big[6x^2-8x^3+3x^4\Big]_{1/2}^{1}\]
+\paso{Eval\'uo: arriba menos abajo}
+\[\big(6-8+3\big)-\Big(6\cdot\tfrac14-8\cdot\tfrac18+3\cdot\tfrac1{16}\Big)=1-\Big(\tfrac32-1+\tfrac3{16}\Big)=1-\tfrac{11}{16}=\res{\tfrac5{16}=0.3125}\]
+\end{pasos}
+\verifica{coincide con la respuesta de la serie (0.312).}
+\end{resuelto}
+
+\begin{resuelto}{Regi\'on en banda: la integral se parte}{Serie 3 \textbullet{} problema 2}
+\begin{enunciado}
+$\fxy(x,y)=kx$ para $0\le x\le4$, $0\le y$, $-x+2\le y\le -x+4$.\quad a) Valor de $k$.\quad b) $P(1\le X\le3)$.
+\end{enunciado}
+\begin{minipage}{0.34\textwidth}\centering
+\begin{tikzpicture}[scale=0.78]
+\draw[eje] (-0.2,0)--(4.9,0) node[right,et]{$x$}; \draw[eje] (0,-0.2)--(0,4.8) node[above,et]{$y$};
+\draw[reg] (0,2)--(0,4)--(4,0)--(2,0)--cycle;
+\draw[dashed,tinta] (2,0)--(2,2);
+\draw[fy] (1,0.88)--(1,3.2);
+\draw[fy] (3,-0.12)--(3,1.2);
+\node[below,et] at (2,0){2}; \node[below,et] at (4,0){4};
+\node[left,et] at (0,2){2}; \node[left,et] at (0,4){4};
+\node[right,et] at (2.05,2.35){$y=4-x$};
+\node[et,anchor=north east] at (1.08,1.02){$y=2-x$};
+\end{tikzpicture}
+\end{minipage}\hfill
+\begin{minipage}{0.63\textwidth}
+\begin{pasos}
+\paso{Dibujo el soporte}
+$y$ est\'a entre las rectas $y=2-x$ y $y=4-x$, y adem\'as $y\ge0$. Sale una banda inclinada.
+\paso{Pruebo la flecha vertical en dos lugares}
+\begin{itemize}
+\item Si $0\le x\le2$: \cy{entra en $y=2-x$}, \cy{sale en $y=4-x$}.
+\item Si $2\le x\le4$: la recta $y=2-x$ ya qued\'o bajo el eje, as\'i que \cy{entra en $y=0$}, \cy{sale en $y=4-x$}.
+\end{itemize}
+Entra por curvas distintas: la integral \textbf{se parte en $x=2$}.
+\end{pasos}
+\end{minipage}
+
+\inciso{a}{Valor de $k$}
+\begin{pasos}
+\paso{Planteo las dos piezas}
+\[1=k\Big[\underbrace{\int_0^2\!\!\int_{2-x}^{4-x}x\,dy\,dx}_{\text{pieza 1}}+\underbrace{\int_2^4\!\!\int_0^{4-x}x\,dy\,dx}_{\text{pieza 2}}\Big]\]
+\paso{Pieza 1}
+Adentro: $\displaystyle\int_{2-x}^{4-x}x\,dy=x\big[(4-x)-(2-x)\big]=2x$.\quad
+Afuera: $\displaystyle\int_0^2 2x\,dx=\big[x^2\big]_0^2=4$.
+\paso{Pieza 2}
+Adentro: $\displaystyle\int_0^{4-x}x\,dy=x(4-x)=4x-x^2$.\quad Afuera:
+\[\int_2^4(4x-x^2)\,dx=\Big[2x^2-\tfrac{x^3}{3}\Big]_2^4=\Big(32-\tfrac{64}{3}\Big)-\Big(8-\tfrac83\Big)=\tfrac{32}{3}-\tfrac{16}{3}=\tfrac{16}{3}\]
+\paso{Sumo y despejo}
+\[1=k\Big(4+\tfrac{16}{3}\Big)=k\cdot\tfrac{28}{3}\quad\Rightarrow\quad\res{k=\tfrac{3}{28}}\]
+\end{pasos}
+
+\inciso{b}{$P(1\le X\le3)$}
+\begin{pasos}
+\paso{Mismas piezas, con $x$ recortada}
+El intervalo de 1 a 3 cruza el corte en $x=2$: pieza 1 de 1 a 2 y pieza 2 de 2 a 3. Las integrales de adentro ya est\'an hechas.
+\paso{Pieza 1 de 1 a 2}
+\[\int_1^2 2x\,dx=\big[x^2\big]_1^2=4-1=3\]
+\paso{Pieza 2 de 2 a 3}
+\[\int_2^3(4x-x^2)\,dx=\Big[2x^2-\tfrac{x^3}{3}\Big]_2^3=(18-9)-\Big(8-\tfrac83\Big)=9-\tfrac{16}{3}=\tfrac{11}{3}\]
+\paso{Multiplico por $k$}
+\[P(1\le X\le3)=\tfrac{3}{28}\Big(3+\tfrac{11}{3}\Big)=\tfrac{3}{28}\cdot\tfrac{20}{3}=\res{\tfrac57\approx0.714}\]
+\end{pasos}
+\end{resuelto}
+
+\begin{resuelto}{Densidad constante: basta con \'areas}{Apuntes \textbullet{} Ej.~5.5}
+\begin{enunciado}
+$X_1$ y $X_2$ son proporciones de dos sustancias, con $f(x_1,x_2)=2$ para $0\le x_1$, $0\le x_2\le1$, $x_1+x_2\le1$.\quad
+a) $P(X_1\le\tfrac34,\,X_2\le\tfrac34)$.\quad b) $P(X_1\le\tfrac12,\,X_2\le\tfrac12)$.\quad c) $P(X_1\le\tfrac12\mid X_2\le\tfrac12)$.
+\end{enunciado}
+\begin{idea}{Atajo}
+Si la densidad es \textbf{constante}, el techo es plano y el volumen es
+$\text{(altura)}\times\text{(\'area de la base)}$. Aqu\'i: probabilidad $=2\times$ \'area. No hace falta integrar.
+\end{idea}
+\begin{center}
+\begin{tikzpicture}[scale=2.5]
+\begin{scope}
+\draw[eje] (-0.1,0)--(1.3,0) node[right,et]{$x_1$}; \draw[eje] (0,-0.1)--(0,1.3) node[above,et]{$x_2$};
+\draw[reg] (0,0)--(1,0)--(0,1)--cycle;
+\draw[ev] (0,0)--(0.75,0)--(0.75,0.25)--(0.25,0.75)--(0,0.75)--cycle;
+\draw[dashed,rojo] (0.75,0.25)--(0.75,0.75)--(0.25,0.75);
+\node[below,et] at (0.75,0){$\tfrac34$}; \node[left,et] at (0,0.75){$\tfrac34$};
+\node[font=\small] at (0.5,-0.42){inciso a};
+\end{scope}
+\begin{scope}[xshift=2.1cm]
+\draw[eje] (-0.1,0)--(1.3,0) node[right,et]{$x_1$}; \draw[eje] (0,-0.1)--(0,1.3) node[above,et]{$x_2$};
+\draw[reg] (0,0)--(1,0)--(0,1)--cycle;
+\draw[ev] (0,0) rectangle (0.5,0.5);
+\node[below,et] at (0.5,0){$\tfrac12$}; \node[left,et] at (0,0.5){$\tfrac12$};
+\node[font=\small] at (0.5,-0.42){inciso b};
+\end{scope}
+\begin{scope}[xshift=4.2cm]
+\draw[eje] (-0.1,0)--(1.3,0) node[right,et]{$x_1$}; \draw[eje] (0,-0.1)--(0,1.3) node[above,et]{$x_2$};
+\draw[reg] (0,0)--(1,0)--(0,1)--cycle;
+\draw[ev] (0,0)--(1,0)--(0.5,0.5)--(0,0.5)--cycle;
+\node[left,et] at (0,0.5){$\tfrac12$};
+\node[font=\small] at (0.5,-0.42){denominador de c};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\inciso{a}{$P(X_1\le\tfrac34,\,X_2\le\tfrac34)$}
+\begin{pasos}
+\paso{\'Area de la zona amarilla}
+Es el cuadrado de lado $\tfrac34$ menos la esquina que se sale del tri\'angulo (l\'inea roja punteada), que es un tri\'angulo de catetos $\tfrac12$:
+\[\text{\'area}=\Big(\tfrac34\Big)^2-\tfrac12\cdot\tfrac12\cdot\tfrac12=\tfrac9{16}-\tfrac18=\tfrac7{16}\]
+\paso{Multiplico por la altura}
+\[P=2\cdot\tfrac{7}{16}=\res{\tfrac78}\]
+\end{pasos}
+
+\inciso{b}{$P(X_1\le\tfrac12,\,X_2\le\tfrac12)$}
+El cuadrado de lado $\tfrac12$ cabe completo dentro del tri\'angulo: \'area $\tfrac14$, y \quad $P=2\cdot\tfrac14=\res{\tfrac12}$
+
+\inciso{c}{$P(X_1\le\tfrac12\mid X_2\le\tfrac12)$}
+\begin{pasos}
+\paso{Reconozco el tipo de condicional}
+Se condiciona a un \textbf{evento} ($X_2\le\tfrac12$), no a un valor exacto. Se usa la f\'ormula de probabilidad condicional del Tema 1:
+\[P(A\mid B)=\frac{P(A\cap B)}{P(B)}=\frac{P(X_1\le\frac12,\ X_2\le\frac12)}{P(X_2\le\frac12)}\]
+\paso{Numerador}
+Es el inciso b: $\tfrac12$.
+\paso{Denominador}
+La zona $X_2\le\tfrac12$ es el tri\'angulo completo (\'area $\tfrac12$) menos el triangulito de arriba (catetos $\tfrac12$, \'area $\tfrac18$): \'area $\tfrac38$.
+\quad $P(X_2\le\tfrac12)=2\cdot\tfrac38=\tfrac34$.
+\paso{Divido}
+\[P\big(X_1\le\tfrac12\mid X_2\le\tfrac12\big)=\frac{1/2}{3/4}=\res{\tfrac23}\]
+\end{pasos}
+\end{resuelto}
+
+\begin{resuelto}{Neum\'aticos}{Serie 3 \textbullet{} problema 7, incisos a, b, c}
+\begin{enunciado}
+$X$ = presi\'on del neum\'atico derecho, $Y$ = presi\'on del izquierdo (la requerida es 26), con
+$\fxy(x,y)=K(x^2+y^2)$ para $20\le x\le30$, $20\le y\le30$.\quad
+a) Valor de $K$.\quad b) Probabilidad de que ambos tengan menor presi\'on que la requerida.\quad
+c) Probabilidad de que la diferencia de presi\'on sea a lo sumo 2.
+\end{enunciado}
+
+\inciso{a}{Valor de $K$}
+\begin{pasos}
+\paso{Planteo}
+\[1=K\int_{20}^{30}\!\!\int_{20}^{30}(x^2+y^2)\,dx\,dy\]
+\paso{Integro adentro \textnormal{(en $x$)}}
+\[\int_{20}^{30}(x^2+y^2)\,dx=\Big[\tfrac{x^3}{3}+y^2x\Big]_{20}^{30}=\tfrac{27000-8000}{3}+y^2(30-20)=\tfrac{19000}{3}+10y^2\]
+\paso{Integro afuera \textnormal{(en $y$)}}
+\[\int_{20}^{30}\Big(\tfrac{19000}{3}+10y^2\Big)dy=\tfrac{19000}{3}(10)+10\cdot\tfrac{19000}{3}=\tfrac{380000}{3}\]
+\paso{Despejo}
+\[1=K\cdot\tfrac{380000}{3}\quad\Rightarrow\quad\res{K=\tfrac{3}{380000}}\]
+\end{pasos}
+
+\inciso{b}{Ambos con menos presi\'on que la requerida}
+\begin{pasos}
+\paso{Traduzco}
+$X<26$ \textbf{y} $Y<26$: un cuadrado de 20 a 26 en las dos variables.
+\paso{Integro adentro}
+\[\int_{20}^{26}(x^2+y^2)\,dx=\tfrac{26^3-20^3}{3}+6y^2=\tfrac{17576-8000}{3}+6y^2=3192+6y^2\]
+\paso{Integro afuera}
+\[\int_{20}^{26}(3192+6y^2)\,dy=3192(6)+6(3192)=38304\]
+\paso{Multiplico por $K$}
+\[P(X<26,\,Y<26)=\tfrac{3}{380000}(38304)=\res{0.3024}\]
+\end{pasos}
+
+\inciso{c}{Diferencia de presi\'on a lo sumo 2}
+\begin{minipage}{0.33\textwidth}\centering
+\begin{tikzpicture}[scale=0.37]
+\draw[eje] (-0.6,0)--(11.6,0) node[right,et]{$x$}; \draw[eje] (0,-0.6)--(0,11.6) node[above,et]{$y$};
+\fill[rojo!18] (0,2)--(8,10)--(0,10)--cycle;
+\fill[rojo!18] (2,0)--(10,8)--(10,0)--cycle;
+\fill[marca] (0,0)--(2,0)--(10,8)--(10,10)--(8,10)--(0,2)--cycle;
+\draw[tinta,line width=0.6pt] (0,0) rectangle (10,10);
+\draw[tinta] (0,2)--(8,10) (2,0)--(10,8);
+\node[et] at (2.9,7.6){$y>x+2$}; \node[et] at (7.2,2.3){$y<x-2$};
+\node[below,et] at (0,0){20}; \node[below,et] at (10,0){30}; \node[left,et] at (0,10){30};
+\end{tikzpicture}
+\end{minipage}\hfill
+\begin{minipage}{0.64\textwidth}
+\begin{pasos}
+\paso{Traduzco}
+\guillemotleft Diferencia a lo sumo 2\guillemotright{} es $|X-Y|\le2$, o sea $x-2\le y\le x+2$: la banda amarilla alrededor de la diagonal.
+\paso{Uso el complemento}
+La banda es dif\'icil de integrar directo; las dos esquinas rojas son f\'aciles y, como la densidad es sim\'etrica en $x$ y $y$, valen lo mismo:
+\[P(|X-Y|\le2)=1-2\,P(Y>X+2)\]
+\paso{L\'imites de una esquina}
+Afuera $x$, de 20 a 28. La flecha vertical \cy{entra en $y=x+2$} y \cy{sale en $y=30$}.
+\end{pasos}
+\end{minipage}
+\begin{pasos}
+\setcounter{paso}{3}
+\paso{Planteo y resultado}
+\[P(|X-Y|\le2)=1-2K\int_{20}^{28}\!\!\int_{x+2}^{30}(x^2+y^2)\,dy\,dx=1-2(0.3203)=\res{0.3593}\]
+\end{pasos}
+\porque{En el examen, el dibujo con la banda y la integral bien planteada valen casi todos los puntos del inciso; la cuenta final es larga pero mec\'anica.}
+\end{resuelto}
+
+\begin{turno}
+\textbf{1.} (Autoexamen 1) $\fxy=c$ para $0\le x\le0.25$, $0\le y\le2000$. Halla $c$.
+
+\textbf{2.} (Autoexamen 2) $\fxy=6x^2y$ para $0\le x\le1$, $0\le y\le1$. Calcula $P(X\le0.5,\ Y\le0.5)$.
+
+\textbf{3.} Con la densidad de la tabacalera, $\fxy=24xy$ en $x+y\le1$, calcula $P(X\le\tfrac12)$ sin integrar.
+\comprueba{\textbf{1.} densidad constante: $c$ por el \'area es 1, y el \'area es $0.25\,(2000)=500$; entonces $c=\tfrac1{500}$ (inciso B).\par
+\textbf{2.} adentro: $\int_0^{0.5}6x^2y\,dx=\big[2x^3y\big]_0^{0.5}=\tfrac y4$; \ afuera: $\int_0^{0.5}\tfrac y4\,dy=\big[\tfrac{y^2}{8}\big]_0^{0.5}=\tfrac1{32}=0.03125$ (inciso A).\par
+\textbf{3.} es el complemento del resuelto: $1-\tfrac5{16}=\tfrac{11}{16}$.}
+\end{turno}
+
+\begin{ojo}
+\mal{Poner l\'imites sin dibujar la regi\'on.}
+\bien{El dibujo toma treinta segundos y los l\'imites salen solos con la flecha.}
+\mal{Dejar una variable en los l\'imites de afuera: $\int_0^{1-y}\!\!\int_0^1\ldots$}
+\bien{Los l\'imites de afuera siempre son n\'umeros. Las expresiones con letras s\'olo van adentro.}
+\mal{Usar $\int_0^1\!\!\int_0^1$ cuando el soporte es un tri\'angulo.}
+\bien{En un tri\'angulo, un l\'imite de adentro siempre es la recta inclinada ($1-x$, $x$, etc.).}
+\mal{Seguir con $k$ sin sustituir en los incisos siguientes.}
+\bien{En cuanto halles $k$, reescribe la densidad completa con su valor.}
+\end{ojo}

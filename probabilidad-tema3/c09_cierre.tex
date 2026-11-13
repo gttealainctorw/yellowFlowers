@@ -1,0 +1,273 @@
+\capitulo{Simulacro y cierre}{Los errores que m\'as cuestan, un examen de pr\'actica con soluci\'on completa y la hoja de bolsillo.}{cap:cierre}
+
+\subsection{Los ocho errores que m\'as puntos quitan}
+
+\begin{ojo}
+\mal{\textbf{No dibujar la regi\'on} y adivinar los l\'imites.}
+\bien{Dibujo, sombreo el evento, trazo la flecha. Con eso los l\'imites se leen.}
+\mal{\textbf{L\'imites de afuera con letras.}}
+\bien{Afuera siempre n\'umeros; las expresiones como $1-x$ s\'olo van adentro.}
+\mal{\textbf{Marginal o condicional sin intervalo.}}
+\bien{Siempre: f\'ormula, intervalo y \guillemotleft 0 en otro caso\guillemotright.}
+\mal{\textbf{Confundir las dos condicionales:} $P(X<a\mid Y=y_0)$ y $P(X<a\mid Y<b)$.}
+\bien{Valor exacto: densidad condicional. Desigualdad: $P(A\cap B)/P(B)$.}
+\mal{\textbf{Seguir con $k$} en lugar de su valor.}
+\bien{Reescribe la densidad con el n\'umero en cuanto lo tengas.}
+\mal{\textbf{Afirmar independencia sin mostrarla.}}
+\bien{Escribe $f_X$, $f_Y$, su producto y la comparaci\'on con $\fxy$.}
+\mal{\textbf{Redondear a media cuenta} en covariancias.}
+\bien{Fracciones o cuatro decimales hasta el final.}
+\mal{\textbf{No resaltar el resultado.}}
+\bien{Enci\'erralo en un recuadro. Las instrucciones del examen lo piden.}
+\end{ojo}
+
+\begin{idea}{Comprobaciones de diez segundos}
+\begin{itemize}
+\item Toda tabla, marginal y condicional \textbf{suma o integra 1}.
+\item Toda probabilidad est\'a entre 0 y 1.
+\item Toda variancia es positiva, y $-1\le\rho\le1$.
+\item $\E(X)$ cae dentro del intervalo donde vive $X$.
+\item Una marginal de $X$ no contiene $y$; una integral doble terminada no contiene letras.
+\end{itemize}
+\end{idea}
+
+\subsection{Simulacro tipo examen}
+
+Mismo formato que tu segundo parcial: 5 problemas de 20 puntos. Resu\'elvelo completo, con reloj (90 minutos) y sin ver la gu\'ia.
+Las soluciones empiezan en la p\'agina siguiente.
+
+\begin{enumerate}[label=\textbf{\arabic*.-},leftmargin=9mm,itemsep=10pt]
+\item El n\'umero de reclamaciones $X$ y de devoluciones $Y$ que recibe una tienda en un d\'ia tiene la funci\'on de probabilidad conjunta
+\begin{center}\small
+\begin{tabular}{|C|C|C|C|}\hline
+\hd{$x\,\backslash\,y$} & \hy{0} & \hy{1} & \hy{2}\\\hline
+\hx{1} & 0.10 & 0.05 & 0.05\\\hline
+\hx{2} & 0.15 & 0.20 & 0.05\\\hline
+\hx{3} & 0.05 & 0.15 & 0.20\\\hline
+\end{tabular}
+\end{center}
+a) Obtener las funciones marginales.\quad b) Calcular $P(X+Y\le3)$.\quad
+c) Obtener la funci\'on condicional de $Y$ dado $X=2$ y calcular $P(Y\ge1\mid X=2)$.\quad
+d) ?`Son independientes?\quad e) Calcular el coeficiente de correlaci\'on.
+
+\item Sea $\fxy(x,y)=k(x+2y)$ para $0\le x\le1$, $0\le y\le2$, y cero en otro caso.\quad
+a) Determinar $k$.\quad b) Calcular $P(X+Y\le1)$.\quad c) Obtener las marginales.\quad
+d) Obtener $f_{Y\mid x}$ y calcular $P(Y<1\mid X=\tfrac12)$.\quad e) Determinar la curva de regresi\'on de $Y$ dado $x$.
+
+\item Sea $\fxy(x,y)=kx$ para $0\le y\le x\le1$, y cero en otro caso.\quad
+a) Determinar $k$.\quad b) Calcular $P(X+Y\le1)$.\quad c) ?`Son independientes?\quad
+d) Calcular la covariancia y el coeficiente de correlaci\'on.
+
+\item Las variables $X$ y $Y$ tienen $\E(X)=4$, $\Var(X)=9$, $\E(Y)=-2$, $\Var(Y)=4$ y $\rho=-0.5$.
+Para $W=2X-3Y+5$ calcular $\E(W)$ y $\Var(W)$. ?`Cu\'anto valdr\'ia $\Var(W)$ si fueran independientes?
+
+\item Un dep\'osito tiene al inicio de la semana una cantidad $Y$ (miles de litros), de la cual se vende una cantidad $X$, con
+$\fxy(x,y)=6x$ para $0\le x\le y\le1$. Obtener la cantidad promedio que queda en el dep\'osito al final de la semana.
+\end{enumerate}
+
+\clearpage
+\subsection{Soluciones del simulacro}
+
+\begin{resuelto}{Problema 1: tabla conjunta}{Simulacro}
+\inciso{a}{Marginales}
+Renglones ($x$): $f_X(1)=0.10+0.05+0.05=0.20$,\ \ $f_X(2)=0.15+0.20+0.05=0.40$,\ \ $f_X(3)=0.05+0.15+0.20=0.40$.
+
+Columnas ($y$): $f_Y(0)=0.10+0.15+0.05=0.30$,\ \ $f_Y(1)=0.05+0.20+0.15=0.40$,\ \ $f_Y(2)=0.05+0.05+0.20=0.30$.
+\begin{center}\small
+\begin{tabular}{|C|C|C|C|C|}\hline
+\hd{$x\,\backslash\,y$} & \hy{0} & \hy{1} & \hy{2} & \hx{$f_X(x)$}\\\hline
+\hx{1} & \ce{0.10} & \ce{0.05} & \ce{0.05} & \mx{0.20}\\\hline
+\hx{2} & \ce{0.15} & \ce{0.20} & 0.05 & \mx{0.40}\\\hline
+\hx{3} & \ce{0.05} & 0.15 & 0.20 & \mx{0.40}\\\hline
+\hy{$f_Y(y)$} & \my{0.30} & \my{0.40} & \my{0.30} & \textbf{1}\\\hline
+\end{tabular}
+\end{center}
+\inciso{b}{$P(X+Y\le3)$}
+Las celdas marcadas en la tabla son las que cumplen $x+y\le3$:
+\[P(X+Y\le3)=0.10+0.05+0.05+0.15+0.20+0.05=\res{0.60}\]
+\inciso{c}{Condicional de $Y$ dado $X=2$}
+Se conoce $X=2$: uso el rengl\'on $x=2$ y lo divido entre su total, $0.40$:
+\[f_{Y\mid X=2}(0)=\tfrac{0.15}{0.40}=0.375\qquad f_{Y\mid X=2}(1)=\tfrac{0.20}{0.40}=0.5\qquad f_{Y\mid X=2}(2)=\tfrac{0.05}{0.40}=0.125\]
+\[P(Y\ge1\mid X=2)=0.5+0.125=\res{0.625}\]
+\inciso{d}{Independencia}
+$\fxy(1,0)=0.10$, pero $f_X(1)\,f_Y(0)=0.20(0.30)=0.06$. Falla en una celda: \res{\text{no son independientes}}
+\inciso{e}{Coeficiente de correlaci\'on}
+\begin{pasos}
+\paso{Esperanzas con las marginales}
+\begin{align*}
+\E(X)&=1(0.2)+2(0.4)+3(0.4)=2.2 & \E(X^2)&=1(0.2)+4(0.4)+9(0.4)=5.4\\
+\E(Y)&=0(0.3)+1(0.4)+2(0.3)=1.0 & \E(Y^2)&=0(0.3)+1(0.4)+4(0.3)=1.6
+\end{align*}
+\paso{$\E(XY)$ con la conjunta \textnormal{(la columna $y=0$ aporta cero)}}
+\[\E(XY)=(1)(1)(0.05)+(1)(2)(0.05)+(2)(1)(0.20)+(2)(2)(0.05)+(3)(1)(0.15)+(3)(2)(0.20)=2.4\]
+\paso{Variancias y covariancia}
+\[\Var(X)=5.4-2.2^2=0.56\qquad\Var(Y)=1.6-1^2=0.60\qquad\Cov(X,Y)=2.4-(2.2)(1.0)=0.2\]
+\paso{Correlaci\'on}
+\[\rho=\frac{0.2}{\sqrt{0.56}\sqrt{0.60}}=\frac{0.2}{0.5797}=\res{0.345}\]
+\end{pasos}
+\end{resuelto}
+
+\begin{resuelto}{Problema 2: densidad sobre un rect\'angulo}{Simulacro}
+\inciso{a}{Valor de $k$}
+\[\int_0^2\!\!\int_0^1(x+2y)\,dx\,dy=\int_0^2\Big[\tfrac{x^2}{2}+2xy\Big]_0^1dy=\int_0^2\Big(\tfrac12+2y\Big)dy=\Big[\tfrac y2+y^2\Big]_0^2=1+4=5
+\quad\Rightarrow\quad\res{k=\tfrac15}\]
+\inciso{b}{$P(X+Y\le1)$}
+\begin{minipage}{0.22\textwidth}\centering
+\begin{tikzpicture}[scale=1.5]
+\draw[eje] (-0.1,0)--(1.4,0) node[right,et]{$x$}; \draw[eje] (0,-0.1)--(0,2.3) node[above,et]{$y$};
+\draw[reg] (0,0) rectangle (1,2);
+\draw[ev] (0,0)--(1,0)--(0,1)--cycle;
+\draw[fy] (0.3,-0.08)--(0.3,0.82);
+\node[below,et] at (1,0){1}; \node[left,et] at (0,2){2}; \node[left,et] at (0,1){1};
+\end{tikzpicture}
+\end{minipage}\hfill
+\begin{minipage}{0.75\textwidth}
+Tri\'angulo bajo $y=1-x$. Afuera $x$ de 0 a 1; la flecha vertical entra en $y=0$ y sale en $y=1-x$.
+\begin{align*}
+\int_0^{1-x}(x+2y)\,dy&=\Big[xy+y^2\Big]_0^{1-x}=x(1-x)+(1-x)^2=(1-x)(x+1-x)=1-x\\
+P(X+Y\le1)&=\tfrac15\int_0^1(1-x)\,dx=\tfrac15\cdot\tfrac12=\res{\tfrac1{10}}
+\end{align*}
+\end{minipage}
+\inciso{c}{Marginales}
+\begin{align*}
+f_X(x)&=\tfrac15\int_0^2(x+2y)\,dy=\tfrac15\Big[xy+y^2\Big]_0^2=\res{\tfrac{2x+4}{5}},\quad0\le x\le1\\
+f_Y(y)&=\tfrac15\int_0^1(x+2y)\,dx=\tfrac15\Big(\tfrac12+2y\Big)=\res{\tfrac{1+4y}{10}},\quad0\le y\le2
+\end{align*}
+\inciso{d}{Condicional y probabilidad condicional}
+\[f_{Y\mid x}(y\mid x)=\frac{(x+2y)/5}{(2x+4)/5}=\res{\frac{x+2y}{2x+4}},\quad0\le y\le2\]
+Con $x=\tfrac12$ el denominador es $2\cdot\tfrac12+4=5$:
+\[P\big(Y<1\mid X=\tfrac12\big)=\int_0^1\frac{0.5+2y}{5}\,dy=\frac15\Big[0.5y+y^2\Big]_0^1=\frac{1.5}{5}=\res{0.3}\]
+\inciso{e}{Curva de regresi\'on}
+\[\E[Y\mid x]=\int_0^2y\cdot\frac{x+2y}{2x+4}\,dy=\frac{1}{2x+4}\Big[\tfrac{xy^2}{2}+\tfrac{2y^3}{3}\Big]_0^2=\frac{2x+\frac{16}{3}}{2x+4}=\res{\frac{3x+8}{3\,(x+2)}}\]
+\end{resuelto}
+
+\begin{resuelto}{Problema 3: densidad sobre un tri\'angulo}{Simulacro}
+\begin{minipage}{0.25\textwidth}\centering
+\begin{tikzpicture}[scale=2.3]
+\draw[eje] (-0.1,0)--(1.3,0) node[right,et]{$x$}; \draw[eje] (0,-0.1)--(0,1.3) node[above,et]{$y$};
+\draw[reg] (0,0)--(1,0)--(1,1)--cycle;
+\draw[ev] (0,0)--(1,0)--(0.5,0.5)--cycle;
+\draw[fx] (0.16,0.22)--(0.88,0.22);
+\node[et] at (0.3,0.52){$x=y$}; \node[et] at (0.98,0.6){$x=1-y$};
+\node[below,et] at (1,0){1};
+\end{tikzpicture}
+\end{minipage}\hfill
+\begin{minipage}{0.72\textwidth}
+\inciso{a}{Valor de $k$}
+Soporte: tri\'angulo bajo $y=x$. Flecha vertical de $y=0$ a $y=x$:
+\[\int_0^1\!\!\int_0^xx\,dy\,dx=\int_0^1x^2\,dx=\tfrac13\quad\Rightarrow\quad\res{k=3}\]
+\inciso{b}{$P(X+Y\le1)$}
+Dentro del soporte, $x+y\le1$ deja el tri\'angulo amarillo. Con flecha \cx{horizontal} no hay que partir: para $0\le y\le\tfrac12$, entra en $x=y$ y sale en $x=1-y$.
+\end{minipage}
+\[P(X+Y\le1)=\int_0^{1/2}\!\!\int_{y}^{1-y}3x\,dx\,dy=\int_0^{1/2}\tfrac32\big[(1-y)^2-y^2\big]dy=\tfrac32\int_0^{1/2}(1-2y)\,dy=\tfrac32\Big[y-y^2\Big]_0^{1/2}=\res{\tfrac38}\]
+\inciso{c}{Independencia}
+\[f_X(x)=\int_0^x3x\,dy=3x^2,\ 0\le x\le1\qquad f_Y(y)=\int_y^13x\,dx=\tfrac32(1-y^2),\ 0\le y\le1\]
+$f_X\,f_Y=\tfrac92x^2(1-y^2)\ne3x$, y adem\'as el soporte es triangular: \res{\text{no son independientes}}
+\inciso{d}{Covariancia y correlaci\'on}
+\begin{pasos}
+\paso{Esperanzas con las marginales}
+\begin{align*}
+\E(X)&=\int_0^13x^3dx=\tfrac34 & \E(X^2)&=\int_0^13x^4dx=\tfrac35\\
+\E(Y)&=\int_0^1\tfrac32(y-y^3)\,dy=\tfrac32\Big(\tfrac12-\tfrac14\Big)=\tfrac38 & \E(Y^2)&=\int_0^1\tfrac32(y^2-y^4)\,dy=\tfrac32\Big(\tfrac13-\tfrac15\Big)=\tfrac15
+\end{align*}
+\paso{$\E(XY)$ con la conjunta}
+\[\E(XY)=\int_0^1\!\!\int_0^xxy\,(3x)\,dy\,dx=\int_0^13x^2\cdot\tfrac{x^2}{2}\,dx=\tfrac32\cdot\tfrac15=\tfrac3{10}\]
+\paso{Variancias y covariancia}
+\[\Var(X)=\tfrac35-\tfrac9{16}=\tfrac3{80}\qquad\Var(Y)=\tfrac15-\tfrac9{64}=\tfrac{19}{320}\qquad\Cov(X,Y)=\tfrac3{10}-\tfrac34\cdot\tfrac38=\tfrac3{10}-\tfrac9{32}=\res{\tfrac3{160}=0.01875}\]
+\paso{Correlaci\'on}
+\[\rho=\frac{0.01875}{\sqrt{0.0375}\,\sqrt{0.059375}}=\frac{0.01875}{0.04719}=\res{0.397}\]
+\end{pasos}
+\end{resuelto}
+
+\begin{resuelto}{Problema 4: combinaci\'on lineal}{Simulacro}
+\begin{pasos}
+\paso{Junto los datos}
+$\sigma_X=\sqrt9=3$, $\sigma_Y=\sqrt4=2$, y $\Cov(X,Y)=\rho\,\sigma_X\sigma_Y=(-0.5)(3)(2)=-3$. Coeficientes: $a=2$, $b=-3$, $c=5$.
+\paso{Media}
+\[\E(W)=2(4)+(-3)(-2)+5=8+6+5=\res{19}\]
+\paso{Variancia}
+\[\Var(W)=2^2(9)+(-3)^2(4)+2(2)(-3)(-3)=36+36+36=\res{108}\]
+\paso{Si fueran independientes}
+Sin t\'ermino cruzado: $\Var(W)=36+36=\res{72}$
+\end{pasos}
+\end{resuelto}
+
+\begin{resuelto}{Problema 5: valor esperado con contexto}{Simulacro}
+\begin{pasos}
+\paso{Traduzco}
+Queda lo que hab\'ia menos lo vendido: $g=Y-X$.
+\paso{L\'imites}
+Soporte $0\le x\le y\le1$ (tri\'angulo sobre la diagonal). Afuera $y$ de 0 a 1; la flecha horizontal entra en $x=0$ y sale en $x=y$.
+\paso{Integro adentro}
+\[\int_0^y(y-x)\,6x\,dx=\int_0^y(6xy-6x^2)\,dx=\Big[3x^2y-2x^3\Big]_0^y=3y^3-2y^3=y^3\]
+\paso{Integro afuera}
+\[\E(Y-X)=\int_0^1y^3\,dy=\res{\tfrac14}\qquad\text{(250 litros en promedio)}\]
+\end{pasos}
+\end{resuelto}
+
+\subsection{Respuestas del autoexamen de tus apuntes}
+
+\begin{center}\small
+\setlength{\tabcolsep}{5pt}\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|}\hline
+\hd{Pregunta} & \hd{1} & \hd{2} & \hd{3} & \hd{4} & \hd{5} & \hd{6} & \hd{7} & \hd{8} & \hd{9} & \hd{10}\\\hline
+Inciso & B & A & B & B & B & D & C & E & D & A\\\hline
+Valor & $\tfrac1{500}$ & $\tfrac1{32}$ & $\tfrac x6-\tfrac1{12}$ & $\tfrac{2x}{y^2}$ & 0.8 & 1.88 & 0 & 8 & 13 y 12.87 & $-0.408$\\\hline
+\end{tabular}
+\end{center}
+El procedimiento de cada pregunta est\'a en la gu\'ia: 1 y 2 en el cap\'itulo \ref{cap:continuas}; 3 y 4 en el \ref{cap:margcond};
+5 y 6 en el \ref{cap:esperanza}; 7 y 10 en el \ref{cap:cov}; 8 y 9 en el \ref{cap:lineal}.
+
+\clearpage
+\subsection{Hoja de bolsillo: todo el tema en una p\'agina}
+
+\newtcolorbox{tarjeta}[1]{enhanced,colback=white,colframe=tinta,boxrule=0.8pt,arc=2pt,
+  left=8pt,right=8pt,top=8pt,bottom=8pt,
+  title={\sffamily\bfseries\footnotesize #1},colbacktitle=tinta,coltitle=white,toptitle=2pt,bottomtitle=2pt}
+
+\begin{tcbraster}[raster columns=2,raster equal height=rows,raster column skip=10pt,raster row skip=10pt]
+\begin{tarjeta}{1 \ \ HALLAR LA CONSTANTE}
+$\displaystyle\sum\sum\fxy=1$ \quad o \quad $\displaystyle\iint\fxy\,dx\,dy=1$, y despejo.
+Despu\'es reescribo la densidad con el valor.
+\end{tarjeta}
+\begin{tarjeta}{2 \ \ PROBABILIDAD DE UN EVENTO}
+Tabla: marco celdas y sumo. Densidad: dibujo, sombreo, flecha, integral doble.
+Afuera n\'umeros; adentro, donde entra y sale la flecha.
+\end{tarjeta}
+\begin{tarjeta}{3 \ \ MARGINAL}
+$f_X(x)=\displaystyle\sum_y\fxy$ \ o \ $\displaystyle\int\fxy\,dy$.\par
+Sumo o integro \textbf{la otra} variable y escribo su intervalo.
+\end{tarjeta}
+\begin{tarjeta}{4 \ \ CONDICIONAL}
+$f_{X\mid y_0}=\dfrac{\fxy(x,y_0)}{f_Y(y_0)}$.\quad Conjunta entre la marginal de lo conocido.
+Con desigualdad: $\dfrac{P(A\cap B)}{P(B)}$.
+\end{tarjeta}
+\begin{tarjeta}{5 \ \ INDEPENDENCIA}
+?`$\fxy=f_X\,f_Y$ en \textbf{todo} punto? Una falla basta para decir que no.
+Soporte no rectangular: dependientes.
+\end{tarjeta}
+\begin{tarjeta}{6 \ \ VALOR ESPERADO}
+$\E[g]=\displaystyle\sum\sum g\,\fxy$ \ o \ $\displaystyle\iint g\,\fxy$.\par
+$\E(aX+bY+c)=a\E(X)+b\E(Y)+c$ siempre.
+\end{tarjeta}
+\begin{tarjeta}{7 \ \ CURVA DE REGRESI\'ON}
+$\E[Y\mid x]=\displaystyle\int y\,f_{Y\mid x}(y\mid x)\,dy$.\quad Pasos: marginal, condicional, integrar.
+Independientes: constante.
+\end{tarjeta}
+\begin{tarjeta}{8 \ \ COVARIANCIA Y CORRELACI\'ON}
+$\Cov=\E(XY)-\E(X)\E(Y)$,\quad $\rho=\dfrac{\Cov}{\sigma_X\sigma_Y}$.\par
+Siempre $-1\le\rho\le1$. Independientes: ambas valen 0.
+\end{tarjeta}
+\begin{tarjeta}{9 \ \ COMBINACI\'ON LINEAL}
+$\Var(aX+bY+c)=$\par $\quad a^2\Var(X)+b^2\Var(Y)+2ab\Cov(X,Y)$.\par
+Si dan $\rho$: $\Cov=\rho\,\sigma_X\sigma_Y$.
+\end{tarjeta}
+\begin{tarjeta}{10 \ \ ANTES DE ENTREGAR}
+?`Todo suma 1? ?`Intervalos escritos? ?`$k$ sustituida? ?`Resultados encerrados? ?`$\rho$ entre $-1$ y $1$?
+\end{tarjeta}
+\end{tcbraster}
+
+\vfill
+\begin{notacorta}{gris}{Calculadora TI-Nspire CX II.}
+Esta versi\'on todav\'ia no incluye qu\'e pesta\~na del programa usar en cada tipo de ejercicio.
+Se agregar\'a cuando el programa est\'e hecho, como acordamos.
+\end{notacorta}
