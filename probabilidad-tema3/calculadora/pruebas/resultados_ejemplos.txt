@@ -1,0 +1,1231 @@
+=========== 1 Tabla discreta :: Ej. 3.3 Fábrica
+## 1) TABLA CON MÁRGENES
+    | y\x | 0 | 1 | 2 | fY
+    | 0 | 0.1 | 0.2 | 0.2 | 0.5
+    | 1 | 0.04 | 0.08 | 0.08 | 0.2
+    | 2 | 0.06 | 0.12 | 0.12 | 0.3
+    | fX | 0.2 | 0.4 | 0.4 | 1
+    (La suma de todas las celdas es 1 ✓
+## 2) MARGINALES
+  > Marginal de X: para cada x sumo todas sus celdas
+    fX(0) = 0.1 + 0.04 + 0.06 = 0.2
+    fX(1) = 0.2 + 0.08 + 0.12 = 0.4
+    fX(2) = 0.2 + 0.08 + 0.12 = 0.4
+  > Marginal de Y: para cada y sumo todas sus celdas
+    fY(0) = 0.1 + 0.2 + 0.2 = 0.5
+    fY(1) = 0.04 + 0.08 + 0.08 = 0.2
+    fY(2) = 0.06 + 0.12 + 0.12 = 0.3
+## 3) MEDIA Y VARIANCIA DE X
+  > Media: cada valor por su probabilidad, y sumo
+    E(X) = (0)(0.2) + (1)(0.4) + (2)(0.4) = 1.2
+  > Segundo momento: igual, con los valores al cuadrado
+    E(X²) = (0)²(0.2) + (1)²(0.4) + (2)²(0.4) = 2
+  > Variancia: E(X²) - [E(X)]²
+    Var(X) = 2 - (1.2)² = 0.56
+  = E(X) = 1.2
+  = Var(X) = 0.56
+  = σX = √Var = 0.748331
+## 4) MEDIA Y VARIANCIA DE Y
+  > Media: cada valor por su probabilidad, y sumo
+    E(Y) = (0)(0.5) + (1)(0.2) + (2)(0.3) = 0.8
+  > Segundo momento: igual, con los valores al cuadrado
+    E(Y²) = (0)²(0.5) + (1)²(0.2) + (2)²(0.3) = 1.4
+  > Variancia: E(Y²) - [E(Y)]²
+    Var(Y) = 1.4 - (0.8)² = 0.76
+  = E(Y) = 0.8
+  = Var(Y) = 0.76
+  = σY = √Var = 0.87178
+## 5) E(XY), COVARIANCIA Y CORRELACIÓN
+  > E(XY): cada celda por su x y su y (las que dan 0 no se escriben)
+    E(XY) = (1)(1)(0.08) + (1)(2)(0.12) + (2)(1)(0.08) + (2)(2)(0.12) = 0.96
+  > Covariancia: E(XY) - E(X)E(Y)
+    Cov = 0.96 - (1.2)(0.8) = 0
+  > Correlación: Cov / (σX σY)
+    ρ = 0 / √((0.56)(0.76)) = 0
+  = Cov(X,Y) = 0
+  = ρ = 0
+    ρ² (determinación) = 0
+## 6) ¿SON INDEPENDIENTES?
+  > Comparo cada celda con fX(x)·fY(y)
+    Las 9 celdas cumplen f(x,y) = fX(x)·fY(y).
+    Ej.: 0.2 · 0.5 = 0.1
+  = SÍ son independientes
+## 7) EVENTO: x>y
+  > Marco las celdas que cumplen y las sumo
+    | y\x | 0 | 1 | 2
+    | 0 | 0.1 | 0.2 | 0.2
+    | 1 | 0.04 | 0.08 | 0.08
+    | 2 | 0.06 | 0.12 | 0.12
+    P = 0.2 + 0.2 + 0.08 = 0.48
+  = P(x>y) = 0.48
+## 8) VALOR ESPERADO DE g = x+y
+  > Calculo g en cada celda
+    | y\x | 0 | 1 | 2
+    | 0 | 0 | 1 | 2
+    | 1 | 1 | 2 | 3
+    | 2 | 2 | 3 | 4
+  > Multiplico g por la probabilidad de su celda y sumo
+    E[g] = (1)(0.04) + (2)(0.06) + (1)(0.2) + (2)(0.08) + (3)(0.12) + (2)(0.2) + (3)(0.08) + (4)(0.12) = 2
+  = E[x+y] = 2
+## 9) CONDICIONAL DE X DADO Y = 1
+  > Me quedó con las celdas donde y = 1; su total es fY(1) = 0.2
+  > Divido cada celda entre ese total
+    f(0|1) = 0.04 / 0.2 = 0.2
+    f(1|1) = 0.08 / 0.2 = 0.4
+    f(2|1) = 0.08 / 0.2 = 0.4
+    | x | f(x|y=1)
+    | 0 | 0.2
+    | 1 | 0.4
+    | 2 | 0.4
+    (Comprueba: la condicional suma 1.
+    E[X|Y=1] = (0)(0.2) + (1)(0.4) + (2)(0.4) = 1.2
+  = E[X|Y=1] = 1.2
+  > Probabilidad del evento con la condicional
+    P(x>y | y=1) = 0.4 = 0.4
+  = P(x>y | y=1) = 0.4
+## 10) ACUMULADA F(x,y) = P(X≤x, Y≤y)
+  > Cada celda: suma de las celdas con x y y menores o iguales
+    | y\x | 0 | 1 | 2
+    | 0 | 0.1 | 0.3 | 0.5
+    | 1 | 0.14 | 0.42 | 0.7
+    | 2 | 0.2 | 0.6 | 1
+=========== 1 Tabla discreta :: Serie 1 Supermercado
+## 1) TABLA CON MÁRGENES
+    | x\y | 0 | 1 | 2 | 3 | fX
+    | 0 | 0.08 | 0.07 | 0.04 | 0 | 0.19
+    | 1 | 0.06 | 0.15 | 0.05 | 0.04 | 0.3
+    | 2 | 0.05 | 0.04 | 0.1 | 0.06 | 0.25
+    | 3 | 0 | 0.03 | 0.04 | 0.07 | 0.14
+    | 4 | 0 | 0.01 | 0.05 | 0.06 | 0.12
+    | fY | 0.19 | 0.3 | 0.28 | 0.23 | 1
+    (La suma de todas las celdas es 1 ✓
+## 2) MARGINALES
+  > Marginal de X: para cada x sumo todas sus celdas
+    fX(0) = 0.08 + 0.07 + 0.04 + 0 = 0.19
+    fX(1) = 0.06 + 0.15 + 0.05 + 0.04 = 0.3
+    fX(2) = 0.05 + 0.04 + 0.1 + 0.06 = 0.25
+    fX(3) = 0 + 0.03 + 0.04 + 0.07 = 0.14
+    fX(4) = 0 + 0.01 + 0.05 + 0.06 = 0.12
+  > Marginal de Y: para cada y sumo todas sus celdas
+    fY(0) = 0.08 + 0.06 + 0.05 + 0 + 0 = 0.19
+    fY(1) = 0.07 + 0.15 + 0.04 + 0.03 + 0.01 = 0.3
+    fY(2) = 0.04 + 0.05 + 0.1 + 0.04 + 0.05 = 0.28
+    fY(3) = 0 + 0.04 + 0.06 + 0.07 + 0.06 = 0.23
+## 3) MEDIA Y VARIANCIA DE X
+  > Media: cada valor por su probabilidad, y sumo
+    E(X) = (0)(0.19) + (1)(0.3) + (2)(0.25) + (3)(0.14) + (4)(0.12) = 1.7
+  > Segundo momento: igual, con los valores al cuadrado
+    E(X²) = (0)²(0.19) + (1)²(0.3) + (2)²(0.25) + (3)²(0.14) + (4)²(0.12) = 4.48
+  > Variancia: E(X²) - [E(X)]²
+    Var(X) = 4.48 - (1.7)² = 1.59
+  = E(X) = 1.7
+  = Var(X) = 1.59
+  = σX = √Var = 1.26095
+## 4) MEDIA Y VARIANCIA DE Y
+  > Media: cada valor por su probabilidad, y sumo
+    E(Y) = (0)(0.19) + (1)(0.3) + (2)(0.28) + (3)(0.23) = 1.55
+  > Segundo momento: igual, con los valores al cuadrado
+    E(Y²) = (0)²(0.19) + (1)²(0.3) + (2)²(0.28) + (3)²(0.23) = 3.49
+  > Variancia: E(Y²) - [E(Y)]²
+    Var(Y) = 3.49 - (1.55)² = 1.0875
+  = E(Y) = 1.55
+  = Var(Y) = 1.0875
+  = σY = √Var = 1.04283
+## 5) E(XY), COVARIANCIA Y CORRELACIÓN
+  > E(XY): cada celda por su x y su y (las que dan 0 no se escriben)
+    E(XY) = (1)(1)(0.15) + (1)(2)(0.05) + (1)(3)(0.04) + (2)(1)(0.04) + (2)(2)(0.1) + (2)(3)(0.06) + (3)(1)(0.03) + (3)(2)(0.04) + (3)(3)(0.07) + (4)(1)(0.01) + (4)(2)(0.05) + (4)(3)(0.06) = 3.33
+  > Covariancia: E(XY) - E(X)E(Y)
+    Cov = 3.33 - (1.7)(1.55) = 0.695
+  > Correlación: Cov / (σX σY)
+    ρ = 0.695 / √((1.59)(1.0875)) = 0.528532
+  = Cov(X,Y) = 0.695
+  = ρ = 0.528532
+    ρ² (determinación) = 19321/69165  ≈ 0.279346
+## 6) ¿SON INDEPENDIENTES?
+  > Comparo cada celda con fX(x)·fY(y)
+    Celda (0, 0): f = 0.08
+    fX·fY = 0.19 · 0.19 = 0.0361  ≠ 0.08
+  = NO son independientes (basta una celda que falle)
+## 7) EVENTO: abs(x-y)>=2
+  > Marco las celdas que cumplen y las sumo
+    | x\y | 0 | 1 | 2 | 3
+    | 0 | 0.08 | 0.07 | 0.04 | 0
+    | 1 | 0.06 | 0.15 | 0.05 | 0.04
+    | 2 | 0.05 | 0.04 | 0.1 | 0.06
+    | 3 | 0 | 0.03 | 0.04 | 0.07
+    | 4 | 0 | 0.01 | 0.05 | 0.06
+    P = 0.04 + 0 + 0.04 + 0.05 + 0 + 0.03 + 0 + 0.01 + 0.05 = 0.22
+  = P(abs(x-y)>=2) = 0.22
+## 8) ACUMULADA F(x,y) = P(X≤x, Y≤y)
+  > Cada celda: suma de las celdas con x y y menores o iguales
+    | x\y | 0 | 1 | 2 | 3
+    | 0 | 0.08 | 0.15 | 0.19 | 0.19
+    | 1 | 0.14 | 0.36 | 0.45 | 0.49
+    | 2 | 0.19 | 0.45 | 0.64 | 0.74
+    | 3 | 0.19 | 0.48 | 0.71 | 0.88
+    | 4 | 0.19 | 0.49 | 0.77 | 1
+=========== 1 Tabla discreta :: Serie 8 Restaurante
+## 1) TABLA CON MÁRGENES
+    | x\y | 7 | 9 | 10 | fX
+    | 7 | 0.05 | 0.05 | 0.1 | 0.2
+    | 9 | 0.05 | 0.1 | 0.35 | 0.5
+    | 10 | 0 | 0.2 | 0.1 | 0.3
+    | fY | 0.1 | 0.35 | 0.55 | 1
+    (La suma de todas las celdas es 1 ✓
+## 2) MARGINALES
+  > Marginal de X: para cada x sumo todas sus celdas
+    fX(7) = 0.05 + 0.05 + 0.1 = 0.2
+    fX(9) = 0.05 + 0.1 + 0.35 = 0.5
+    fX(10) = 0 + 0.2 + 0.1 = 0.3
+  > Marginal de Y: para cada y sumo todas sus celdas
+    fY(7) = 0.05 + 0.05 + 0 = 0.1
+    fY(9) = 0.05 + 0.1 + 0.2 = 0.35
+    fY(10) = 0.1 + 0.35 + 0.1 = 0.55
+## 3) MEDIA Y VARIANCIA DE X
+  > Media: cada valor por su probabilidad, y sumo
+    E(X) = (7)(0.2) + (9)(0.5) + (10)(0.3) = 8.9
+  > Segundo momento: igual, con los valores al cuadrado
+    E(X²) = (7)²(0.2) + (9)²(0.5) + (10)²(0.3) = 80.3
+  > Variancia: E(X²) - [E(X)]²
+    Var(X) = 80.3 - (8.9)² = 1.09
+  = E(X) = 8.9
+  = Var(X) = 1.09
+  = σX = √Var = 1.04403
+## 4) MEDIA Y VARIANCIA DE Y
+  > Media: cada valor por su probabilidad, y sumo
+    E(Y) = (7)(0.1) + (9)(0.35) + (10)(0.55) = 9.35
+  > Segundo momento: igual, con los valores al cuadrado
+    E(Y²) = (7)²(0.1) + (9)²(0.35) + (10)²(0.55) = 88.25
+  > Variancia: E(Y²) - [E(Y)]²
+    Var(Y) = 88.25 - (9.35)² = 0.8275
+  = E(Y) = 9.35
+  = Var(Y) = 0.8275
+  = σY = √Var = 0.90967
+## 5) E(XY), COVARIANCIA Y CORRELACIÓN
+  > E(XY): cada celda por su x y su y (las que dan 0 no se escriben)
+    E(XY) = (7)(7)(0.05) + (7)(9)(0.05) + (7)(10)(0.1) + (9)(7)(0.05) + (9)(9)(0.1) + (9)(10)(0.35) + (10)(9)(0.2) + (10)(10)(0.1) = 83.35
+  > Covariancia: E(XY) - E(X)E(Y)
+    Cov = 83.35 - (8.9)(9.35) = 0.135
+  > Correlación: Cov / (σX σY)
+    ρ = 0.135 / √((1.09)(0.8275)) = 0.142147
+  = Cov(X,Y) = 0.135
+  = ρ = 0.142147
+    ρ² (determinación) = 729/36079  ≈ 0.0202057
+## 6) ¿SON INDEPENDIENTES?
+  > Comparo cada celda con fX(x)·fY(y)
+    Celda (7, 7): f = 0.05
+    fX·fY = 0.2 · 0.1 = 0.02  ≠ 0.05
+  = NO son independientes (basta una celda que falle)
+## 7) EVENTO: x<=9, y<=9
+  > Marco las celdas que cumplen y las sumo
+    | x\y | 7 | 9 | 10
+    | 7 | 0.05 | 0.05 | 0.1
+    | 9 | 0.05 | 0.1 | 0.35
+    | 10 | 0 | 0.2 | 0.1
+    P = 0.05 + 0.05 + 0.05 + 0.1 = 0.25
+  = P(x<=9, y<=9) = 0.25
+## 8) VALOR ESPERADO DE g = abs(x-y)
+  > Calculo g en cada celda
+    | x\y | 7 | 9 | 10
+    | 7 | 0 | 2 | 3
+    | 9 | 2 | 0 | 1
+    | 10 | 3 | 1 | 0
+  > Multiplico g por la probabilidad de su celda y sumo
+    E[g] = (2)(0.05) + (3)(0.1) + (2)(0.05) + (1)(0.35) + (1)(0.2) = 1.05
+  = E[abs(x-y)] = 1.05
+## 9) CONDICIONAL DE X DADO Y = 9
+  > Me quedó con las celdas donde y = 9; su total es fY(9) = 0.35
+  > Divido cada celda entre ese total
+    f(7|9) = 0.05 / 0.35 = 1/7
+    f(9|9) = 0.1 / 0.35 = 2/7
+    f(10|9) = 0.2 / 0.35 = 4/7
+    | x | f(x|y=9)
+    | 7 | 1/7
+    | 9 | 2/7
+    | 10 | 4/7
+    (Comprueba: la condicional suma 1.
+    E[X|Y=9] = (7)(1/7) + (9)(2/7) + (10)(4/7) = 65/7
+  = E[X|Y=9] = 65/7  ≈ 9.28571
+  > Probabilidad del evento con la condicional
+    P(x<=9, y<=9 | y=9) = 1/7 + 2/7 = 3/7
+  = P(x<=9, y<=9 | y=9) = 3/7  ≈ 0.428571
+## 10) ACUMULADA F(x,y) = P(X≤x, Y≤y)
+  > Cada celda: suma de las celdas con x y y menores o iguales
+    | x\y | 7 | 9 | 10
+    | 7 | 0.05 | 0.1 | 0.2
+    | 9 | 0.1 | 0.25 | 0.7
+    | 10 | 0.1 | 0.45 | 1
+=========== 1 Tabla discreta :: Serie 10 Transistores
+## 1) TABLA CON MÁRGENES
+    | x\y | 1 | 2 | 3 | fX
+    | 1 | 0.3 | 0.2 | 0.1 | 0.6
+    | 2 | 0.2 | 0.1 | 0 | 0.3
+    | 3 | 0.1 | 0 | 0 | 0.1
+    | fY | 0.6 | 0.3 | 0.1 | 1
+    (La suma de todas las celdas es 1 ✓
+## 2) MARGINALES
+  > Marginal de X: para cada x sumo todas sus celdas
+    fX(1) = 0.3 + 0.2 + 0.1 = 0.6
+    fX(2) = 0.2 + 0.1 + 0 = 0.3
+    fX(3) = 0.1 + 0 + 0 = 0.1
+  > Marginal de Y: para cada y sumo todas sus celdas
+    fY(1) = 0.3 + 0.2 + 0.1 = 0.6
+    fY(2) = 0.2 + 0.1 + 0 = 0.3
+    fY(3) = 0.1 + 0 + 0 = 0.1
+## 3) MEDIA Y VARIANCIA DE X
+  > Media: cada valor por su probabilidad, y sumo
+    E(X) = (1)(0.6) + (2)(0.3) + (3)(0.1) = 1.5
+  > Segundo momento: igual, con los valores al cuadrado
+    E(X²) = (1)²(0.6) + (2)²(0.3) + (3)²(0.1) = 2.7
+  > Variancia: E(X²) - [E(X)]²
+    Var(X) = 2.7 - (1.5)² = 0.45
+  = E(X) = 1.5
+  = Var(X) = 0.45
+  = σX = √Var = 0.67082
+## 4) MEDIA Y VARIANCIA DE Y
+  > Media: cada valor por su probabilidad, y sumo
+    E(Y) = (1)(0.6) + (2)(0.3) + (3)(0.1) = 1.5
+  > Segundo momento: igual, con los valores al cuadrado
+    E(Y²) = (1)²(0.6) + (2)²(0.3) + (3)²(0.1) = 2.7
+  > Variancia: E(Y²) - [E(Y)]²
+    Var(Y) = 2.7 - (1.5)² = 0.45
+  = E(Y) = 1.5
+  = Var(Y) = 0.45
+  = σY = √Var = 0.67082
+## 5) E(XY), COVARIANCIA Y CORRELACIÓN
+  > E(XY): cada celda por su x y su y (las que dan 0 no se escriben)
+    E(XY) = (1)(1)(0.3) + (1)(2)(0.2) + (1)(3)(0.1) + (2)(1)(0.2) + (2)(2)(0.1) + (3)(1)(0.1) = 2.1
+  > Covariancia: E(XY) - E(X)E(Y)
+    Cov = 2.1 - (1.5)(1.5) = -0.15
+  > Correlación: Cov / (σX σY)
+    ρ = (-0.15) / √((0.45)(0.45)) = -1/3  ≈ -0.333333
+  = Cov(X,Y) = -0.15
+  = ρ = -1/3  ≈ -0.333333
+    ρ² (determinación) = 1/9  ≈ 0.111111
+## 6) ¿SON INDEPENDIENTES?
+  > Comparo cada celda con fX(x)·fY(y)
+    Celda (1, 1): f = 0.3
+    fX·fY = 0.6 · 0.6 = 0.36  ≠ 0.3
+  = NO son independientes (basta una celda que falle)
+## 7) ACUMULADA F(x,y) = P(X≤x, Y≤y)
+  > Cada celda: suma de las celdas con x y y menores o iguales
+    | x\y | 1 | 2 | 3
+    | 1 | 0.3 | 0.5 | 0.6
+    | 2 | 0.5 | 0.8 | 0.9
+    | 3 | 0.6 | 0.9 | 1
+=========== 1 Tabla discreta :: Autoexamen 10
+## 1) TABLA CON MÁRGENES
+    | y\x | 0 | 1 | fY
+    | 1 | 0.1 | 0.3 | 0.4
+    | 2 | 0.4 | 0.2 | 0.6
+    | fX | 0.5 | 0.5 | 1
+    (La suma de todas las celdas es 1 ✓
+## 2) MARGINALES
+  > Marginal de X: para cada x sumo todas sus celdas
+    fX(0) = 0.1 + 0.4 = 0.5
+    fX(1) = 0.3 + 0.2 = 0.5
+  > Marginal de Y: para cada y sumo todas sus celdas
+    fY(1) = 0.1 + 0.3 = 0.4
+    fY(2) = 0.4 + 0.2 = 0.6
+## 3) MEDIA Y VARIANCIA DE X
+  > Media: cada valor por su probabilidad, y sumo
+    E(X) = (0)(0.5) + (1)(0.5) = 0.5
+  > Segundo momento: igual, con los valores al cuadrado
+    E(X²) = (0)²(0.5) + (1)²(0.5) = 0.5
+  > Variancia: E(X²) - [E(X)]²
+    Var(X) = 0.5 - (0.5)² = 0.25
+  = E(X) = 0.5
+  = Var(X) = 0.25
+  = σX = √Var = 0.5
+## 4) MEDIA Y VARIANCIA DE Y
+  > Media: cada valor por su probabilidad, y sumo
+    E(Y) = (1)(0.4) + (2)(0.6) = 1.6
+  > Segundo momento: igual, con los valores al cuadrado
+    E(Y²) = (1)²(0.4) + (2)²(0.6) = 2.8
+  > Variancia: E(Y²) - [E(Y)]²
+    Var(Y) = 2.8 - (1.6)² = 0.24
+  = E(Y) = 1.6
+  = Var(Y) = 0.24
+  = σY = √Var = 0.489898
+## 5) E(XY), COVARIANCIA Y CORRELACIÓN
+  > E(XY): cada celda por su x y su y (las que dan 0 no se escriben)
+    E(XY) = (1)(1)(0.3) + (1)(2)(0.2) = 0.7
+  > Covariancia: E(XY) - E(X)E(Y)
+    Cov = 0.7 - (0.5)(1.6) = -0.1
+  > Correlación: Cov / (σX σY)
+    ρ = (-0.1) / √((0.25)(0.24)) = -0.408248
+  = Cov(X,Y) = -0.1
+  = ρ = -0.408248
+    ρ² (determinación) = 1/6  ≈ 0.166667
+## 6) ¿SON INDEPENDIENTES?
+  > Comparo cada celda con fX(x)·fY(y)
+    Celda (0, 1): f = 0.1
+    fX·fY = 0.5 · 0.4 = 0.2  ≠ 0.1
+  = NO son independientes (basta una celda que falle)
+## 7) VALOR ESPERADO DE g = xy
+  > Calculo g en cada celda
+    | y\x | 0 | 1
+    | 1 | 0 | 1
+    | 2 | 0 | 2
+  > Multiplico g por la probabilidad de su celda y sumo
+    E[g] = (1)(0.3) + (2)(0.2) = 0.7
+  = E[xy] = 0.7
+## 8) ACUMULADA F(x,y) = P(X≤x, Y≤y)
+  > Cada celda: suma de las celdas con x y y menores o iguales
+    | y\x | 0 | 1
+    | 1 | 0.1 | 0.4
+    | 2 | 0.5 | 1
+=========== 2 Densidad: k y P :: Ej. 3.4
+## DATOS
+    f(x,y) = kx + ky
+    Soporte: 0<=x<=1, 0<=y<=1
+    Vértices de la región: (0,0) (1,0) (1,1) (0,1)
+    Flecha vertical: afuera x, adentro y
+      0≤x≤1:  y entra en 0, sale en 1
+## HALLAR k
+  > La integral de f sobre todo el soporte vale 1:
+    ∫[0→1] ∫[0→1] (kx + ky) dy dx
+  > Adentro: integro en y (x queda fija)
+    ∫(kx + ky) dy = kxy + (1/2)ky^2
+  > Sustituyo y = 1 menos y = 0
+    [kx(1) + (1/2)k(1)^2] - [0]
+    = kx + (1/2)k
+  > Afuera: integro en x
+    ∫(kx + (1/2)k) dx = (1/2)kx^2 + (1/2)kx
+  > Evalúo x = 1 menos x = 0
+    (k) - (0) = k
+  > Igualo a 1 y despejo:
+    k = 1
+  = k = 1
+    Densidad: f(x,y) = x + y
+## P(x+y<=1)
+    Región (soporte y condición): vertices (0,0) (1,0) (0,1)
+    Flecha vertical: afuera x, adentro y
+      0≤x≤1:  y entra en 0, sale en 1 - x
+    ∫[0→1] ∫[0→1-x] (x + y) dy dx
+  > Adentro: integro en y (x queda fija)
+    ∫(x + y) dy = xy + (1/2)y^2
+  > Sustituyo y = 1 - x menos y = 0
+    [x(1 - x) + (1/2)(1 - x)^2] - [0]
+    = 1/2 - (1/2)x^2
+  > Afuera: integro en x
+    ∫(1/2 - (1/2)x^2) dx = (1/2)x - (1/6)x^3
+  > Evalúo x = 1 menos x = 0
+    (1/3) - (0) = 1/3
+  = P(x+y<=1) = 1/3  ≈ 0.333333
+=========== 2 Densidad: k y P :: Serie 2 (banda)
+## DATOS
+    f(x,y) = kx
+    Soporte: 0<=x<=4, y>=0, y>=2-x, y<=4-x
+    Vértices de la región: (0,2) (2,0) (4,0) (0,4)
+    Flecha vertical: afuera x, adentro y
+      0≤x≤2:  y entra en 2 - x, sale en 4 - x
+      2≤x≤4:  y entra en 0, sale en 4 - x
+    (La flecha cambia de curva: la integral se parte en 2 piezas.
+## HALLAR k
+  > La integral de f sobre todo el soporte vale 1:
+  > PIEZA 1 de 2
+    ∫[0→2] ∫[2-x→4-x] (kx) dy dx
+  > Adentro: integro en y (x queda fija)
+    ∫(kx) dy = kxy
+  > Sustituyo y = 4 - x menos y = 2 - x
+    [kx(4 - x)] - [kx(2 - x)]
+    = 2kx
+  > Afuera: integro en x
+    ∫(2kx) dx = kx^2
+  > Evalúo x = 2 menos x = 0
+    (4k) - (0) = 4k
+  > PIEZA 2 de 2
+    ∫[2→4] ∫[0→4-x] (kx) dy dx
+  > Adentro: integro en y (x queda fija)
+    ∫(kx) dy = kxy
+  > Sustituyo y = 4 - x menos y = 0
+    [kx(4 - x)] - [0]
+    = 4kx - kx^2
+  > Afuera: integro en x
+    ∫(4kx - kx^2) dx = 2kx^2 - (1/3)kx^3
+  > Evalúo x = 4 menos x = 2
+    ((32/3)k) - ((16/3)k) = (16/3)k
+    Sumo las piezas: (4k) + ((16/3)k) = (28/3)k
+  > Igualo a 1 y despejo:
+    (28/3)k = 1
+  = k = 3/28  ≈ 0.107143
+    Densidad: f(x,y) = (3/28)x
+## P(1<=x<=3)
+    Región (soporte y condición): vertices (1,1) (2,0) (3,0) (3,1) (1,3)
+    Flecha vertical: afuera x, adentro y
+      1≤x≤2:  y entra en 2 - x, sale en 4 - x
+      2≤x≤3:  y entra en 0, sale en 4 - x
+    (La flecha cambia de curva: la integral se parte en 2 piezas.
+  > PIEZA 1 de 2
+    ∫[1→2] ∫[2-x→4-x] ((3/28)x) dy dx
+  > Adentro: integro en y (x queda fija)
+    ∫((3/28)x) dy = (3/28)xy
+  > Sustituyo y = 4 - x menos y = 2 - x
+    [(3/28)x(4 - x)] - [(3/28)x(2 - x)]
+    = (3/14)x
+  > Afuera: integro en x
+    ∫((3/14)x) dx = (3/28)x^2
+  > Evalúo x = 2 menos x = 1
+    (3/7) - (3/28) = 9/28
+  > PIEZA 2 de 2
+    ∫[2→3] ∫[0→4-x] ((3/28)x) dy dx
+  > Adentro: integro en y (x queda fija)
+    ∫((3/28)x) dy = (3/28)xy
+  > Sustituyo y = 4 - x menos y = 0
+    [(3/28)x(4 - x)] - [0]
+    = (3/7)x - (3/28)x^2
+  > Afuera: integro en x
+    ∫((3/7)x - (3/28)x^2) dx = (3/14)x^2 - (1/28)x^3
+  > Evalúo x = 3 menos x = 2
+    (27/28) - (4/7) = 11/28
+    Sumo las piezas: (9/28) + (11/28) = 5/7
+  = P(1<=x<=3) = 5/7  ≈ 0.714286
+=========== 2 Densidad: k y P :: Serie 3 Tabacalera
+## DATOS
+    f(x,y) = 24xy
+    Soporte: x>=0, y>=0, x+y<=1
+    Vértices de la región: (0,0) (1,0) (0,1)
+    Flecha vertical: afuera x, adentro y
+      0≤x≤1:  y entra en 0, sale en 1 - x
+    (Comprobado: la integral sobre el soporte vale 1 ✓
+## P(x>1/2)
+    Región (soporte y condición): vertices (1/2,0) (1,0) (1/2,1/2)
+    Flecha vertical: afuera x, adentro y
+      1/2≤x≤1:  y entra en 0, sale en 1 - x
+    ∫[1/2→1] ∫[0→1-x] (24xy) dy dx
+  > Adentro: integro en y (x queda fija)
+    ∫(24xy) dy = 12xy^2
+  > Sustituyo y = 1 - x menos y = 0
+    [12x(1 - x)^2] - [0]
+    = 12x^3 - 24x^2 + 12x
+  > Afuera: integro en x
+    ∫(12x^3 - 24x^2 + 12x) dx = 3x^4 - 8x^3 + 6x^2
+  > Evalúo x = 1 menos x = 1/2
+    (1) - (11/16) = 5/16
+  = P(x>1/2) = 5/16  ≈ 0.3125
+=========== 2 Densidad: k y P :: Ej. 5.5 (P(A|B))
+## DATOS
+    f(x,y) = 2
+    Soporte: x>=0, y>=0, x+y<=1
+    Vértices de la región: (0,0) (1,0) (0,1)
+    Flecha vertical: afuera x, adentro y
+      0≤x≤1:  y entra en 0, sale en 1 - x
+    (Comprobado: la integral sobre el soporte vale 1 ✓
+## P(x<=1/2)
+    Región (soporte y condición): vertices (0,0) (1/2,0) (1/2,1/2) (0,1)
+    Flecha vertical: afuera x, adentro y
+      0≤x≤1/2:  y entra en 0, sale en 1 - x
+    ∫[0→1/2] ∫[0→1-x] (2) dy dx
+  > Adentro: integro en y (x queda fija)
+    ∫(2) dy = 2y
+  > Sustituyo y = 1 - x menos y = 0
+    [2(1 - x)] - [0]
+    = 2 - 2x
+  > Afuera: integro en x
+    ∫(2 - 2x) dx = 2x - x^2
+  > Evalúo x = 1/2 menos x = 0
+    (3/4) - (0) = 3/4
+  = P(x<=1/2) = 3/4  ≈ 0.75
+## P(y<=1/2)  (lo que se da)
+    Región (soporte y condición): vertices (0,0) (1,0) (1/2,1/2) (0,1/2)
+    Flecha horizontal: afuera y, adentro x
+      0≤y≤1/2:  x entra en 0, sale en 1 - y
+    ∫[0→1/2] ∫[0→1-y] (2) dx dy
+  > Adentro: integro en x (y queda fija)
+    ∫(2) dx = 2x
+  > Sustituyo x = 1 - y menos x = 0
+    [2(1 - y)] - [0]
+    = 2 - 2y
+  > Afuera: integro en y
+    ∫(2 - 2y) dy = 2y - y^2
+  > Evalúo y = 1/2 menos y = 0
+    (3/4) - (0) = 3/4
+  = P(y<=1/2) = 3/4  ≈ 0.75
+## P(A y B): las dos condiciones
+    Región (soporte y condición): vertices (0,0) (1/2,0) (1/2,1/2) (0,1/2)
+    Flecha vertical: afuera x, adentro y
+      0≤x≤1/2:  y entra en 0, sale en 1/2
+    ∫[0→1/2] ∫[0→1/2] (2) dy dx
+  > Adentro: integro en y (x queda fija)
+    ∫(2) dy = 2y
+  > Sustituyo y = 1/2 menos y = 0
+    [2(1/2)] - [0]
+    = 1
+  > Afuera: integro en x
+    ∫(1) dx = x
+  > Evalúo x = 1/2 menos x = 0
+    (1/2) - (0) = 1/2
+  = P(A y B) = 1/2  ≈ 0.5
+## CONDICIONAL: P(A|B) = P(A y B) / P(B)
+    P(A|B) = 1/2 / 3/4
+  = P(x<=1/2 | y<=1/2) = 2/3  ≈ 0.666667
+=========== 2 Densidad: k y P :: Serie 7 Neumáticos
+## DATOS
+    f(x,y) = kx^2 + ky^2
+    Soporte: 20<=x<=30, 20<=y<=30
+    Vértices de la región: (20,20) (30,20) (30,30) (20,30)
+    Flecha vertical: afuera x, adentro y
+      20≤x≤30:  y entra en 20, sale en 30
+## HALLAR k
+  > La integral de f sobre todo el soporte vale 1:
+    ∫[20→30] ∫[20→30] (kx^2 + ky^2) dy dx
+  > Adentro: integro en y (x queda fija)
+    ∫(kx^2 + ky^2) dy = kx^2y + (1/3)ky^3
+  > Sustituyo y = 30 menos y = 20
+    [kx^2(30) + (1/3)k(30)^3] - [kx^2(20) + (1/3)k(20)^3]
+    = 10kx^2 + (19000/3)k
+  > Afuera: integro en x
+    ∫(10kx^2 + (19000/3)k) dx = (10/3)kx^3 + (19000/3)kx
+  > Evalúo x = 30 menos x = 20
+    (280000k) - ((460000/3)k) = (380000/3)k
+  > Igualo a 1 y despejo:
+    (380000/3)k = 1
+  = k = 3/380000  ≈ 0.000007895
+    Densidad: f(x,y) = (3/380000)x^2 + (3/380000)y^2
+## P(x-y<=2, y-x<=2)
+    Región (soporte y condición): vertices (20,20) (22,20) (30,28) (30,30) (28,30) (20,22)
+    Flecha vertical: afuera x, adentro y
+      20≤x≤22:  y entra en 20, sale en x + 2
+      22≤x≤28:  y entra en x - 2, sale en x + 2
+      28≤x≤30:  y entra en x - 2, sale en 30
+    (La flecha cambia de curva: la integral se parte en 3 piezas.
+  > PIEZA 1 de 3
+    ∫[20→22] ∫[20→x+2] ((3/380000)x^2 + (3/380000)y^2) dy dx
+  > Adentro: integro en y (x queda fija)
+    ∫((3/380000)x^2 + (3/380000)y^2) dy = (3/380000)x^2y + (1/380000)y^3
+  > Sustituyo y = x + 2 menos y = 20
+    [(3/380000)x^2(x + 2) + (1/380000)(x + 2)^3] - [(3/380000)x^2(20) + (1/380000)(20)^3]
+    = (1/95000)x^3 - (3/23750)x^2 + (3/95000)x - 999/47500
+  > Afuera: integro en x
+    ∫((1/95000)x^3 - (3/23750)x^2 + (3/95000)x - 999/47500) dx = (1/380000)x^4 - (1/23750)x^3 + (3/190000)x^2 - (999/47500)x
+  > Evalúo x = 22 menos x = 20
+    (-13629/47500) - (-784/2375) = 2051/47500
+  > PIEZA 2 de 3
+    ∫[22→28] ∫[x-2→x+2] ((3/380000)x^2 + (3/380000)y^2) dy dx
+  > Adentro: integro en y (x queda fija)
+    ∫((3/380000)x^2 + (3/380000)y^2) dy = (3/380000)x^2y + (1/380000)y^3
+  > Sustituyo y = x + 2 menos y = x - 2
+    [(3/380000)x^2(x + 2) + (1/380000)(x + 2)^3] - [(3/380000)x^2(x - 2) + (1/380000)(x - 2)^3]
+    = (3/47500)x^2 + 1/23750
+  > Afuera: integro en x
+    ∫((3/47500)x^2 + 1/23750) dx = (1/47500)x^3 + (1/23750)x
+  > Evalúo x = 28 menos x = 22
+    (5502/11875) - (2673/11875) = 2829/11875
+  > PIEZA 3 de 3
+    ∫[28→30] ∫[x-2→30] ((3/380000)x^2 + (3/380000)y^2) dy dx
+  > Adentro: integro en y (x queda fija)
+    ∫((3/380000)x^2 + (3/380000)y^2) dy = (3/380000)x^2y + (1/380000)y^3
+  > Sustituyo y = 30 menos y = x - 2
+    [(3/380000)x^2(30) + (1/380000)(30)^3] - [(3/380000)x^2(x - 2) + (1/380000)(x - 2)^3]
+    = 844/11875 - (3/95000)x + (51/190000)x^2 - (1/95000)x^3
+  > Afuera: integro en x
+    ∫(844/11875 - (3/95000)x + (51/190000)x^2 - (1/95000)x^3) dx = (844/11875)x - (3/190000)x^2 + (17/190000)x^3 - (1/380000)x^4
+  > Evalúo x = 30 menos x = 28
+    (22821/9500) - (27601/11875) = 3701/47500
+    Sumo las piezas: (2051/47500) + (2829/11875) + (3701/47500) = 4267/11875
+  = P(x-y<=2, y-x<=2) = 4267/11875  ≈ 0.359326
+=========== 3 Marginal y condicional :: Serie 3 Tabacalera
+## DATOS
+    f(x,y) = 24xy
+    Soporte: x>=0, y>=0, x+y<=1
+    Vértices de la región: (0,0) (1,0) (0,1)
+## MARGINAL DE X
+  > Marginal de X: integro en y (flecha vertical)
+    Para 0≤x≤1:
+    fX(x) = ∫[0→1-x] (24xy) dy
+      ∫(24xy) dy = 12xy^2
+      = [12x(1 - x)^2] - [0]
+      = 12x^3 - 24x^2 + 12x
+  = fX(x) = 12x^3 - 24x^2 + 12x = 12x(1 - x)^2,  0≤x≤1
+## MARGINAL DE Y
+  > Marginal de Y: integro en x (flecha horizontal)
+    Para 0≤y≤1:
+    fY(y) = ∫[0→1-y] (24xy) dx
+      ∫(24xy) dx = 12x^2y
+      = [12(1 - y)^2y] - [0]
+      = 12y^3 - 24y^2 + 12y
+  = fY(y) = 12y^3 - 24y^2 + 12y = 12y(1 - y)^2,  0≤y≤1
+## CONDICIONAL DE Y DADO X = x
+  > Conjunta entre la marginal de lo conocido (X)
+    f(y|x) = (24xy) / (12x^3 - 24x^2 + 12x)
+  = f(y|x) = (2y)/(1 - x)^2
+      para 0<x<1:  0≤y≤1 - x
+## CONDICIONAL DE X DADO Y = y
+  > Conjunta entre la marginal de lo conocido (Y)
+    f(x|y) = (24xy) / (12y^3 - 24y^2 + 12y)
+  = f(x|y) = (2x)/(1 - y)^2
+      para 0<y<1:  0≤x≤1 - y
+## ¿SON INDEPENDIENTES?
+    El soporte NO es un rectángulo: los límites de una variable dependen de la otra.
+    Hay puntos donde f = 0 pero fX y fY son positivas.
+  = NO son independientes
+## CONDICIONAL DE X DADO Y = 3/4
+  > 1) Intervalo de x cuando y = 3/4
+    x va de 0 a 1 - y = 1/4
+  > 2) Conjunta evaluada en y = 3/4
+    f = 24x(3/4) = 18x
+  > 3) Marginal evaluada en y = 3/4
+    fY(3/4) = 9/16  ≈ 0.5625
+  > 4) Divido
+    f(x|3/4) = (18x) / (9/16)
+  = f(x|y=3/4) = 32x,  0≤x≤1/4
+    (Comprueba: integra 1 en ese intervalo.
+    E[X|Y=3/4] = ∫[0→1/4] x(32x) dx = 1/6  ≈ 0.166667
+## P(x<1/8 | y=3/4)
+  > Integro la condicional donde se cumple x<1/8
+    ∫[0→1/8] (32x) dx
+    = [16x^2] de 0 a 1/8
+    = (1/4) - 0 = 1/4
+  = P(x<1/8 | y=3/4) = 1/4  ≈ 0.25
+=========== 3 Marginal y condicional :: Ej. 3.6
+## DATOS
+    f(x,y) = x^3 + kxy^2
+    Soporte: 0<=x<=1, 0<=y<=2
+    Vértices de la región: (0,0) (1,0) (1,2) (0,2)
+  = k = 3/8  ≈ 0.375
+    ((El procedimiento para k está en la pestaña 2.)
+    Densidad: f(x,y) = x^3 + (3/8)xy^2
+## MARGINAL DE X
+  > Marginal de X: integro en y (flecha vertical)
+    Para 0≤x≤1:
+    fX(x) = ∫[0→2] (x^3 + (3/8)xy^2) dy
+      ∫(x^3 + (3/8)xy^2) dy = x^3y + (1/8)xy^3
+      = [x^3(2) + (1/8)x(2)^3] - [0]
+      = 2x^3 + x
+  = fX(x) = 2x^3 + x = x(2x^2 + 1),  0≤x≤1
+## MARGINAL DE Y
+  > Marginal de Y: integro en x (flecha horizontal)
+    Para 0≤y≤2:
+    fY(y) = ∫[0→1] (x^3 + (3/8)xy^2) dx
+      ∫(x^3 + (3/8)xy^2) dx = (1/4)x^4 + (3/16)x^2y^2
+      = [(1/4)(1)^4 + (3/16)(1)^2y^2] - [0]
+      = (3/16)y^2 + 1/4
+  = fY(y) = (3/16)y^2 + 1/4,  0≤y≤2
+## CONDICIONAL DE Y DADO X = x
+  > Conjunta entre la marginal de lo conocido (X)
+    f(y|x) = (x^3 + (3/8)xy^2) / (2x^3 + x)
+  = f(y|x) = (8x^2 + 3y^2)/(16x^2 + 8)
+      para 0<x<1:  0≤y≤2
+## CONDICIONAL DE X DADO Y = y
+  > Conjunta entre la marginal de lo conocido (Y)
+    f(x|y) = (x^3 + (3/8)xy^2) / ((3/16)y^2 + 1/4)
+  = f(x|y) = (16x^3 + 6xy^2)/(3y^2 + 4)
+      para 0<y<2:  0≤x≤1
+## ¿SON INDEPENDIENTES?
+    Soporte rectangular: comparo fX·fY con f(x,y)
+    fX·fY = (2x^3 + x)((3/16)y^2 + 1/4)
+    = (3/8)x^3y^2 + (1/2)x^3 + (3/16)xy^2 + (1/4)x
+    ≠ x^3 + (3/8)xy^2
+  = NO son independientes
+## CONDICIONAL DE Y DADO X = 1/2
+  > 1) Intervalo de y cuando x = 1/2
+    y va de 0 a 2
+  > 2) Conjunta evaluada en x = 1/2
+    f = (1/2)^3 + (3/8)(1/2)y^2 = (3/16)y^2 + 1/8
+  > 3) Marginal evaluada en x = 1/2
+    fX(1/2) = 3/4  ≈ 0.75
+  > 4) Divido
+    f(y|1/2) = ((3/16)y^2 + 1/8) / (3/4)
+  = f(y|x=1/2) = (1/4)y^2 + 1/6,  0≤y≤2
+    (Comprueba: integra 1 en ese intervalo.
+    E[Y|X=1/2] = ∫[0→2] y((1/4)y^2 + 1/6) dy = 4/3  ≈ 1.33333
+## P(y<=1 | x=1/2)
+  > Integro la condicional donde se cumple y<=1
+    ∫[0→1] ((1/4)y^2 + 1/6) dy
+    = [(1/12)y^3 + (1/6)y] de 0 a 1
+    = (1/4) - 0 = 1/4
+  = P(y<=1 | x=1/2) = 1/4  ≈ 0.25
+=========== 3 Marginal y condicional :: Ej. 3.8
+## DATOS
+    f(x,y) = (8/3)x^2 + (8/3)xy
+    Soporte: 0<=y<=x<=1
+    Vértices de la región: (0,0) (1,0) (1,1)
+## MARGINAL DE X
+  > Marginal de X: integro en y (flecha vertical)
+    Para 0≤x≤1:
+    fX(x) = ∫[0→x] ((8/3)x^2 + (8/3)xy) dy
+      ∫((8/3)x^2 + (8/3)xy) dy = (8/3)x^2y + (4/3)xy^2
+      = [(8/3)x^2(x) + (4/3)x(x)^2] - [0]
+      = 4x^3
+  = fX(x) = 4x^3,  0≤x≤1
+## MARGINAL DE Y
+  > Marginal de Y: integro en x (flecha horizontal)
+    Para 0≤y≤1:
+    fY(y) = ∫[y→1] ((8/3)x^2 + (8/3)xy) dx
+      ∫((8/3)x^2 + (8/3)xy) dx = (8/9)x^3 + (4/3)x^2y
+      = [(8/9)(1)^3 + (4/3)(1)^2y] - [(8/9)(y)^3 + (4/3)(y)^2y]
+      = 8/9 + (4/3)y - (20/9)y^3
+  = fY(y) = 8/9 + (4/3)y - (20/9)y^3 = (4/9)(1 - y)(5y^2 + 5y + 2),  0≤y≤1
+## CONDICIONAL DE Y DADO X = x
+  > Conjunta entre la marginal de lo conocido (X)
+    f(y|x) = ((8/3)x^2 + (8/3)xy) / (4x^3)
+  = f(y|x) = (2x + 2y)/(3x^2)
+      para 0<x<1:  0≤y≤x
+## CONDICIONAL DE X DADO Y = y
+  > Conjunta entre la marginal de lo conocido (Y)
+    f(x|y) = ((8/3)x^2 + (8/3)xy) / (8/9 + (4/3)y - (20/9)y^3)
+  = f(x|y) = (6x^2 + 6xy)/((1 - y)(5y^2 + 5y + 2))
+      para 0<y<1:  y≤x≤1
+## ¿SON INDEPENDIENTES?
+    El soporte NO es un rectángulo: los límites de una variable dependen de la otra.
+    Hay puntos donde f = 0 pero fX y fY son positivas.
+  = NO son independientes
+=========== 3 Marginal y condicional :: Serie 6 Calcio
+## DATOS
+    f(x,y) = 1/240
+    Soporte: 8.5<=x<=10.5, 120<=y<=240
+    Vértices de la región: (17/2,120) (21/2,120) (21/2,240) (17/2,240)
+## MARGINAL DE X
+  > Marginal de X: integro en y (flecha vertical)
+    Para 17/2≤x≤21/2:
+    fX(x) = ∫[120→240] (1/240) dy
+      ∫(1/240) dy = (1/240)y
+      = [(1/240)(240)] - [(1/240)(120)]
+      = 1/2
+  = fX(x) = 1/2,  17/2≤x≤21/2
+## MARGINAL DE Y
+  > Marginal de Y: integro en x (flecha horizontal)
+    Para 120≤y≤240:
+    fY(y) = ∫[17/2→21/2] (1/240) dx
+      ∫(1/240) dx = (1/240)x
+      = [(1/240)(21/2)] - [(1/240)(17/2)]
+      = 1/120
+  = fY(y) = 1/120,  120≤y≤240
+## CONDICIONAL DE Y DADO X = x
+  > Conjunta entre la marginal de lo conocido (X)
+    f(y|x) = (1/240) / (1/2)
+  = f(y|x) = 1/120
+      para 17/2<x<21/2:  120≤y≤240
+## CONDICIONAL DE X DADO Y = y
+  > Conjunta entre la marginal de lo conocido (Y)
+    f(x|y) = (1/240) / (1/120)
+  = f(x|y) = 1/2
+      para 120<y<240:  17/2≤x≤21/2
+## ¿SON INDEPENDIENTES?
+    Soporte rectangular: comparo fX·fY con f(x,y)
+    fX·fY = (1/2)(1/120)
+    = 1/240
+    = f(x,y) en todo punto
+  = SÍ son independientes
+=========== 4 E, Cov y regresión :: Serie 9 Neumáticos
+## DATOS
+    f(x,y) = kx^2 + ky^2
+    Soporte: 20<=x<=30, 20<=y<=30
+    Vértices de la región: (20,20) (30,20) (30,30) (20,30)
+  = k = 3/380000  ≈ 0.000007895
+    ((El procedimiento para k está en la pestaña 2.)
+    Densidad: f(x,y) = (3/380000)x^2 + (3/380000)y^2
+  > Marginales (procedimiento en la pestaña 3):
+    fX(x) = (3/38000)x^2 + 1/20,  20≤x≤30
+    fY(y) = (3/38000)y^2 + 1/20,  20≤y≤30
+## MEDIA Y VARIANCIA DE X (con fX)
+    E(X) = ∫[20→30] x((3/38000)x^2 + 1/20) dx
+    = ∫((3/38000)x^3 + (1/20)x) dx = [(3/152000)x^4 + (1/40)x^2]
+    = (2925/76) - (250/19) = 1925/76
+    E(X²) = ∫[20→30] x^2((3/38000)x^2 + 1/20) dx
+    = ∫((3/38000)x^4 + (1/20)x^2) dx = [(3/190000)x^5 + (1/60)x^3]
+    = (15840/19) - (10480/57) = 37040/57
+    Var(X) = E(X²) - [E(X)]² = 37040/57 - (1925/76)² = 143285/17328
+  = E(X) = 1925/76  ≈ 25.3289
+  = Var(X) = 143285/17328  ≈ 8.26899
+## MEDIA Y VARIANCIA DE Y (con fY)
+    E(Y) = ∫[20→30] y((3/38000)y^2 + 1/20) dy
+    = ∫((3/38000)y^3 + (1/20)y) dy = [(3/152000)y^4 + (1/40)y^2]
+    = (2925/76) - (250/19) = 1925/76
+    E(Y²) = ∫[20→30] y^2((3/38000)y^2 + 1/20) dy
+    = ∫((3/38000)y^4 + (1/20)y^2) dy = [(3/190000)y^5 + (1/60)y^3]
+    = (15840/19) - (10480/57) = 37040/57
+    Var(Y) = E(Y²) - [E(Y)]² = 37040/57 - (1925/76)² = 143285/17328
+  = E(Y) = 1925/76  ≈ 25.3289
+  = Var(Y) = 143285/17328  ≈ 8.26899
+## E(XY) CON LA CONJUNTA
+    Flecha vertical: afuera x, adentro y
+      20≤x≤30:  y entra en 20, sale en 30
+    ∫[20→30] ∫[20→30] ((3/380000)x^3y + (3/380000)xy^3) dy dx
+  > Adentro: integro en y (x queda fija)
+    ∫((3/380000)x^3y + (3/380000)xy^3) dy = (3/760000)x^3y^2 + (3/1520000)xy^4
+  > Sustituyo y = 30 menos y = 20
+    [(3/760000)x^3(30)^2 + (3/1520000)x(30)^4] - [(3/760000)x^3(20)^2 + (3/1520000)x(20)^4]
+    = (3/1520)x^3 + (195/152)x
+  > Afuera: integro en x
+    ∫((3/1520)x^3 + (195/152)x) dx = (3/6080)x^4 + (195/304)x^2
+  > Evalúo x = 30 menos x = 20
+    (37125/38) - (6375/19) = 24375/38
+  = E(XY) = 24375/38  ≈ 641.447
+## COVARIANCIA Y CORRELACIÓN
+    Cov = E(XY) - E(X)E(Y) = 24375/38 - (1925/76)(1925/76) = -625/5776
+    ρ = Cov / √(Var(X)Var(Y)) = (-625/5776) / √((143285/17328)(143285/17328))
+  = Cov(X,Y) = -625/5776  ≈ -0.108206
+  = ρ = -375/28657  ≈ -0.0130858
+    ρ² (determinación) = 140625/821223649  ≈ 0.000171238
+## CURVA DE REGRESIÓN DE Y DADO x
+  > E[Y|x] = (∫ y·f dy) / fX(x)
+    (Es lo mismo que integrar y·f(y|x), porque fX no depende de y.
+    Numerador: ∫[20→30] y((3/380000)x^2 + (3/380000)y^2) dy = (3/1520)x^2 + 195/152
+    E[Y|x] = ((3/1520)x^2 + 195/152) / ((3/38000)x^2 + 1/20)
+  = E[Y|x] = (75x^2 + 48750)/(3x^2 + 1900)
+    (No es una recta.
+## CURVA DE REGRESIÓN DE X DADO y
+  > E[X|y] = (∫ x·f dx) / fY(y)
+    (Es lo mismo que integrar x·f(x|y), porque fY no depende de x.
+    Numerador: ∫[20→30] x((3/380000)x^2 + (3/380000)y^2) dx = (3/1520)y^2 + 195/152
+    E[X|y] = ((3/1520)y^2 + 195/152) / ((3/38000)y^2 + 1/20)
+  = E[X|y] = (75y^2 + 48750)/(3y^2 + 1900)
+    (No es una recta.
+=========== 4 E, Cov y regresión :: Serie 5 Queroseno
+## DATOS
+    f(x,y) = 2
+    Soporte: 0<=x<=y<=1
+    Vértices de la región: (0,0) (1,1) (0,1)
+  > Marginales (procedimiento en la pestaña 3):
+    fX(x) = 2 - 2x,  0≤x≤1
+    fY(y) = 2y,  0≤y≤1
+## MEDIA Y VARIANCIA DE X (con fX)
+    E(X) = ∫[0→1] x(2 - 2x) dx
+    = ∫(2x - 2x^2) dx = [x^2 - (2/3)x^3]
+    = (1/3) - 0 = 1/3
+    E(X²) = ∫[0→1] x^2(2 - 2x) dx
+    = ∫(2x^2 - 2x^3) dx = [(2/3)x^3 - (1/2)x^4]
+    = (1/6) - 0 = 1/6
+    Var(X) = E(X²) - [E(X)]² = 1/6 - (1/3)² = 1/18
+  = E(X) = 1/3  ≈ 0.333333
+  = Var(X) = 1/18  ≈ 0.0555556
+## MEDIA Y VARIANCIA DE Y (con fY)
+    E(Y) = ∫[0→1] y(2y) dy
+    = ∫(2y^2) dy = [(2/3)y^3]
+    = (2/3) - 0 = 2/3
+    E(Y²) = ∫[0→1] y^2(2y) dy
+    = ∫(2y^3) dy = [(1/2)y^4]
+    = (1/2) - 0 = 1/2
+    Var(Y) = E(Y²) - [E(Y)]² = 1/2 - (2/3)² = 1/18
+  = E(Y) = 2/3  ≈ 0.666667
+  = Var(Y) = 1/18  ≈ 0.0555556
+## E(XY) CON LA CONJUNTA
+    Flecha vertical: afuera x, adentro y
+      0≤x≤1:  y entra en x, sale en 1
+    ∫[0→1] ∫[x→1] (2xy) dy dx
+  > Adentro: integro en y (x queda fija)
+    ∫(2xy) dy = xy^2
+  > Sustituyo y = 1 menos y = x
+    [x(1)^2] - [x(x)^2]
+    = x - x^3
+  > Afuera: integro en x
+    ∫(x - x^3) dx = (1/2)x^2 - (1/4)x^4
+  > Evalúo x = 1 menos x = 0
+    (1/4) - (0) = 1/4
+  = E(XY) = 1/4  ≈ 0.25
+## COVARIANCIA Y CORRELACIÓN
+    Cov = E(XY) - E(X)E(Y) = 1/4 - (1/3)(2/3) = 1/36
+    ρ = Cov / √(Var(X)Var(Y)) = (1/36) / √((1/18)(1/18))
+  = Cov(X,Y) = 1/36  ≈ 0.0277778
+  = ρ = 1/2  ≈ 0.5
+    ρ² (determinación) = 1/4  ≈ 0.25
+## CURVA DE REGRESIÓN DE Y DADO x
+  > E[Y|x] = (∫ y·f dy) / fX(x)
+    (Es lo mismo que integrar y·f(y|x), porque fX no depende de y.
+    Numerador: ∫[x→1] y(2) dy = 1 - x^2
+    E[Y|x] = (1 - x^2) / (2 - 2x)
+  = E[Y|x] = (1/2)x + 1/2
+    (Es una recta.
+## CURVA DE REGRESIÓN DE X DADO y
+  > E[X|y] = (∫ x·f dx) / fY(y)
+    (Es lo mismo que integrar x·f(x|y), porque fY no depende de x.
+    Numerador: ∫[0→y] x(2) dx = y^2
+    E[X|y] = (y^2) / (2y)
+  = E[X|y] = (1/2)y
+    (Es una recta.
+## E[y-x]
+  > Multiplico g por la conjunta e integro sobre el soporte
+    g·f = (y - x)(2) = 2y - 2x
+    Flecha vertical: afuera x, adentro y
+      0≤x≤1:  y entra en x, sale en 1
+    ∫[0→1] ∫[x→1] (2y - 2x) dy dx
+  > Adentro: integro en y (x queda fija)
+    ∫(2y - 2x) dy = y^2 - 2xy
+  > Sustituyo y = 1 menos y = x
+    [(1)^2 - 2x(1)] - [(x)^2 - 2x(x)]
+    = x^2 - 2x + 1
+  > Afuera: integro en x
+    ∫(x^2 - 2x + 1) dx = (1/3)x^3 - x^2 + x
+  > Evalúo x = 1 menos x = 0
+    (1/3) - (0) = 1/3
+  = E[y-x] = 1/3  ≈ 0.333333
+=========== 4 E, Cov y regresión :: Ej. 3.9 Impurezas
+## DATOS
+    f(x,y) = 2 - 2x
+    Soporte: 0<=x<=1, 0<=y<=1
+    Vértices de la región: (0,0) (1,0) (1,1) (0,1)
+  > Marginales (procedimiento en la pestaña 3):
+    fX(x) = 2 - 2x,  0≤x≤1
+    fY(y) = 1,  0≤y≤1
+## MEDIA Y VARIANCIA DE X (con fX)
+    E(X) = ∫[0→1] x(2 - 2x) dx
+    = ∫(2x - 2x^2) dx = [x^2 - (2/3)x^3]
+    = (1/3) - 0 = 1/3
+    E(X²) = ∫[0→1] x^2(2 - 2x) dx
+    = ∫(2x^2 - 2x^3) dx = [(2/3)x^3 - (1/2)x^4]
+    = (1/6) - 0 = 1/6
+    Var(X) = E(X²) - [E(X)]² = 1/6 - (1/3)² = 1/18
+  = E(X) = 1/3  ≈ 0.333333
+  = Var(X) = 1/18  ≈ 0.0555556
+## MEDIA Y VARIANCIA DE Y (con fY)
+    E(Y) = ∫[0→1] y(1) dy
+    = ∫(y) dy = [(1/2)y^2]
+    = (1/2) - 0 = 1/2
+    E(Y²) = ∫[0→1] y^2(1) dy
+    = ∫(y^2) dy = [(1/3)y^3]
+    = (1/3) - 0 = 1/3
+    Var(Y) = E(Y²) - [E(Y)]² = 1/3 - (1/2)² = 1/12
+  = E(Y) = 1/2  ≈ 0.5
+  = Var(Y) = 1/12  ≈ 0.0833333
+## E(XY) CON LA CONJUNTA
+    Flecha vertical: afuera x, adentro y
+      0≤x≤1:  y entra en 0, sale en 1
+    ∫[0→1] ∫[0→1] (2xy - 2x^2y) dy dx
+  > Adentro: integro en y (x queda fija)
+    ∫(2xy - 2x^2y) dy = xy^2 - x^2y^2
+  > Sustituyo y = 1 menos y = 0
+    [x(1)^2 - x^2(1)^2] - [0]
+    = x - x^2
+  > Afuera: integro en x
+    ∫(x - x^2) dx = (1/2)x^2 - (1/3)x^3
+  > Evalúo x = 1 menos x = 0
+    (1/6) - (0) = 1/6
+  = E(XY) = 1/6  ≈ 0.166667
+## COVARIANCIA Y CORRELACIÓN
+    Cov = E(XY) - E(X)E(Y) = 1/6 - (1/3)(1/2) = 0
+    ρ = Cov / √(Var(X)Var(Y)) = 0 / √((1/18)(1/12))
+  = Cov(X,Y) = 0
+  = ρ = 0
+    ρ² (determinación) = 0
+## CURVA DE REGRESIÓN DE Y DADO x
+  > E[Y|x] = (∫ y·f dy) / fX(x)
+    (Es lo mismo que integrar y·f(y|x), porque fX no depende de y.
+    Numerador: ∫[0→1] y(2 - 2x) dy = 1 - x
+    E[Y|x] = (1 - x) / (2 - 2x)
+  = E[Y|x] = 1/2
+    (Es una recta.
+## CURVA DE REGRESIÓN DE X DADO y
+  > E[X|y] = (∫ x·f dx) / fY(y)
+    (Es lo mismo que integrar x·f(x|y), porque fY no depende de x.
+    Numerador: ∫[0→1] x(2 - 2x) dx = 1/3
+    E[X|y] = (1/3) / (1)
+  = E[X|y] = 1/3
+    (Es una recta.
+## E[xy]
+  > Multiplico g por la conjunta e integro sobre el soporte
+    g·f = (xy)(2 - 2x) = 2xy - 2x^2y
+    Flecha vertical: afuera x, adentro y
+      0≤x≤1:  y entra en 0, sale en 1
+    ∫[0→1] ∫[0→1] (2xy - 2x^2y) dy dx
+  > Adentro: integro en y (x queda fija)
+    ∫(2xy - 2x^2y) dy = xy^2 - x^2y^2
+  > Sustituyo y = 1 menos y = 0
+    [x(1)^2 - x^2(1)^2] - [0]
+    = x - x^2
+  > Afuera: integro en x
+    ∫(x - x^2) dx = (1/2)x^2 - (1/3)x^3
+  > Evalúo x = 1 menos x = 0
+    (1/6) - (0) = 1/6
+  = E[xy] = 1/6  ≈ 0.166667
+=========== 4 E, Cov y regresión :: Tabacalera
+## DATOS
+    f(x,y) = 24xy
+    Soporte: x>=0, y>=0, x+y<=1
+    Vértices de la región: (0,0) (1,0) (0,1)
+  > Marginales (procedimiento en la pestaña 3):
+    fX(x) = 12x^3 - 24x^2 + 12x,  0≤x≤1
+    fY(y) = 12y^3 - 24y^2 + 12y,  0≤y≤1
+## MEDIA Y VARIANCIA DE X (con fX)
+    E(X) = ∫[0→1] x(12x^3 - 24x^2 + 12x) dx
+    = ∫(12x^4 - 24x^3 + 12x^2) dx = [(12/5)x^5 - 6x^4 + 4x^3]
+    = (2/5) - 0 = 2/5
+    E(X²) = ∫[0→1] x^2(12x^3 - 24x^2 + 12x) dx
+    = ∫(12x^5 - 24x^4 + 12x^3) dx = [2x^6 - (24/5)x^5 + 3x^4]
+    = (1/5) - 0 = 1/5
+    Var(X) = E(X²) - [E(X)]² = 1/5 - (2/5)² = 1/25
+  = E(X) = 2/5  ≈ 0.4
+  = Var(X) = 1/25  ≈ 0.04
+## MEDIA Y VARIANCIA DE Y (con fY)
+    E(Y) = ∫[0→1] y(12y^3 - 24y^2 + 12y) dy
+    = ∫(12y^4 - 24y^3 + 12y^2) dy = [(12/5)y^5 - 6y^4 + 4y^3]
+    = (2/5) - 0 = 2/5
+    E(Y²) = ∫[0→1] y^2(12y^3 - 24y^2 + 12y) dy
+    = ∫(12y^5 - 24y^4 + 12y^3) dy = [2y^6 - (24/5)y^5 + 3y^4]
+    = (1/5) - 0 = 1/5
+    Var(Y) = E(Y²) - [E(Y)]² = 1/5 - (2/5)² = 1/25
+  = E(Y) = 2/5  ≈ 0.4
+  = Var(Y) = 1/25  ≈ 0.04
+## E(XY) CON LA CONJUNTA
+    Flecha vertical: afuera x, adentro y
+      0≤x≤1:  y entra en 0, sale en 1 - x
+    ∫[0→1] ∫[0→1-x] (24x^2y^2) dy dx
+  > Adentro: integro en y (x queda fija)
+    ∫(24x^2y^2) dy = 8x^2y^3
+  > Sustituyo y = 1 - x menos y = 0
+    [8x^2(1 - x)^3] - [0]
+    = 8x^2 - 24x^3 + 24x^4 - 8x^5
+  > Afuera: integro en x
+    ∫(8x^2 - 24x^3 + 24x^4 - 8x^5) dx = (8/3)x^3 - 6x^4 + (24/5)x^5 - (4/3)x^6
+  > Evalúo x = 1 menos x = 0
+    (2/15) - (0) = 2/15
+  = E(XY) = 2/15  ≈ 0.133333
+## COVARIANCIA Y CORRELACIÓN
+    Cov = E(XY) - E(X)E(Y) = 2/15 - (2/5)(2/5) = -2/75
+    ρ = Cov / √(Var(X)Var(Y)) = (-2/75) / √((1/25)(1/25))
+  = Cov(X,Y) = -2/75  ≈ -0.0266667
+  = ρ = -2/3  ≈ -0.666667
+    ρ² (determinación) = 4/9  ≈ 0.444444
+## CURVA DE REGRESIÓN DE Y DADO x
+  > E[Y|x] = (∫ y·f dy) / fX(x)
+    (Es lo mismo que integrar y·f(y|x), porque fX no depende de y.
+    Numerador: ∫[0→1-x] y(24xy) dy = 8x - 24x^2 + 24x^3 - 8x^4
+    E[Y|x] = (8x - 24x^2 + 24x^3 - 8x^4) / (12x^3 - 24x^2 + 12x)
+  = E[Y|x] = 2/3 - (2/3)x
+    (Es una recta.
+## CURVA DE REGRESIÓN DE X DADO y
+  > E[X|y] = (∫ x·f dx) / fY(y)
+    (Es lo mismo que integrar x·f(x|y), porque fY no depende de x.
+    Numerador: ∫[0→1-y] x(24xy) dx = 8y - 24y^2 + 24y^3 - 8y^4
+    E[X|y] = (8y - 24y^2 + 24y^3 - 8y^4) / (12y^3 - 24y^2 + 12y)
+  = E[X|y] = 2/3 - (2/3)y
+    (Es una recta.
+=========== 5 Combinación lineal :: Serie 11 g y h
+## 1) JUNTO LOS DATOS
+    W = 2X - 3Y + 7
+    Var(X) = E(X²) - [E(X)]² = 25 - (3)² = 16
+    Var(Y) = E(Y²) - [E(Y)]² = 164 - (10)² = 64
+    Son independientes → todas las covariancias valen 0
+## 2) MEDIA DE W
+  > Cada coeficiente por su media, más la constante
+    E(W) = (2)(3) + (-3)(10) + 7 = -17
+  = E(W) = -17
+## 3) VARIANCIA DE W
+    (La constante no cambia la variancia. Coeficientes al cuadrado.
+  > Parte de los cuadrados: a²·Var
+    (2)²(16) + (-3)²(64) = 640
+  > Parte cruzada: una por cada pareja, a_i·a_j·Cov
+    (X,Y): (2)(-3)(0) = 0
+    2 × 0 = 0
+  > Sumo las dos partes
+    Var(W) = 640 + 0 = 640
+  = Var(W) = 640
+  = σW = √Var(W) = 25.2982
+=========== 5 Combinación lineal :: Ej. 3.13 (3 variables)
+## 1) JUNTO LOS DATOS
+    W = 3X1 + 4X2 - 6X3
+    Var(X1) = 4
+    Var(X2) = 6
+    Var(X3) = 8
+    Cov(X1,X2) = 1
+    Cov(X1,X3) = -1
+    Cov(X2,X3) = 0
+## 2) MEDIA DE W
+  > Cada coeficiente por su media, más la constante
+    E(W) = (3)(2) + (4)(-1) + (-6)(4) = -22
+  = E(W) = -22
+## 3) VARIANCIA DE W
+    (La constante no cambia la variancia. Coeficientes al cuadrado.
+  > Parte de los cuadrados: a²·Var
+    (3)²(4) + (4)²(6) + (-6)²(8) = 420
+  > Parte cruzada: una por cada pareja, a_i·a_j·Cov
+    (X1,X2): (3)(4)(1) = 12
+    (X1,X3): (3)(-6)(-1) = 18
+    (X2,X3): (4)(-6)(0) = 0
+    2 × 30 = 60
+  > Sumo las dos partes
+    Var(W) = 420 + 60 = 480
+  = Var(W) = 480
+  = σW = √Var(W) = 21.9089
+=========== 5 Combinación lineal :: Autoexamen 8
+## 1) JUNTO LOS DATOS
+    W = 2X - Y
+    Var(X) = 3
+    Var(Y) = 4
+    Cov(X,Y) = 2
+## 2) MEDIA DE W
+  > Cada coeficiente por su media, más la constante
+    E(W) = (2)(10) + (-1)(15) = 5
+  = E(W) = 5
+## 3) VARIANCIA DE W
+    (La constante no cambia la variancia. Coeficientes al cuadrado.
+  > Parte de los cuadrados: a²·Var
+    (2)²(3) + (-1)²(4) = 16
+  > Parte cruzada: una por cada pareja, a_i·a_j·Cov
+    (X,Y): (2)(-1)(2) = -4
+    2 × (-4) = -8
+  > Sumo las dos partes
+    Var(W) = 16 + (-8) = 8
+  = Var(W) = 8
+  = σW = √Var(W) = 2.82843
+=========== 5 Combinación lineal :: Autoexamen 9
+## 1) JUNTO LOS DATOS
+    W = 0.4X + 0.6Y
+    Var(X) = σ² = (15)² = 225
+    Var(Y) = σ² = (20)² = 400
+    Cov(X,Y) = ρ·σX·σY = (-0.1)(15)(20) = -30
+## 2) MEDIA DE W
+  > Cada coeficiente por su media, más la constante
+    E(W) = (0.4)(10) + (0.6)(15) = 13
+  = E(W) = 13
+## 3) VARIANCIA DE W
+    (La constante no cambia la variancia. Coeficientes al cuadrado.
+  > Parte de los cuadrados: a²·Var
+    (0.4)²(225) + (0.6)²(400) = 180
+  > Parte cruzada: una por cada pareja, a_i·a_j·Cov
+    (X,Y): (0.4)(0.6)(-30) = -7.2
+    2 × (-7.2) = -14.4
+  > Sumo las dos partes
+    Var(W) = 180 + (-14.4) = 165.6
+  = Var(W) = 165.6
+  = σW = √Var(W) = 12.8686
+=========== 6 Integral doble :: Tabacalera P(X>1/2)
+## INTEGRAL DOBLE PASO A PASO
+    ∫[1/2→1] ∫[0→1-x] (24xy) dy dx
+  > Adentro: integro en y (x queda fija)
+    ∫(24xy) dy = 12xy^2
+  > Sustituyo y = 1 - x menos y = 0
+    [12x(1 - x)^2] - [0]
+    = 12x^3 - 24x^2 + 12x
+  > Afuera: integro en x
+    ∫(12x^3 - 24x^2 + 12x) dx = 3x^4 - 8x^3 + 6x^2
+  > Evalúo x = 1 menos x = 1/2
+    (1) - (11/16) = 5/16
+  = Resultado = 5/16  ≈ 0.3125
+=========== 6 Integral doble :: Queroseno E(Y-X)
+## INTEGRAL DOBLE PASO A PASO
+    ∫[0→1] ∫[0→y] (2y - 2x) dx dy
+  > Adentro: integro en x (y queda fija)
+    ∫(2y - 2x) dx = 2xy - x^2
+  > Sustituyo x = y menos x = 0
+    [2(y)y - (y)^2] - [0]
+    = y^2
+  > Afuera: integro en y
+    ∫(y^2) dy = (1/3)y^3
+  > Evalúo y = 1 menos y = 0
+    (1/3) - (0) = 1/3
+  = Resultado = 1/3  ≈ 0.333333
+=========== 7 Ayuda
+## ¿QUÉ PESTAÑA USO?
+    1 Tabla discreta: te dan una TABLA f(x,y). Da marginales, medias, variancias, Cov, ρ, independencia, evento, E[g], condicional y F(x,y).
+    2 Densidad: k y P: te dan f(x,y) con una constante o piden P(región) o P(A|B).
+    3 Marginal y condicional: piden fX, fY, f(y|x), f(x|y), P(X<a | Y=b) o si son independientes.
+    4 E, Cov y regresión: piden E(X), Var, E(XY), Cov, ρ, curva de regresión o E[g(X,Y)] con densidad.
+    5 Combinación lineal: te dan medias, variancias (o σ, o E(X²)) y Cov (o ρ) y piden E o Var de aX+bY+c.
+    6 Integral doble: ya tienes los límites y quieres la cuenta paso a paso.
+## CÓMO ESCRIBIR
+    Multiplicación sin *: 24xy, k(x+y), 3x^2y.
+    Fracciones con /: 3/4.  Decimales: 0.05 o .05
+    Constante desconocida: siempre k. Si el enunciado trae x y^2/a, escribe kxy^2 y al final a = 1/k.
+    Regiones: desigualdades separadas por coma: 0<=x<=1, 0<=y, x+y<=1. Sirven ≤ y <=.
+    |x-y|<=2 se escribe como dos: x-y<=2, y-x<=2.
+    Eventos en tabla: x>y, x+y<=3, abs(x-y)>=2, x<=9, y<=9.
+## TECLAS
+    Flechas arriba/abajo o tab: cambiar de campo.  Flechas izq/der: mover el cursor.
+    enter: resolver.  esc: regresar a los datos.  clear: borrar el campo.
+    En resultados: arriba/abajo recorren, izq/der saltan una pantalla, tab salta a la siguiente sección.
+    menu: Pestañas, Ejemplos (datos de tu serie) y Opciones (letra, símbolos).
+## LÍMITES DEL PROGRAMA
+    Densidades: sólo polinomios en x, y sobre regiones de rectas (como en tu serie). No acepta e^x ni regiones infinitas.
+    Si ves cuadritos en lugar de símbolos: menu > Opciones > Símbolos simples.
