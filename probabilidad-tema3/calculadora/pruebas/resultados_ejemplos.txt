@@ -1225,7 +1225,11 @@
     Flechas arriba/abajo o tab: cambiar de campo.  Flechas izq/der: mover el cursor.
     enter: resolver.  esc: regresar a los datos.  clear: borrar el campo.
     En resultados: arriba/abajo recorren, izq/der saltan una pantalla, tab salta a la siguiente sección.
-    menu: Pestañas, Ejemplos (datos de tu serie) y Opciones (letra, símbolos).
+    menu: Pestañas, Ejemplos (datos de tu serie), ¿Qué va aquí? y Opciones (letra, símbolos).
+## ¿QUÉ ESCRIBO EN CADA CAMPO?
+    En cualquier pestaña, párate en el campo y pulsa ctrl+menu (o menu > ¿Qué va aquí? > Este campo).
+    Te dice qué significa el campo y cómo pasar las frases del enunciado a lo que escribes, con ejemplos de tu serie.
+    menu > ¿Qué va aquí? > Toda la pestaña: cuándo usar la pestaña y todos sus campos.
 ## LÍMITES DEL PROGRAMA
     Densidades: sólo polinomios en x, y sobre regiones de rectas (como en tu serie). No acepta e^x ni regiones infinitas.
     Si ves cuadritos en lugar de símbolos: menu > Opciones > Símbolos simples.

@@ -1776,7 +1776,11 @@ local function solveAyuda(d, L)
   L.t("Flechas arriba/abajo o tab: cambiar de campo.  Flechas izq/der: mover el cursor.")
   L.t("enter: resolver.  esc: regresar a los datos.  clear: borrar el campo.")
   L.t("En resultados: arriba/abajo recorren, izq/der saltan una pantalla, tab salta a la siguiente sección.")
-  L.t("menu: Pestañas, Ejemplos (datos de tu serie) y Opciones (letra, símbolos).")
+  L.t("menu: Pestañas, Ejemplos (datos de tu serie), ¿Qué va aquí? y Opciones (letra, símbolos).")
+  L.h("¿QUÉ ESCRIBO EN CADA CAMPO?")
+  L.t("En cualquier pestaña, párate en el campo y pulsa ctrl+menu (o menu > ¿Qué va aquí? > Este campo).")
+  L.t("Te dice qué significa el campo y cómo pasar las frases del enunciado a lo que escribes, con ejemplos de tu serie.")
+  L.t("menu > ¿Qué va aquí? > Toda la pestaña: cuándo usar la pestaña y todos sus campos.")
   L.h("LÍMITES DEL PROGRAMA")
   L.t("Densidades: sólo polinomios en x, y sobre regiones de rectas (como en tu serie). No acepta e^x ni regiones infinitas.")
   L.t("Si ves cuadritos en lugar de símbolos: menu > Opciones > Símbolos simples.")
@@ -1866,6 +1870,272 @@ local TOOLS = {
 }
 
 -- ---------------------------------------------------------------------
+-- 16b. ¿Qué va aquí?  Ayuda de cada campo: qué significa y cómo pasar
+--      del enunciado a lo que se escribe.  "@" = subtítulo.
+-- ---------------------------------------------------------------------
+local F_DENS = {
+  "La densidad tal como viene en el enunciado, cambiando la constante desconocida por k.",
+  "@Enunciado " .. "→" .. " escribes",
+  "f(x,y) = kx(x+y)  →  kx(x+y)",
+  "f(x,y) = c(2-y)  →  k(2-y)   (la c se escribe k)",
+  "f(x,y) = 24xy  →  24xy   (sin constante: tal cual)",
+  "f(x,y) = (3x-y)/18  →  (3x-y)/18",
+  "f(x,y) = 1/240  →  1/240",
+  "f(x,y) = x^3 + xy^2/a  →  x^3+kxy^2   (al final a = 1/k)",
+  "@Cuidado",
+  "Sin * : 24xy, 3x^2y. Potencias con ^.",
+  "Sólo la fórmula: el «en otro caso 0» no se escribe.",
+  "La k sólo puede ir multiplicando (no k^2 ni dividiendo entre x).",
+  "Este campo se comparte con las pestañas 2, 3 y 4.",
+}
+local F_SOP = {
+  "Dónde la densidad NO es cero: la parte que dice «para ...» al lado de la fórmula.",
+  "@Enunciado " .. "→" .. " escribes",
+  "0≤x≤1, 0≤y≤1  →  0<=x<=1, 0<=y<=1",
+  "0≤x≤1, 0≤y≤1, x+y≤1  →  0<=x<=1, 0<=y<=1, x+y<=1",
+  "0≤y≤x≤1  →  0<=y<=x<=1",
+  "0≤x≤y, 0≤y≤1  →  0<=x<=y, 0<=y<=1",
+  "0≤x≤4, 0≤y, -x+2≤y≤-x+4  →  0<=x<=4, y>=0, -x+2<=y<=-x+4",
+  "20≤x≤30, 20≤y≤30  →  20<=x<=30, 20<=y<=30",
+  "@Cómo se escribe",
+  "Copia las desigualdades separadas por coma. Sirven ≤ o <=.",
+  "El programa dibuja la región, encuentra los vértices y escoge los límites solo.",
+  "Sólo rectas (nada de x^2) y la región debe ser cerrada.",
+}
+local AYUDA = {
+  -- 1 Tabla discreta
+  {intro = {
+     "Úsala cuando el enunciado trae una TABLA con las probabilidades P(X=x, Y=y).",
+     "Si trae un experimento (urna, dados, transistores), primero arma la tabla a mano y luego métela aquí.",
+     "Aunque no llenes los campos opcionales, siempre salen: marginales, E, Var, σ, E(XY), Cov, ρ, independencia y F(x,y)."},
+   xs = {
+     "Los valores que puede tomar X, en el mismo orden en que aparecen en la tabla.",
+     "@Dónde están",
+     "En el encabezado de la tabla que corresponde a X (a la izquierda o arriba).",
+     "@Enunciado " .. "→" .. " escribes",
+     "«X1: clientes en la caja rápida», renglones 0 a 4  →  0,1,2,3,4",
+     "«X: costo de la comida del hombre», 7, 9, 10  →  7,9,10",
+     "Si el enunciado los llama X1 y X2: X1 es x, X2 es y."},
+   ys = {
+     "Los valores que puede tomar Y, en el mismo orden en que aparecen en la tabla.",
+     "@Enunciado " .. "→" .. " escribes",
+     "«X2: clientes en la caja superveloz», columnas 0 a 3  →  0,1,2,3",
+     "«Y: costo de la comida de la mujer», 7, 9, 10  →  7,9,10"},
+   ren = {
+     "Le dice al programa cómo leer las celdas.",
+     "@Cómo saberlo",
+     "Mira la tabla: si los valores que están a la IZQUIERDA (renglones) son los de X, escribe x. Si son los de Y, escribe y.",
+     "@Ejemplos",
+     "Ej. 3.3 de tus apuntes: a la izquierda está y  →  y",
+     "Serie 3, problema 1: a la izquierda está x1  →  x",
+     "Serie 3, problema 4: a la izquierda está Y  →  y",
+     "@Cuidado",
+     "Si te equivocas el programa no lo nota (la tabla igual suma 1) y todo sale mal. Revisa el encabezado."},
+   tab = {
+     "Todas las probabilidades de la tabla, separadas por coma.",
+     "@Orden",
+     "Renglón por renglón, de izquierda a derecha, como se lee un libro.",
+     "Tabla de 3 renglones y 4 columnas  →  12 números.",
+     "@Ejemplo (Ej. 3.3)",
+     "renglón y=0: 0.10 0.20 0.20, renglón y=1: 0.04 0.08 0.08, renglón y=2: 0.06 0.12 0.12",
+     "→  .10,.20,.20,.04,.08,.08,.06,.12,.12",
+     "@Cuidado",
+     "Escribe también los ceros.",
+     "Si vienen en fracción usa fracción (1/36); si vienen en decimal usa decimal (.05). El resultado sale en ese formato.",
+     "Si la tabla tiene un «?», calcúlalo antes: todas las celdas suman 1."},
+   ev = {
+     "La condición cuya probabilidad te piden. Opcional.",
+     "@Enunciado " .. "→" .. " escribes",
+     "«la línea uno produce más que la dos»  →  x>y",
+     "«el número de clientes en las dos filas es idéntico»  →  x=y",
+     "«por lo menos dos clientes más en una fila que en la otra»  →  abs(x-y)>=2",
+     "«el total es exactamente cuatro»  →  x+y=4",
+     "«el total es por lo menos cuatro»  →  x+y>=4",
+     "«a lo sumo $9 cada una»  →  x<=9, y<=9",
+     "«exactamente un cliente en cada fila»  →  x=1, y=1",
+     "@Palabras clave",
+     "a lo sumo / no más de  →  <=      por lo menos / al menos  →  >=",
+     "más de  →  >      menos de  →  <      exactamente / idéntico  →  =",
+     "La coma significa «y al mismo tiempo». Para «o» escribe or."},
+   g = {
+     "Lo que quieres PROMEDIAR, escrito con x y y. El programa te da E[g] = suma de g(x,y)·f(x,y). Opcional.",
+     "La g casi nunca viene con ese nombre: el enunciado la dice con palabras y tú la traduces.",
+     "@Enunciado " .. "→" .. " escribes",
+     "«costo total esperado de las dos comidas»  →  x+y",
+     "«devolución: la diferencia entre la comida más cara y la menos cara»  →  abs(x-y)",
+     "«cada falla de A cuesta $50 y de B $20»  →  50x+20y",
+     "«le cuesta 120X + 10 pesos»  →  120x+10",
+     "«cuánto queda» (había Y, salió X)  →  y-x",
+     "«valor esperado del producto», E(XY)  →  xy",
+     "E(X^2)  →  x^2",
+     "@Cuando dejarlo vacío",
+     "Si sólo piden E(X), E(Y), Var, Cov o ρ: siempre salen sin llenar nada."},
+   cond = {
+     "Lo que YA se sabe: lo que va después de la barra «|» o de «dado que», «si se sabe que». Opcional.",
+     "@Dos formas",
+     "Con = (un valor exacto): te da la tabla condicional completa y la esperanza condicional.",
+     "Con desigualdad: te da P(evento | condición) = P(evento y condición) / P(condición).",
+     "@Enunciado " .. "→" .. " escribes",
+     "«función de probabilidad condicional de X dado Y=1»  →  y=1",
+     "«P(X<2 | Y=1)»  →  condición y=1  y  evento x<2",
+     "«dado que la mujer pidió la de $9»  →  y=9",
+     "«si se sabe que hubo por lo menos una falla en A»  →  x>=1  (y el evento en el campo 5)"}},
+  -- 2 Densidad: k y P
+  {intro = {
+     "Úsala cuando te dan una densidad f(x,y) (una fórmula) y piden la constante, una probabilidad de una región o P(A|B) con rangos.",
+     "Si lo que se sabe es un VALOR exacto (Y=3/4), usa la pestaña 3."},
+   f = F_DENS, sop = F_SOP,
+   ev = {
+     "La región cuya probabilidad te piden (el evento A). Opcional.",
+     "@Enunciado " .. "→" .. " escribes",
+     "«P(0.5≤X≤1, 0.5≤Y≤1)»  →  0.5<=x<=1, 0.5<=y<=1",
+     "«P(X+Y≤1)»  →  x+y<=1",
+     "«P(X≤Y)»  →  x<=y",
+     "«P(1≤X≤3)»  →  1<=x<=3",
+     "«el tabaco turco es más de la mitad de la mezcla» (X = turco)  →  x>1/2",
+     "«ambos neumáticos con menor presión que la requerida (26)»  →  x<26, y<26",
+     "«la diferencia de presión es a lo sumo 2»  →  x-y<=2, y-x<=2",
+     "@Cuidado",
+     "Sólo rectas. |x-y|<=2 se escribe como dos condiciones.",
+     "Si sólo piden k, déjalo vacío."},
+   dado = {
+     "Para P(A | B) cuando lo que se sabe (B) es un rango. Opcional.",
+     "@Enunciado " .. "→" .. " escribes",
+     "«P(X1≤1/2 | X2≤1/2)»  →  evento x<=1/2  y aquí  y<=1/2",
+     "@Cuidado",
+     "Si lo que se sabe es un valor exacto, como Y=3/4, usa la pestaña 3: con un valor exacto no se puede dividir entre P(Y=3/4), que vale 0."}},
+  -- 3 Marginal y condicional
+  {intro = {
+     "Úsala cuando piden marginales (fX, fY), condicionales f(y|x), f(x|y), una probabilidad dado un valor exacto, o si son independientes.",
+     "Siempre salen las dos marginales, las dos condicionales y la independencia; los campos 3 y 4 son para un valor concreto."},
+   f = F_DENS, sop = F_SOP,
+   dado3 = {
+     "El valor EXACTO que ya se conoce. Opcional.",
+     "Primero identifica qué letra es cada variable en el enunciado.",
+     "@Enunciado " .. "→" .. " escribes",
+     "«si se sabe que la mezcla contiene 3/4 de tabaco regional» (Y = regional)  →  y=3/4",
+     "«dado X = 1/2»  →  x=1/2",
+     "«obtener f(y|x0)» sin número  →  vacío (la general siempre sale)"},
+   ev3 = {
+     "Lo que piden de la OTRA variable, sabiendo el valor del campo 3. Opcional.",
+     "@Enunciado " .. "→" .. " escribes",
+     "«que la proporción de turco sea menor de 1/8» (X = turco)  →  x<1/8",
+     "«P(Y≤1 | X=1/2)»  →  campo 3: x=1/2, aquí: y<=1",
+     "@Cuidado",
+     "Sólo puede llevar la letra que NO está en el campo 3."}},
+  -- 4 E, Cov y regresión
+  {intro = {
+     "Úsala cuando, con una densidad, piden E(X), Var, E(XY), covariancia, correlación, curva de regresión o el valor esperado de algo.",
+     "Todo sale siempre; el campo 3 sólo es para un valor esperado especial."},
+   f = F_DENS, sop = F_SOP,
+   g4 = {
+     "Lo que quieres PROMEDIAR, escrito con x y y (debe ser polinomio). Opcional.",
+     "@Enunciado " .. "→" .. " escribes",
+     "«cantidad promedio que queda en el tanque» (Y al inicio, X vendida)  →  y-x",
+     "«proporción de impurezas tipo I en la muestra» (X·Y)  →  xy",
+     "«total esperado»  →  x+y",
+     "«costo 3X + 2Y»  →  3x+2y",
+     "@Cuando dejarlo vacío",
+     "E(X), E(Y), Var, Cov, ρ y las curvas de regresión siempre salen.",
+     "@Cuidado",
+     "No acepta abs ni dividir entre x o y."}},
+  -- 5 Combinación lineal
+  {intro = {
+     "Úsala cuando NO hay tabla ni densidad: te dan números sueltos (medias, variancias o σ o E(X²), y covariancia o ρ o «independientes») y piden E o Var de algo como 2X - 3Y + 7.",
+     "Sirve para 1, 2, 3 o más variables."},
+   a = {
+     "Los números que multiplican a cada variable, en orden y con su signo.",
+     "@Enunciado " .. "→" .. " escribes",
+     "«Var(2X - 3Y + 7)»  →  2,-3",
+     "«E(3X + Y - 8)»  →  3,1",
+     "«R = 0.4X + 0.6Y»  →  0.4,0.6",
+     "«(X - 3)/4»  →  1/4   (una sola variable)",
+     "«3Y1 + 4Y2 - 6Y3»  →  3,4,-6",
+     "«Var(2X - Y)»  →  2,-1"},
+   c = {
+     "El número suelto (sin variable). Si no hay, déjalo vacío.",
+     "@Enunciado " .. "→" .. " escribes",
+     "2X - 3Y + 7  →  7",
+     "3X + Y - 8  →  -8",
+     "(X - 3)/4  →  -3/4",
+     "La constante no cambia la variancia, pero sí la media."},
+   mu = {
+     "Las medias E(X1), E(X2), ... en el mismo orden que los coeficientes.",
+     "@Enunciado " .. "→" .. " escribes",
+     "«E(X) = 3, E(Y) = 10»  →  3,10",
+     "«μx = 10, μy = 15»  →  10,15",
+     "«E(Y1)=2, E(Y2)=-1, E(Y3)=4»  →  2,-1,4"},
+   tdis = {
+     "Qué te dieron de la dispersión de cada variable. Escribe una letra.",
+     "@Enunciado " .. "→" .. " escribes",
+     "«Var(X) = 4» o «σ²x = 3» (con cuadrado)  →  v",
+     "«σx = 15» (sin cuadrado, desviación estándar)  →  s",
+     "«E(X²) = 25» (segundo momento)  →  e",
+     "El programa lo convierte en variancia y te muestra la cuenta."},
+   dis = {
+     "Los valores del campo anterior, en el mismo orden.",
+     "@Enunciado " .. "→" .. " escribes",
+     "«E(X²) = 25, E(Y²) = 164» (con e)  →  25,164",
+     "«σx = 15, σy = 20» (con s)  →  15,20",
+     "«Var(Y1)=4, Var(Y2)=6, Var(Y3)=8» (con v)  →  4,6,8"},
+   trel = {
+     "Qué te dieron de la relación entre las variables. Escribe una letra.",
+     "@Enunciado " .. "→" .. " escribes",
+     "«Cov(X,Y) = 2» o «σxy = 2»  →  c",
+     "«ρ = -0.1» (coeficiente de correlación)  →  r",
+     "«X y Y son independientes»  →  i   (y deja vacío el siguiente)",
+     "Si no dicen nada de la relación y no dicen independientes, falta un dato: pregunta."},
+   rel = {
+     "Los valores de covariancia o de ρ, por parejas.",
+     "@Orden",
+     "2 variables: un solo valor.",
+     "3 variables: (1,2), (1,3), (2,3), en ese orden.",
+     "@Enunciado " .. "→" .. " escribes",
+     "«Cov(X,Y) = 2»  →  2",
+     "«ρXY = -0.1»  →  -0.1",
+     "«Cov(Y1,Y2)=1, Cov(Y1,Y3)=-1, Cov(Y2,Y3)=0»  →  1,-1,0"}},
+  -- 6 Integral doble
+  {intro = {
+     "Úsala cuando ya dibujaste la región y tienes los límites, o para revisar una integral que hiciste a mano.",
+     "Si prefieres que el programa ponga los límites, usa la pestaña 2."},
+   f6 = {
+     "Lo que va dentro de la integral.",
+     "@Qué escribir",
+     "Para una probabilidad: la densidad, por ejemplo 24xy.",
+     "Para un valor esperado E[g]: g por la densidad. «cantidad que queda» con f = 2  →  2(y-x)",
+     "Para hallar k: la densidad sin la k (y luego k = 1 / resultado)."},
+   ord = {
+     "Qué variable va adentro.",
+     "dydx  →  flecha vertical: adentro y, afuera x.",
+     "dxdy  →  flecha horizontal: adentro x, afuera y.",
+     "Si en tu hoja escribiste «... dy dx», pon dydx."},
+   out6 = {
+     "Los límites de la integral de AFUERA: siempre números.",
+     "@Tu integral " .. "→" .. " escribes",
+     "x de 1/2 a 1  →  1/2,1",
+     "y de 0 a 1  →  0,1"},
+   in6 = {
+     "Los límites de la integral de ADENTRO: donde la flecha entra y donde sale. Pueden llevar la letra de afuera.",
+     "@Tu integral " .. "→" .. " escribes",
+     "y de 0 a 1-x  →  0,1-x",
+     "y de x a 2  →  x,2",
+     "x de 0 a y  →  0,y"}},
+}
+for i, t in ipairs(TOOLS) do
+  local h = AYUDA[i] or {}
+  t.intro = h.intro
+  for _, fd in ipairs(t.fields) do fd.a = h[fd.k] end
+end
+local function fieldHelp(L, i, fd)
+  L.h("CAMPO " .. i .. ": " .. fd.l)
+  for _, ln in ipairs(fd.a or {"(sin explicación)"}) do
+    ln = ln:gsub("→", SYM.to):gsub("≤", SYM.le):gsub("≥", SYM.ge)
+    if ln:sub(1, 1) == "@" then L.s(ln:sub(2)) else L.t(ln) end
+  end
+  L.n("Ejemplo rápido: " .. fd.h)
+end
+
+-- ---------------------------------------------------------------------
 -- 17. Interfaz
 -- ---------------------------------------------------------------------
 local data = {ren = "x", tdis = "v", trel = "c", ord = "dydx"}
@@ -1873,6 +2143,7 @@ local tool, fsel, mode = 1, 1, "form"
 local curpos = {}
 local fscroll = 0
 local outLines, wrapped, wrapW = nil, nil, 0
+local outTitle = nil
 local oscroll = 0
 local FS = 10
 local C = {tinta = {22, 33, 62}, naranja = {207, 92, 54}, verde = {29, 122, 70},
@@ -1902,6 +2173,28 @@ local function runSolve()
     L.n("Revisa los datos (esc) o consulta la pestaña 7 Ayuda.")
   end
   outLines = L.lines
+  outTitle = nil
+  wrapped = nil
+  oscroll = 0
+  mode = "out"
+  invalidate()
+end
+-- ¿Qué va aquí?: explicación del campo seleccionado o de toda la pestaña
+local function showHelp(all)
+  local t = T()
+  if #t.fields == 0 then runSolve() return end
+  local L = newLog()
+  if all then
+    L.h(t.name .. ": ¿CUÁNDO LA USO?")
+    for _, ln in ipairs(t.intro or {}) do L.t(ln) end
+    for i, fd in ipairs(t.fields) do fieldHelp(L, i, fd) end
+  else
+    fieldHelp(L, fsel, t.fields[fsel])
+    L.n("Toda la pestaña: menu > ¿Qué va aquí? > Toda la pestaña.")
+  end
+  L.n("esc: regresar a los datos.")
+  outLines = L.lines
+  outTitle = "¿Qué va aquí?"
   wrapped = nil
   oscroll = 0
   mode = "out"
@@ -1927,6 +2220,9 @@ registerMenu = function()
   local ex = {"Ejemplos"}
   for _, e in ipairs(T().examples or {}) do ex[#ex + 1] = {e.n, function() loadExample(e) end} end
   if #ex == 1 then ex[2] = {"(sin ejemplos)", function() end} end
+  local qa = {"¿Qué va aquí?",
+    {"Este campo", function() showHelp(false) end},
+    {"Toda la pestaña", function() showHelp(true) end}}
   local op = {"Opciones",
     {"Letra normal", function() FS = 10 wrapped = nil invalidate() end},
     {"Letra chica", function() FS = 9 wrapped = nil invalidate() end},
@@ -1935,7 +2231,7 @@ registerMenu = function()
     {"Borrar datos de esta pestaña", function()
       for _, fd in ipairs(T().fields) do data[fd.k] = "" curpos[fd.k] = 0 end
       mode = "form" invalidate() end}}
-  toolpalette.register({tabs, ex, op})
+  toolpalette.register({tabs, ex, qa, op})
 end
 
 -- texto con desplazamiento horizontal para que el cursor siempre se vea
@@ -2005,7 +2301,7 @@ local function drawForm(gc)
   if fd then gc:drawString(fd.h, 5, h - 28, "top") end
   gc:setFont("sansserif", "b", 9)
   col(gc, C.naranja)
-  gc:drawString("enter: resolver    menu: pestañas y ejemplos", 5, h - 15, "top")
+  gc:drawString("enter: resolver   ctrl+menu: ¿qué va aquí?", 5, h - 15, "top")
 end
 
 -- partir el texto en renglones que quepan
@@ -2099,7 +2395,10 @@ end
 local function drawOut(gc)
   local w, h = platform.window:width(), platform.window:height()
   if not wrapped or wrapW ~= w then wrapped = buildWrap(gc, w) wrapW = w end
-  drawTop(gc, w, #T().fields > 0 and (T().name .. "  " .. SYM.to .. " pasos") or T().name)
+  local title = T().name
+  if outTitle then title = T().name .. "  " .. SYM.to .. " " .. outTitle
+  elseif #T().fields > 0 then title = T().name .. "  " .. SYM.to .. " pasos" end
+  drawTop(gc, w, title)
   local lh = lineH(gc)
   local top, bottom = 22, h - 14
   if oscroll > #wrapped - 1 then oscroll = math.max(0, #wrapped - 1) end
@@ -2248,6 +2547,12 @@ end
 function on.enterKey()
   if mode == "form" then runSolve() end
 end
+function on.contextMenu()
+  if mode == "form" then showHelp(false) end
+end
+function on.help()
+  if mode == "form" then showHelp(false) else showHelp(true) end
+end
 function on.escapeKey()
   if mode == "out" and #T().fields > 0 then mode = "form" invalidate() end
 end
@@ -2281,6 +2586,7 @@ pcall(registerMenu)
 -- acceso para pruebas fuera de la calculadora
 if _G.__T3TEST then
   _G.__T3TEST.api = {TOOLS = TOOLS, data = data, newLog = newLog,
-    select = selectTool, load = loadExample, solve = runSolve,
+    select = selectTool, load = loadExample, solve = runSolve, help = showHelp,
+    setField = function(i) fsel = i end,
     state = function() return mode, tool, fsel, outLines end}
 end

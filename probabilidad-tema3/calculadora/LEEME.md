@@ -24,6 +24,11 @@ Si en tu computadora tienes [Luna](https://github.com/ndless-nspire/Luna), tambi
 ## Cómo se usa
 
 - **menu → Pestañas**: escoges la herramienta (las 7 de abajo).
+- **ctrl+menu** (o **menu → ¿Qué va aquí? → Este campo**): explica el campo donde estás:
+  qué significa y cómo pasar las frases del enunciado a lo que escribes, con ejemplos de tu
+  serie (por ejemplo, «costo total esperado» → `x+y`, «σx = 15» → `s`). **menu → ¿Qué va aquí?
+  → Toda la pestaña** explica cuándo usar la pestaña y todos sus campos. **esc** te regresa a
+  tus datos sin borrarlos.
 - **menu → Ejemplos**: llena los campos con un ejercicio de tu serie o de tus apuntes. Úsalo
   para ver cómo se escriben los datos y para comprobar que todo funciona.
 - **Flechas arriba/abajo o tab**: cambias de campo. **Flechas izquierda/derecha**: mueves el cursor.

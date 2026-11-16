@@ -6,6 +6,7 @@ Simulador mínimo de la API Lua de TI-Nspire para correr `tema3.lua` en una comp
 cd probabilidad-tema3/calculadora/pruebas
 lua5.1 run_examples.lua . ../tema3.lua   # resuelve todos los ejemplos del menú
 lua5.1 edge.lua . ../tema3.lua           # datos con errores: deben dar mensajes claros
+lua5.1 ayuda_test.lua . ../tema3.lua     # la ayuda «¿Qué va aquí?» de cada campo
 lua5.1 scenario.lua . ../tema3.lua && python3 render.py   # dibuja pantallas simuladas (shot_*.png)
 ```
 
